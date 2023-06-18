@@ -9,6 +9,7 @@ export default function Timer() {
   const [seconds, setSeconds] = useState(1 * 60);
   const [isActive, setIsActive] = useState(false);
   const [cycleCount, setCycleCount] = useState(0);
+  const [selectedTime, setSelectedTime] = useState(1);
   const [selectedName, setSelectedName] = useState("pomodoro");
 
   useEffect(() => {
@@ -28,7 +29,6 @@ export default function Timer() {
               const nextCycleIndex = cycleCount % cycleTimes.length;
               const nextCycleSeconds = cycleTimes[nextCycleIndex] * 60;
               setSeconds(nextCycleSeconds);
-              console.log("ini", cycleTimes[nextCycleIndex]);
               setCycleCount((prevCount) => prevCount + 1);
               return nextCycleSeconds;
             }
@@ -59,6 +59,7 @@ export default function Timer() {
   };
 
   const changeTime = (time: number, name: string) => {
+    setSelectedTime(time);
     setSelectedName(name);
     setSeconds(time * 60);
     setIsActive(false);
@@ -121,9 +122,7 @@ export default function Timer() {
               </div>
             </div>
             <div className="w-full flex justify-around">
-              <div className="text-[8rem] font-bold">
-                {formatTime(isActive ? seconds : 1 * 60)}
-              </div>
+              <div className="text-[8rem] font-bold">{formatTime(seconds)}</div>
             </div>
             <div className="flex justify-around py-[2rem]">
               <button

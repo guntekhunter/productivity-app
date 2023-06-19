@@ -5,7 +5,8 @@ import addNotification from "react-push-notification";
 const cycleTimes = [5, 25]; // Cycle times in minutes
 const cycleCountLimit = 4;
 
-export default function Timer() {
+//@ts-ignore
+export default function Timer({ callback }) {
   const [seconds, setSeconds] = useState(25 * 60);
   const [isActive, setIsActive] = useState(false);
   const [cycleCount, setCycleCount] = useState(0);
@@ -26,6 +27,7 @@ export default function Timer() {
               setSeconds(15 * 60);
               setCycleCount(0);
               setSelectedName("long-break");
+              callback("long-break");
               addNotification({
                 title: "ISTIRAHAT",
                 subtitle: "Istirahat",
@@ -41,6 +43,7 @@ export default function Timer() {
               setSeconds(nextCycleSeconds);
               setCycleCount((prevCount) => prevCount + 1);
               setSelectedName("pomodoro");
+              callback("pomodoro");
               addNotification({
                 title: "FOKUS",
                 subtitle: "Fokus",
@@ -56,6 +59,7 @@ export default function Timer() {
               setSeconds(nextCycleSeconds);
               setCycleCount((prevCount) => prevCount + 1);
               setSelectedName("pomodoro");
+              callback("pomodoro");
               addNotification({
                 title: "FOKUS",
                 subtitle: "Fokus",
@@ -71,6 +75,7 @@ export default function Timer() {
               const nextCycleSeconds = cycleTimes[nextCycleIndex] * 60;
               if (nextCycleIndex === 0) {
                 setSelectedName("short-break");
+                callback("short-break");
                 addNotification({
                   title: "ISTIRAHAT",
                   subtitle: "Istirahat",
@@ -82,6 +87,7 @@ export default function Timer() {
                 setNotifAudio(true);
               } else if (nextCycleIndex === 1) {
                 setSelectedName("pomodoro");
+                callback("pomodoro");
                 addNotification({
                   title: "FOKUS",
                   subtitle: "Fokus",
@@ -93,6 +99,7 @@ export default function Timer() {
                 setNotifAudio(true);
               } else {
                 setSelectedName("long-break");
+                callback("long-break");
                 addNotification({
                   title: "ISTIRAHAT",
                   subtitle: "Istirahat",
@@ -136,6 +143,7 @@ export default function Timer() {
   const changeTime = (time: number, name: string) => {
     setSelectedTime(time);
     setSelectedName(name);
+    callback(name);
     setSeconds(time * 60);
     setIsActive(false);
   };
@@ -160,7 +168,7 @@ export default function Timer() {
       <section className="w-full flex justify-around">
         <div className="w-[80%] flex justify-around pt-[2rem]">
           <div
-            className={`${
+            className={`transition duration-200 ease-in-out ${
               selectedName === "pomodoro"
                 ? "bg-red-200"
                 : selectedName === "short-break"

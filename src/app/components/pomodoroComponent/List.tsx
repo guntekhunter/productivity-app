@@ -4,21 +4,31 @@ import Image from "next/image";
 import ListComponent from "./ListComponent";
 import AddListButton from "./AddListButton";
 
-export default function List() {
+//@ts-ignore
+export default function List({ color }) {
   const [list, setList] = useState<string[]>([]);
 
   const callbackButton = async (value: string) => {
     setList((prev) => [...prev, value]);
   };
 
-  console.log(list);
+  const callbackEdit = async (name: string, index: number) => {
+    setList((prevList) =>
+      prevList.map((item, i) => (i === index ? name : item))
+    );
+  };
   return (
     <section className="mt-[2rem] flex justify-around overflow-hidden">
       <div className="w-[60%] py-[2rem] space-y-2">
         {list.map((item, key) => (
-          <ListComponent name={item} key={key} />
+          <ListComponent
+            name={item}
+            index={list.indexOf(item)}
+            key={key}
+            color={color}
+            callback={callbackEdit}
+          />
         ))}
-
         <AddListButton callback={callbackButton} />
       </div>
     </section>

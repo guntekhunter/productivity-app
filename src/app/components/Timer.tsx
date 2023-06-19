@@ -2,14 +2,14 @@
 import React, { useEffect, useState } from "react";
 import addNotification from "react-push-notification";
 
-const cycleTimes = [2, 1]; // Cycle times in minutes
+const cycleTimes = [5, 25]; // Cycle times in minutes
 const cycleCountLimit = 4;
 
 export default function Timer() {
-  const [seconds, setSeconds] = useState(1 * 60);
+  const [seconds, setSeconds] = useState(25 * 60);
   const [isActive, setIsActive] = useState(false);
   const [cycleCount, setCycleCount] = useState(0);
-  const [selectedTime, setSelectedTime] = useState(1);
+  const [selectedTime, setSelectedTime] = useState(25);
   const [notifAudio, setNotifAudio] = useState(false);
   const [selectedName, setSelectedName] = useState("pomodoro");
 
@@ -23,7 +23,7 @@ export default function Timer() {
             setIsActive(false);
 
             if (cycleCount === cycleCountLimit) {
-              setSeconds(3 * 60);
+              setSeconds(15 * 60);
               setCycleCount(0);
               setSelectedName("long-break");
               addNotification({
@@ -35,7 +35,7 @@ export default function Timer() {
                 duration: 6000,
               });
               setNotifAudio(true);
-              return 3 * 60;
+              return 15 * 60;
             } else if (selectedName === "short-break") {
               const nextCycleSeconds = cycleTimes[1] * 60;
               setSeconds(nextCycleSeconds);
@@ -177,7 +177,7 @@ export default function Timer() {
                       : "hover:bg-opacity-10 hover:bg-black"
                   } px-5 py-2 rounded-md `}
                   onClick={() => {
-                    changeTime(1, "pomodoro");
+                    changeTime(25, "pomodoro");
                   }}
                 >
                   Pomodoro
@@ -189,14 +189,14 @@ export default function Timer() {
                       : "hover:bg-opacity-10 hover:bg-black"
                   } px-5 py-2 rounded-md `}
                   onClick={() => {
-                    changeTime(2, "short-break");
+                    changeTime(5, "short-break");
                   }}
                 >
                   Break Singkat
                 </button>
                 <button
                   onClick={() => {
-                    changeTime(3, "long-break");
+                    changeTime(15, "long-break");
                   }}
                   className={`${
                     selectedName === "long-break"
@@ -213,6 +213,13 @@ export default function Timer() {
             </div>
             <div className="flex justify-around py-[2rem]">
               <button
+                onKeyDown={(e) => {
+                  if (e.code === "Space") {
+                    e.preventDefault();
+                    setIsActive(!isActive);
+                    startCountdown;
+                  }
+                }}
                 onClick={startCountdown}
                 className="bg-black text-white text-[3rem] font-bold px-[5rem] w-[22rem] rounded-md"
               >

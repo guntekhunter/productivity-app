@@ -25,17 +25,6 @@ export default function List({ color }) {
     setList(deletedList);
   };
 
-  const checkedCallback = (index: number, status: boolean) => {
-    if (index >= 0 && index < list.length && status === false) {
-      const element = list.splice(index, 1)[0];
-      list.push(element);
-      const checkedList = [...list];
-      setList(checkedList);
-      console.log("ini diupadate", index);
-      setListChecked((prev) => [...prev, index]);
-    }
-  };
-
   console.log(listChecked);
   return (
     <section className="mt-[2rem] flex justify-around overflow-hidden">
@@ -49,7 +38,6 @@ export default function List({ color }) {
               color={color}
               callback={callbackEdit}
               deleted={deleteCallBack}
-              checking={checkedCallback}
             />
           );
         })}

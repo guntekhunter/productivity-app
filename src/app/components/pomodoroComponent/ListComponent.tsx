@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 
 // @ts-ignore
-export default function ListComponent({ name, color, callback, index, deleted, checking }) {
+export default function ListComponent({ name, color, callback, index, deleted}) {
   const [check, setCheck] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [editedName, setEditedName] = useState(name);
@@ -11,7 +11,6 @@ export default function ListComponent({ name, color, callback, index, deleted, c
   const checked = () => {
     setCheck(!check);
     const status = check;
-    checking(index, status)
   };
 
   const deleting = () => {

@@ -3,12 +3,17 @@ import React, { useState } from "react";
 import Image from "next/image";
 
 // @ts-ignore
-export default function ListComponent({ name, color, callback, index }) {
+export default function ListComponent({ name, color, callback, index, deleted }) {
   const [check, setCheck] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [editedName, setEditedName] = useState(name);
+
   const checked = () => {
     setCheck(!check);
+  };
+
+  const deleting = () => {
+    deleted(index);
   };
 
   const handleInputChange = (e: { target: { value: any } }) => {
@@ -27,8 +32,11 @@ export default function ListComponent({ name, color, callback, index }) {
     }, delay);
   };
 
-  const editList = () => {
-    callback(editedName, index);
+  const editList = (event: { key: string }) => {
+    if (event.key === "Enter") {
+      callback(editedName, index);
+      setIsEdit(!isEdit);
+    }
   };
 
   console.log(index);
@@ -65,15 +73,26 @@ export default function ListComponent({ name, color, callback, index }) {
           {name}
         </p>
       )}
-      <button onClick={checked}>
-        <Image
-          alt="turtles"
-          src="/checklist.png"
-          width={500}
-          height={0}
-          className={`${check ? "" : "opacity-10"} w-[1.5rem]`}
-        />
-      </button>
+      <div className="flex space-x-3">
+        <button onClick={deleting}>
+          <Image
+            alt="turtles"
+            src="/delete.png"
+            width={500}
+            height={0}
+            className={`w-[1.5rem]`}
+          />
+        </button>
+        <button onClick={checked}>
+          <Image
+            alt="turtles"
+            src="/checklist.png"
+            width={500}
+            height={0}
+            className={`${check ? "" : "opacity-10"} w-[1.6rem]`}
+          />
+        </button>
+      </div>
     </div>
   );
 }

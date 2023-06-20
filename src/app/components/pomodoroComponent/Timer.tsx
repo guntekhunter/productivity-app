@@ -126,7 +126,7 @@ export default function Timer({ callback }) {
         clearInterval(interval);
       }
     };
-  }, [isActive, cycleCount, selectedName]);
+  }, [isActive, cycleCount, selectedName, callback]);
 
   const formatTime = (time: number) => {
     const minutes = Math.floor(time / 60);
@@ -148,9 +148,6 @@ export default function Timer({ callback }) {
     setIsActive(false);
   };
 
-  console.log(seconds);
-  console.log(cycleCount);
-
   useEffect(() => {
     if (notifAudio) {
       const audio = new Audio("Nada Dering Telepon Ring.mp3"); // Replace with the actual path to your audio file
@@ -164,79 +161,77 @@ export default function Timer({ callback }) {
   }, [notifAudio]);
 
   return (
-    <div>
-      <section className="w-full flex justify-around">
-        <div className="w-[80%] flex justify-around pt-[2rem]">
-          <div
-            className={`transition duration-200 ease-in-out ${
-              selectedName === "pomodoro"
-                ? "bg-red-200"
-                : selectedName === "short-break"
-                ? "bg-green-200"
-                : "bg-blue-200"
-            } w-[50%] p-[2rem] rounded-md`}
-          >
-            <div className="flex justify-around">
-              <div className="flex justify-between w-full">
-                <button
-                  className={`${
-                    selectedName === "pomodoro"
-                      ? "bg-black text-white"
-                      : "hover:bg-opacity-10 hover:bg-black"
-                  } px-5 py-2 rounded-md `}
-                  onClick={() => {
-                    changeTime(25, "pomodoro");
-                  }}
-                >
-                  Pomodoro
-                </button>
-                <button
-                  className={`${
-                    selectedName === "short-break"
-                      ? "bg-black text-white"
-                      : "hover:bg-opacity-10 hover:bg-black"
-                  } px-5 py-2 rounded-md `}
-                  onClick={() => {
-                    changeTime(5, "short-break");
-                  }}
-                >
-                  Break Singkat
-                </button>
-                <button
-                  onClick={() => {
-                    changeTime(15, "long-break");
-                  }}
-                  className={`${
-                    selectedName === "long-break"
-                      ? "bg-black text-white"
-                      : "hover:bg-opacity-10 hover:bg-black"
-                  } px-5 py-2 rounded-md `}
-                >
-                  Break Lama
-                </button>
-              </div>
-            </div>
-            <div className="w-full flex justify-around">
-              <div className="text-[8rem] font-bold">{formatTime(seconds)}</div>
-            </div>
-            <div className="flex justify-around py-[2rem]">
+    <div className="">
+      <div className="w-full flex justify-around pt-[2rem]">
+        <div
+          className={`transition duration-200 ease-in-out ${
+            selectedName === "pomodoro"
+              ? "bg-red-200"
+              : selectedName === "short-break"
+              ? "bg-green-200"
+              : "bg-blue-200"
+          } w-[60%] p-[2rem] rounded-md`}
+        >
+          <div className="flex justify-around pt-[1.5rem]">
+            <div className="flex justify-between w-[60%]">
               <button
-                onKeyDown={(e) => {
-                  if (e.code === "Space") {
-                    e.preventDefault();
-                    setIsActive(!isActive);
-                    startCountdown;
-                  }
+                className={`${
+                  selectedName === "pomodoro"
+                    ? "bg-black text-white"
+                    : "hover:bg-opacity-10 hover:bg-black"
+                } px-5 py-2 rounded-md `}
+                onClick={() => {
+                  changeTime(25, "pomodoro");
                 }}
-                onClick={startCountdown}
-                className="bg-black text-white text-[3rem] font-bold px-[5rem] w-[22rem] rounded-md"
               >
-                {isActive ? <p>PAUSE</p> : <p>START</p>}
+                Pomodoro
+              </button>
+              <button
+                className={`${
+                  selectedName === "short-break"
+                    ? "bg-black text-white"
+                    : "hover:bg-opacity-10 hover:bg-black"
+                } px-5 py-2 rounded-md `}
+                onClick={() => {
+                  changeTime(5, "short-break");
+                }}
+              >
+                Break Singkat
+              </button>
+              <button
+                onClick={() => {
+                  changeTime(15, "long-break");
+                }}
+                className={`${
+                  selectedName === "long-break"
+                    ? "bg-black text-white"
+                    : "hover:bg-opacity-10 hover:bg-black"
+                } px-5 py-2 rounded-md `}
+              >
+                Break Lama
               </button>
             </div>
           </div>
+          <div className="w-full flex justify-around">
+            <div className="text-[8rem] font-bold">{formatTime(seconds)}</div>
+          </div>
+          <div className="flex justify-around py-[2rem]">
+            <button
+              onKeyDown={(e) => {
+                if (e.code === "Space") {
+                  e.preventDefault();
+                  setIsActive(!isActive);
+                  startCountdown;
+                }
+              }}
+              onClick={startCountdown}
+              className="bg-black text-white text-[3rem] font-bold w-[25rem] rounded-md"
+            >
+              {isActive ? <p>PAUSE</p> : <p>START</p>}
+            </button>
+          </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 }

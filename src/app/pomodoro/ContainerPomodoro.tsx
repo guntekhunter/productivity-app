@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Timer from "../components/pomodoroComponent/Timer";
 import List from "../components/pomodoroComponent/List";
+import Description from "../components/pomodoroComponent/Description";
 
 export default function ContainerPomodoro() {
   const [timerType, setTimerType] = useState("pomodoro");
@@ -12,6 +13,7 @@ export default function ContainerPomodoro() {
     <div>
       <Timer callback={callbackButton} />
       <List color={timerType} />
+      <Description />
     </div>
   );
 }

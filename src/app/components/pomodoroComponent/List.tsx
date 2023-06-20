@@ -7,6 +7,7 @@ import AddListButton from "./AddListButton";
 //@ts-ignore
 export default function List({ color }) {
   const [list, setList] = useState<string[]>([]);
+  const [listChecked, setListChecked] = useState<number[]>([]);
 
   const callbackButton = async (value: string) => {
     setList((prev) => [...prev, value]);
@@ -19,26 +20,39 @@ export default function List({ color }) {
   };
 
   const deleteCallBack = (index: number) => {
-    console.log(index);
     list.splice(index, 1);
     const deletedList = [...list];
     setList(deletedList);
   };
 
-  console.log(list);
+  const checkedCallback = (index: number, status: boolean) => {
+    if (index >= 0 && index < list.length && status === false) {
+      const element = list.splice(index, 1)[0];
+      list.push(element);
+      const checkedList = [...list];
+      setList(checkedList);
+      console.log("ini diupadate", index);
+      setListChecked((prev) => [...prev, index]);
+    }
+  };
+
+  console.log(listChecked);
   return (
     <section className="mt-[2rem] flex justify-around overflow-hidden">
       <div className="w-[60%] py-[2rem] space-y-2">
-        {list.map((item, key) => (
-          <ListComponent
-            name={item}
-            index={list.indexOf(item)}
-            key={key}
-            color={color}
-            callback={callbackEdit}
-            deleted={deleteCallBack}
-          />
-        ))}
+        {list.map((item, key) => {
+          return (
+            <ListComponent
+              name={item}
+              index={list.indexOf(item)}
+              key={key}
+              color={color}
+              callback={callbackEdit}
+              deleted={deleteCallBack}
+              checking={checkedCallback}
+            />
+          );
+        })}
         <AddListButton callback={callbackButton} />
       </div>
     </section>

@@ -3,13 +3,15 @@ import React, { useState } from "react";
 import Image from "next/image";
 
 // @ts-ignore
-export default function ListComponent({ name, color, callback, index, deleted }) {
+export default function ListComponent({ name, color, callback, index, deleted, checking }) {
   const [check, setCheck] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [editedName, setEditedName] = useState(name);
 
   const checked = () => {
     setCheck(!check);
+    const status = check;
+    checking(index, status)
   };
 
   const deleting = () => {
@@ -38,10 +40,6 @@ export default function ListComponent({ name, color, callback, index, deleted })
       setIsEdit(!isEdit);
     }
   };
-
-  console.log(index);
-  console.log(isEdit);
-  console.log(editedName);
 
   return (
     <div

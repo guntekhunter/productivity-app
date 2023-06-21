@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 export default function Navbar() {
@@ -7,9 +8,9 @@ export default function Navbar() {
         <div className="font-bold">Teman Kerja</div>
         <div>
           <ul className="flex space-x-[3rem] font-bold text-[.8rem]">
-            <li>Home</li>
-            <li>Pomodoro</li>
-            <li>Peringkas</li>
+            <Link href="/">Home</Link>
+            <Link href="/pomodoro">Pomodoro</Link>
+            <Link href="/peringkas">Peringkas</Link>
             <li>Paraphrase</li>
             <li>Idea Generator</li>
           </ul>

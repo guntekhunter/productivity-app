@@ -4,7 +4,7 @@ import React from "react";
 export default function Footer() {
   return (
     <section className="w-full bg-black text-white flex justify-around">
-      <div className="w-[80%] pt-[5rem] pb-[1rem] space-y-[2rem]">
+      <div className="w-[70%] pt-[5rem] pb-[1rem] space-y-[2rem]">
         <p className="text-[1.8rem]">Teman Kerja</p>
         <div className="flex justify-between text-[.8rem]">
           <div>

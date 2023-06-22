@@ -16,19 +16,8 @@ export default function ContainerPeringkas() {
   const [isSelected, setIsSelected] = useState(false);
   const [summary, setSummary] = useState("");
   const [isCopied, setIsCopied] = useState(false);
-  // const arrayPersentage = [
-  //   "20",
-  //   "30",
-  //   "40",
-  //   "50",
-  //   "60",
-  //   "70",
-  //   "80",
-  //   "90",
-  // ];
 
   const startResume = async () => {
-    const props = `Create a summary of the following sentence, ${input} making it ${selected} shorter than the original sentence. in indonesian`;
     setQuestions([...questions, { chat: input }]);
     setInput("");
     // setIsLoading(true);
@@ -46,10 +35,6 @@ export default function ContainerPeringkas() {
               role: "user",
               content: input,
             },
-            // {
-            //   role: "assistant",
-            //   content: `/summarize\nlength:10`,
-            // },
           ],
           stream: true,
         }),
@@ -91,7 +76,8 @@ export default function ContainerPeringkas() {
     }
   };
 
-  const handleCopy = () => {
+  const handleCopy = (e: any) => {
+    e.preventDefault();
     navigator.clipboard
       .writeText(summary)
       .then(() => {
@@ -102,25 +88,28 @@ export default function ContainerPeringkas() {
       });
     console.log("copy");
   };
+  console.log(input);
   return (
-    <div className="w-full flex justify-around">
+    <div className="w-full flex justify-around text-[.8rem]">
       <div className="w-[70%] inline py-[2rem]">
         <textarea
           placeholder="Masukkan kalimat yang ingin anda ringkas"
-          className="w-full border-[1.5px] border-gray-200 rounded-md appearance-none h-[15rem] overflow-y-scroll border-t-[1px] px-5 scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black resize-none focus:ring-0 focus:outline-none py-[1rem] mb-[1.1rem]"
+          className="w-full border-[1.5px] border-gray-200 rounded-md appearance-none h-[15rem] overflow-y-scroll border-t-[1px] px-5 scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black resize-none focus:ring-0 focus:outline-none py-[1rem] mb-[1.1rem] text-gray-600 "
           name=""
           id=""
           value={input}
           onKeyDown={(e) => {
             if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault();
               startResume();
             }
           }}
           onChange={(e) => {
+            e.preventDefault();
             setInput(e.target.value);
           }}
         />
-        <div className="flex space-x-5 text-[1rem]">
+        <div className="flex space-x-5 ">
           <div className="w-full relative space-y-[.4rem]">
             <input
               placeholder="Masukkan jumlah kalimat"
@@ -129,20 +118,20 @@ export default function ContainerPeringkas() {
                 setSentenceLength(e.target.value);
               }}
               value={sentenceLength}
-              className="w-full border-[1.5px] rounded-md flex px-[1rem] py-[1rem] space-x-[.7rem]"
+              className="w-full border-[1.5px] rounded-md flex px-[1rem] py-[1rem] space-x-[.7rem] text-gray-600 "
             />
           </div>
           <button
             onClick={startResume}
-            className="w-full bg-black text-white font-bold rounded-md"
+            className="w-full bg-black text-white font-bold rounded-md  hover:bg-gray-900"
           >
-            Ringkas
+            Mulai Meringkas
           </button>
         </div>
         <div className="relative z-0">
           <div
             id=""
-            className="w-full border-[1.5px] border-gray-200 rounded-md appearance-none h-[15rem] overflow-y-scroll border-t-[1px] px-5 scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black resize-none focus:ring-0 focus:outline-none py-[1rem] mt-[1.4rem]"
+            className="text-gray-600 w-full border-[1.5px] border-gray-200 rounded-md appearance-none h-[15rem] overflow-y-scroll border-t-[1px] px-5 scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black resize-none focus:ring-0 focus:outline-none py-[1rem] mt-[1.4rem] "
           >
             {summary}
           </div>

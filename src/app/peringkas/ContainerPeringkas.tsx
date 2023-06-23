@@ -101,7 +101,7 @@ export default function ContainerPeringkas() {
         <div className="w-full flex justify-around py-[2rem]">
           <div className="w-[30rem]">
             <p className="text-[3rem] font-bold text-center space-y-2 leading-[3.1rem]">
-              Ringkas Kalimat Teman-teman
+              Ringkas Kalimat Anda
             </p>
             <p className="font-bold text-center space-y-2 leading-[3.1rem] text-gray-500">
               Selamat Meringkas

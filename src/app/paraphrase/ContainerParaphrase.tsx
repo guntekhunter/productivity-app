@@ -8,7 +8,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Instruction from "../components/generateAiComponent/Instruction";
 
-export default function ContainerPeringkas() {
+export default function ContainerParaphrase() {
   const [input, setInput] = useState<string>("");
   const [questions, setQuestions] = useState<{ chat: any }[]>([]);
   const [sentenceLength, setSentenceLength] = useState("");
@@ -18,6 +18,11 @@ export default function ContainerPeringkas() {
   const [isCopied, setIsCopied] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [inputRequired, setInputRequired] = useState(false);
+  const [isDrop, setIsDrop] = useState(false);
+  const [selected, setSelected] = useState("");
+  const [isSelected, setIsSelected] = useState(false);
+
+  const arrayMode = ["Standart", "Fluency", "Formal", "Simple", "Creative"];
 
   const startResume = async () => {
     setQuestions([...questions, { chat: input }]);
@@ -34,7 +39,7 @@ export default function ContainerPeringkas() {
             messages: [
               {
                 role: "system",
-                content: `You are a language model that can generate summaries. make it in ${sentenceLength} sentences`,
+                content: `You are a language model that can paraphrase a sentences. and you are in ${selected}`,
               },
               {
                 role: "user",
@@ -96,22 +101,28 @@ export default function ContainerPeringkas() {
   const handleClear = () => {
     setInput("");
   };
+
+  const hanldeDropDown = () => {
+    setIsDrop(!isDrop);
+  };
+
+  console.log(isDrop);
   return (
     <div className="w-full flex justify-around text-[.8rem] mb-[2rem]">
       <div className="w-[70%] inline">
         <div className="w-full flex justify-around py-[2rem]">
           <div className="w-[30rem]">
             <p className="text-[3rem] font-bold text-center space-y-2 leading-[3.1rem]">
-              Ringkas Kalimat Anda
+              Hindari Plagiarisme Dengan Paraphrase
             </p>
             <p className="font-bold text-center space-y-2 leading-[3.1rem] text-gray-500">
-              Selamat Meringkas
+              Selamat Memparaphrase
             </p>
           </div>
         </div>
         <Instruction
           number="1"
-          instructions="Copy teks yang ingin anda ringkas"
+          instructions="Copy teks yang ingin anda paraphrase"
           suggestions="Atau ketik teks"
         />
         <div className="relative">
@@ -161,11 +172,54 @@ export default function ContainerPeringkas() {
         </div>
         <Instruction
           number="2"
-          instructions="Masukkan banyaknya kalimat ringkasan"
+          instructions="Masukkan Mode Paraphrase Anda"
           suggestions=""
         />
-        <div className="flex space-x-5 ">
+        <div className="flex space-x-5">
           <div className="w-full relative space-y-[.4rem]">
+            <button
+              onClick={hanldeDropDown}
+              className="w-full border-[1.5px] rounded-md flex px-[1rem] py-[1rem] space-x-[.7rem]"
+            >
+              <Image
+                alt="turtles"
+                src="/down.png"
+                width={500}
+                height={0}
+                className={`w-[1.5rem] transform duration-100 ${
+                  isDrop ? "rotate-180" : ""
+                }`}
+              ></Image>
+              <p className={`${isSelected ? "" : "text-gray-400"}`}>
+                {isSelected ? selected : "Contoh : Creative"}
+              </p>
+            </button>
+            <div
+              className={`transfrom duration-100 ease-in z-10 ${
+                isDrop ? "" : "opacity-0"
+              } absolute bg-white border-[1.5px] rounded-md w-full right-0 h-[5rem] overflow-y-scroll border-t-[1px] scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black focus:ring-0 focus:outline-none`}
+            >
+              <div className="">
+                {arrayMode.map((item, key) => (
+                  <div
+                    key={key}
+                    onClick={(e) => {
+                      setSelected(item);
+                      setIsSelected(true);
+                      setIsDrop(false);
+                    }}
+                    className={`${
+                      key === arrayMode.length - 1 ? "" : "border-b-[1.5px]"
+                    } py-[.5rem] px-[1rem] cursor-pointer trasnform duration-200 hover:bg-black hover:text-white w-full`}
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* <div className="w-full relative space-y-[.4rem]">
             <input
               placeholder="Contoh: 20"
               type="number"
@@ -181,7 +235,7 @@ export default function ContainerPeringkas() {
               value={sentenceLength}
               className="w-full border-[1.5px] rounded-md flex px-[1rem] py-[1rem] space-x-[.7rem] text-gray-600 "
             />
-          </div>
+          </div> */}
           <button
             onClick={startResume}
             className="w-full bg-black text-white font-bold rounded-md  hover:bg-gray-900 flex items-center justify-center space-x-[1rem]"
@@ -201,7 +255,7 @@ export default function ContainerPeringkas() {
                 ></Image>
               </div>
             </div>
-            {isLoading ? <p>Loading ...</p> : <p>Mulai Meringkas</p>}
+            {isLoading ? <p>Loading ...</p> : <p>Mulai Paraphrase</p>}
           </button>
         </div>
         <div className="relative z-0">

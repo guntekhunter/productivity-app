@@ -33,7 +33,7 @@ export default function Timer({ callback }) {
                 subtitle: "Istirahat",
                 message: "Waktunya Istirahat",
                 theme: "darkblue",
-                native: true,
+                native: false,
                 duration: 6000,
               });
               setNotifAudio(true);
@@ -49,7 +49,7 @@ export default function Timer({ callback }) {
                 subtitle: "Fokus",
                 message: "Waktunya Fokus",
                 theme: "darkblue",
-                native: true,
+                native: false,
                 duration: 6000,
               });
               setNotifAudio(true);
@@ -65,7 +65,7 @@ export default function Timer({ callback }) {
                 subtitle: "Fokus",
                 message: "Waktunya Fokus",
                 theme: "darkblue",
-                native: true,
+                native: false,
                 duration: 6000,
               });
               setNotifAudio(true);
@@ -81,7 +81,7 @@ export default function Timer({ callback }) {
                   subtitle: "Istirahat",
                   message: "Waktunya Istirahat",
                   theme: "darkblue",
-                  native: true,
+                  native: false,
                   duration: 6000,
                 });
                 setNotifAudio(true);
@@ -93,7 +93,7 @@ export default function Timer({ callback }) {
                   subtitle: "Fokus",
                   message: "Waktunya Fokus",
                   theme: "darkblue",
-                  native: true,
+                  native: false,
                   duration: 6000,
                 });
                 setNotifAudio(true);
@@ -105,13 +105,14 @@ export default function Timer({ callback }) {
                   subtitle: "Istirahat",
                   message: "Waktunya Istirahat",
                   theme: "darkblue",
-                  native: true,
+                  native: false,
                   duration: 6000,
                 });
                 setNotifAudio(true);
               }
               setSeconds(nextCycleSeconds);
               setCycleCount((prevCount) => prevCount + 1);
+              setNotifAudio(true);
               return nextCycleSeconds;
             }
           } else {
@@ -159,6 +160,8 @@ export default function Timer({ callback }) {
       }, 3000);
     }
   }, [notifAudio]);
+
+  console.log(notifAudio);
 
   return (
     <div className="">

@@ -17,7 +17,9 @@ export default function Navbar() {
             <Link href="/peringkas" className="hover:font-bold">
               Peringkas
             </Link>
-            <li className="hover:font-bold">Paraphrase</li>
+            <Link href="/paraphrase" className="hover:font-bold">
+              Paraphrase
+            </Link>
             <li className="hover:font-bold">Idea Generator</li>
           </ul>
         </div>

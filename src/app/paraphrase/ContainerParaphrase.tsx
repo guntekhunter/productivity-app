@@ -22,14 +22,14 @@ export default function ContainerParaphrase() {
   const [selected, setSelected] = useState("");
   const [isSelected, setIsSelected] = useState(false);
 
-  const arrayMode = ["Standart", "Fluency", "Formal", "Simple", "Creative"];
+  const arrayMode = ["Standar", "Formal", "Simpel", "Creatif"];
 
   const startResume = async () => {
     setQuestions([...questions, { chat: input }]);
     setIsLoading(false);
     let temperatures = 0;
-    if (selected === "Creative") {
-      temperatures = 0.5;
+    if (selected === "Creatif") {
+      temperatures = 1;
     }
     if (!input) {
       setInputRequired(true);

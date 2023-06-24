@@ -34,13 +34,14 @@ export default function ContainerPeringkas() {
             messages: [
               {
                 role: "system",
-                content: `You are a language model that can generate summaries. make it in ${sentenceLength} sentences`,
+                content: `You are a language model that can generate summaries`,
               },
               {
                 role: "user",
-                content: input,
+                content: `${input} buat kalimat tersebut menjadi ${sentenceLength} kalimat`,
               },
             ],
+            temperature: 0,
             stream: true,
           }),
         });
@@ -161,7 +162,7 @@ export default function ContainerPeringkas() {
         </div>
         <Instruction
           number="2"
-          instructions="Masukkan banyaknya kalimat ringkasan"
+          instructions="Masukkan panjang kalimat ringkasan"
           suggestions=""
         />
         <div className="flex space-x-5 ">

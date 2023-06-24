@@ -27,25 +27,31 @@ export default function ContainerParaphrase() {
   const startResume = async () => {
     setQuestions([...questions, { chat: input }]);
     setIsLoading(false);
+    let temperatures = 0;
+    if (selected === "Creative") {
+      temperatures = 0.5;
+    }
     if (!input) {
       setInputRequired(true);
     } else {
       try {
         setIsLoading(true);
-        const res = await fetch("/api/resume", {
+        console.log(temperatures);
+        const res = await fetch("/api/paraphrase", {
           method: "POST",
           body: JSON.stringify({
             model: "gpt-3.5-turbo",
             messages: [
               {
                 role: "system",
-                content: `You are a language model that can paraphrase a sentences. and you are in ${selected}`,
+                content: `You are a language model that can paraphrase a sentences, help user to paraphrasing sentences while keeping the length relatively similar to the original. By using different wording and structure, a paraphrased version that avoids plagiarism detection.`,
               },
               {
                 role: "user",
-                content: input,
+                content: `make this sentence ${input} in a ${selected} mode`,
               },
             ],
+            temperature: temperatures,
             stream: true,
           }),
         });
@@ -77,6 +83,7 @@ export default function ContainerParaphrase() {
               }
             }
             setSummary(completeSummary);
+            setIsLoading(false);
           }
         }
         setIsLoading(false);

@@ -36,7 +36,6 @@ export default function ContainerParaphrase() {
     } else {
       try {
         setIsLoading(true);
-        console.log(temperatures);
         const res = await fetch("/api/paraphrase", {
           method: "POST",
           body: JSON.stringify({
@@ -113,7 +112,6 @@ export default function ContainerParaphrase() {
     setIsDrop(!isDrop);
   };
 
-  console.log(isDrop);
   return (
     <div className="w-full flex justify-around text-[.8rem] mb-[2rem]">
       <div className="w-[70%] inline">

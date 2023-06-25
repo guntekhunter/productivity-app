@@ -107,7 +107,6 @@ export default function ContainerIdekan() {
     setInput("");
   };
 
-  console.log(target, difficulty, category);
   return (
     <div className="w-full flex justify-around text-[.8rem] mb-[2rem]">
       <div className="w-[70%] inline">

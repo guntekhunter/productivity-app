@@ -20,7 +20,9 @@ export default function Navbar() {
             <Link href="/paraphrase" className="hover:font-bold">
               Paraphrase
             </Link>
-            <li className="hover:font-bold">Idea Generator</li>
+            <Link href="/idekan" className="hover:font-bold">
+              Idea Generator
+            </Link>
           </ul>
         </div>
       </div>

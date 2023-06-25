@@ -3,12 +3,36 @@ import Image from "next/image";
 import React, { useState } from "react";
 
 // @ts-ignore
-export default function DropDown({ arrayDrop, callbackDrop, isStatus , placeHolder}) {
+export default function DropDown({arrayDrop,callbackDrop,isStatus,placeHolder,
+}) {
   const [selected, setSelected] = useState("");
+  const [input, setInput] = useState("");
   const [isSelected, setIsSelected] = useState(false);
   const [isDrop, setIsDrop] = useState(false);
   const hanldeDropDown = () => {
     setIsDrop(!isDrop);
+  };
+
+  const handleInputChange = (e: any) => {
+    e.preventDefault();
+    setInput(e.target.value);
+  };
+
+  const handleKeyDown = (e: any) => {
+    if (e.key === "Enter") {
+      setSelected(input);
+      callbackDrop(input, isStatus);
+      setSelected(input);
+      setIsSelected(true);
+      setIsDrop(false);
+    }
+    if (e.key === "Space") {
+      e.preventDefault();
+      setIsOpen(true);
+      setSelected(input);
+      setIsSelected(true);
+      setIsDrop(true);
+    }
   };
 
   return (
@@ -33,9 +57,20 @@ export default function DropDown({ arrayDrop, callbackDrop, isStatus , placeHold
       <div
         className={`transfrom duration-100 ease-in z-10 ${
           isDrop ? "" : "opacity-0 hidden"
-        } absolute bg-white border-[1.5px] rounded-md w-full right-0 h-[5rem] overflow-y-scroll border-t-[1px] scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black focus:ring-0 focus:outline-none`}
+        } absolute bg-white border-[1.5px] rounded-md w-full right-0 ${isStatus === "difficulty" ? "h-[7rem]":"h-[9rem]"} overflow-y-scroll border-t-[1px] scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black focus:ring-0 focus:outline-none`}
       >
         <div className="">
+          {
+            isStatus !== "difficulty" && (
+              <input
+                autoFocus
+                className="w-full outline-none py-[.5rem] px-[1rem] border-b-[1.5px]"
+                value={input}
+                onChange={handleInputChange}
+                onKeyDown={handleKeyDown}
+              />
+            ) 
+          }
           {arrayDrop.map((item: string, key: number, seleced: string) => (
             <div
               key={key}
@@ -56,4 +91,7 @@ export default function DropDown({ arrayDrop, callbackDrop, isStatus , placeHold
       </div>
     </div>
   );
+}
+function setIsOpen(arg0: boolean) {
+  throw new Error("Function not implemented.");
 }

@@ -3,7 +3,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 
 // @ts-ignore
-export default function DropDown({ arrayDrop, callbackDrop, isStatus }) {
+export default function DropDown({ arrayDrop, callbackDrop, isStatus , placeHolder}) {
   const [selected, setSelected] = useState("");
   const [isSelected, setIsSelected] = useState(false);
   const [isDrop, setIsDrop] = useState(false);
@@ -27,12 +27,12 @@ export default function DropDown({ arrayDrop, callbackDrop, isStatus }) {
           }`}
         ></Image>
         <p className={`${isSelected ? "" : "text-gray-400"}`}>
-          {isSelected ? selected : "Contoh : Creative"}
+          {isSelected ? selected : `Contoh : ${placeHolder}`}
         </p>
       </button>
       <div
         className={`transfrom duration-100 ease-in z-10 ${
-          isDrop ? "" : "opacity-0"
+          isDrop ? "" : "opacity-0 hidden"
         } absolute bg-white border-[1.5px] rounded-md w-full right-0 h-[5rem] overflow-y-scroll border-t-[1px] scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black focus:ring-0 focus:outline-none`}
       >
         <div className="">

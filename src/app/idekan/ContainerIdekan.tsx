@@ -7,16 +7,12 @@ import DropDown from "../components/generateAiComponent/DropDown";
 export default function ContainerIdekan() {
   const [input, setInput] = useState<string>("");
   const [questions, setQuestions] = useState<{ chat: any }[]>([]);
-  const [sentenceLength, setSentenceLength] = useState("");
   const [summary, setSummary] = useState("");
   const [hoverClear, setHoverClear] = useState(false);
   const [hoverCopy, setHoverCopy] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [inputRequired, setInputRequired] = useState(false);
-  const [isDrop, setIsDrop] = useState(false);
-  const [selected, setSelected] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
   const [category, setCategory] = useState("");
   const [difficulty, setDifficulty] = useState("");
   const [target, setTarget] = useState("");
@@ -24,10 +20,6 @@ export default function ContainerIdekan() {
   const startResume = async () => {
     setQuestions([...questions, { chat: input }]);
     setIsLoading(false);
-    let temperatures = 0;
-    if (selected === "Creatif") {
-      temperatures = 1;
-    }
     if (!input) {
       setInputRequired(true);
     } else {
@@ -40,14 +32,14 @@ export default function ContainerIdekan() {
             messages: [
               {
                 role: "system",
-                content: `You are a language model that can paraphrase a sentences, help user to paraphrasing sentences while keeping the length relatively similar to the original. By using different wording and structure, a paraphrased version that avoids plagiarism detection.`,
+                content: `You are a language model that can generate genereate idea base on user input.`,
               },
               {
                 role: "user",
-                content: `make this sentence ${input} in a ${selected} mode`,
+                content: `create an idea in ${category} category, target of the idea is ${target} and the idea is about ${input}, and the dificulty to execute the idea is ${difficulty} in indonesian languange`,
               },
             ],
-            temperature: temperatures,
+            temperature: 1,
             stream: true,
           }),
         });
@@ -122,10 +114,10 @@ export default function ContainerIdekan() {
         <div className="w-full flex justify-around py-[2rem]">
           <div className="w-[30rem]">
             <p className="text-[3rem] font-bold text-center space-y-2 leading-[3.1rem]">
-              Hindari Plagiarisme Dengan Paraphrase
+              Mencari Inspirasi Ide Dengan Idekan
             </p>
             <p className="font-bold text-center space-y-2 leading-[3.1rem] text-gray-500">
-              Selamat Memparaphrase
+              Selamat Ber-ide
             </p>
           </div>
         </div>
@@ -138,28 +130,38 @@ export default function ContainerIdekan() {
               suggestions="Atau Masukkan Kategori Baru"
             />
             <DropDown
-              arrayDrop={["Standar", "Formal", "Simpel", "Creatif"]}
+              placeHolder="Seni"
+              arrayDrop={[
+                "Teknologi",
+                "Pendidikan",
+                "Bisnis & Kewirausahaan",
+                "Model dan Desain",
+                "Kesehatan",
+                "Hiburan",
+                "Seni",
+              ]}
               callbackDrop={callbackDrop}
               isStatus="category"
             />
           </div>
           <div className="w-full">
             <Instruction
-              number="1"
-              instructions="Pilih Kategori"
-              suggestions="Atau Masukkan Kategori Baru"
+              number="2"
+              instructions="Pilih Target Ide"
+              suggestions="Atau Masukkan Target Baru"
             />
             <DropDown
-              arrayDrop={["Standar", "Formal", "Simpel", "Creatif"]}
+              placeHolder="Mahasiswa"
+              arrayDrop={["Mahasiswa", "Orang tua", "Dosen", "Guru"]}
               callbackDrop={callbackDrop}
               isStatus="target"
             />
           </div>
         </div>
         <Instruction
-          number="1"
-          instructions="Copy teks yang ingin anda paraphrase"
-          suggestions="Atau ketik teks"
+          number="3"
+          instructions="Masukkan Ide Anda"
+          suggestions=""
         />
         <div className="relative">
           <textarea
@@ -207,13 +209,14 @@ export default function ContainerIdekan() {
           </button>
         </div>
         <Instruction
-          number="2"
-          instructions="Masukkan Mode Paraphrase Anda"
+          number="4"
+          instructions="Masukkan Tingat Kesulitan Eksekusi Ide"
           suggestions=""
         />
         <div className="flex space-x-5">
           <DropDown
-            arrayDrop={["Standar", "Formal", "Simpel", "Kreatif"]}
+            placeHolder="Mudah"
+            arrayDrop={["Mudah", "Sedang", "Sulit"]}
             callbackDrop={callbackDrop}
             isStatus="difficulty"
           />
@@ -236,7 +239,7 @@ export default function ContainerIdekan() {
                 ></Image>
               </div>
             </div>
-            {isLoading ? <p>Loading ...</p> : <p>Mulai Paraphrase</p>}
+            {isLoading ? <p>Loading ...</p> : <p>Buat Ide</p>}
           </button>
         </div>
         <div className="relative z-0">

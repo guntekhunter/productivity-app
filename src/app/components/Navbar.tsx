@@ -43,6 +43,9 @@ export default function Navbar() {
               <Link href="/idekan" className={`hover:font-bold`}>
                 Idea Generator
               </Link>
+              <Link href="/konsultan" className={`hover:font-bold`}>
+                Konsultan
+              </Link>
               <button onClick={logout}>LogOut</button>
             </ul>
           </div>

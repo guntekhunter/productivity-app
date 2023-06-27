@@ -9,17 +9,13 @@ export default function Navbar() {
 
   const login = () => {
     Cookies.set("loggedin", "true");
-    console.log(session);
     signIn();
   };
 
   const logout = () => {
     Cookies.remove("loggedin");
-    console.log(session);
     signOut();
   };
-
-  console.log(session);
 
   if (session) {
     return (

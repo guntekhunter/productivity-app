@@ -4,9 +4,11 @@ import {
   ReconnectInterval,
   createParser,
 } from "eventsource-parser";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Instruction from "../components/generateAiComponent/Instruction";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function ContainerPeringkas() {
   const [input, setInput] = useState<string>("");
@@ -97,6 +99,15 @@ export default function ContainerPeringkas() {
   const handleClear = () => {
     setInput("");
   };
+
+  const session = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (session.status === "unauthenticated") {
+      router.push("/");
+    }
+  }, [session, router]);
   return (
     <div className="w-full flex justify-around text-[.8rem] mb-[2rem]">
       <div className="w-[70%] inline">

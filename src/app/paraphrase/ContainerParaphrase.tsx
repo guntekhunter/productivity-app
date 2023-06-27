@@ -4,9 +4,11 @@ import {
   ReconnectInterval,
   createParser,
 } from "eventsource-parser";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Instruction from "../components/generateAiComponent/Instruction";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function ContainerParaphrase() {
   const [input, setInput] = useState<string>("");
@@ -21,6 +23,9 @@ export default function ContainerParaphrase() {
   const [isDrop, setIsDrop] = useState(false);
   const [selected, setSelected] = useState("");
   const [isSelected, setIsSelected] = useState(false);
+
+  const session = useSession();
+  const router = useRouter();
 
   const arrayMode = ["Standar", "Formal", "Simpel", "Creatif"];
 
@@ -111,6 +116,12 @@ export default function ContainerParaphrase() {
   const hanldeDropDown = () => {
     setIsDrop(!isDrop);
   };
+
+  useEffect(() => {
+    if (session.status === "unauthenticated") {
+      router.push("/");
+    }
+  }, [session, router]);
 
   return (
     <div className="w-full flex justify-around text-[.8rem] mb-[2rem]">

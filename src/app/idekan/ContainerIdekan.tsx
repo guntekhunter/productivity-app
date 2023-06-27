@@ -1,8 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Instruction from "../components/generateAiComponent/Instruction";
 import Image from "next/image";
 import DropDown from "../components/generateAiComponent/DropDown";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function ContainerIdekan() {
   const [input, setInput] = useState<string>("");
@@ -107,6 +109,14 @@ export default function ContainerIdekan() {
     setInput("");
   };
 
+  const session = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (session.status === "unauthenticated") {
+      router.push("/");
+    }
+  }, [session, router]);
   return (
     <div className="w-full flex justify-around text-[.8rem] mb-[2rem]">
       <div className="w-[70%] inline">

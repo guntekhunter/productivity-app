@@ -14,10 +14,12 @@ export default function Navbar() {
   };
 
   const logout = () => {
-    Cookies.set("loggedin", "false");
+    Cookies.remove("loggedin");
     console.log(session);
     signOut();
   };
+
+  console.log(session);
 
   if (session) {
     return (
@@ -26,19 +28,19 @@ export default function Navbar() {
           <div className="font-bold">Teman</div>
           <div>
             <ul className="flex space-x-[3rem] text-[.8rem]">
-              <Link href="/" className="hover:font-bold">
+              <Link href="/" className={`hover:font-bold`}>
                 Home
               </Link>
-              <Link href="/pomodoro" className="hover:font-bold">
+              <Link href="/pomodoro" className={`hover:font-bold`}>
                 Pomodoro
               </Link>
-              <Link href="/peringkas" className="hover:font-bold">
+              <Link href="/peringkas" className={`hover:font-bold`}>
                 Peringkas
               </Link>
-              <Link href="/paraphrase" className="hover:font-bold">
+              <Link href="/paraphrase" className={`hover:font-bold`}>
                 Paraphrase
               </Link>
-              <Link href="/idekan" className="hover:font-bold">
+              <Link href="/idekan" className={`hover:font-bold`}>
                 Idea Generator
               </Link>
               <button onClick={logout}>LogOut</button>
@@ -54,7 +56,7 @@ export default function Navbar() {
           <div className="font-bold">Teman</div>
           <div>
             <ul className="flex space-x-[3rem] text-[.8rem]">
-              <Link href="/" className="hover:font-bold">
+              <Link href="/" className={`hover:font-bold`}>
                 Home
               </Link>
               <button onClick={login}>Login</button>

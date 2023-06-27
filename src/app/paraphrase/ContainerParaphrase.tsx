@@ -235,23 +235,6 @@ export default function ContainerParaphrase() {
             </div>
           </div>
 
-          {/* <div className="w-full relative space-y-[.4rem]">
-            <input
-              placeholder="Contoh: 20"
-              type="number"
-              onChange={(e) => {
-                setSentenceLength(e.target.value);
-              }}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && !e.shiftKey) {
-                  e.preventDefault();
-                  startResume();
-                }
-              }}
-              value={sentenceLength}
-              className="w-full border-[1.5px] rounded-md flex px-[1rem] py-[1rem] space-x-[.7rem] text-gray-600 "
-            />
-          </div> */}
           <button
             onClick={startResume}
             className="w-full bg-black text-white font-bold rounded-md  hover:bg-gray-900 flex items-center justify-center space-x-[1rem]"

@@ -9,6 +9,7 @@ import Image from "next/image";
 import Instruction from "../components/generateAiComponent/Instruction";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Title from "../components/generateAiComponent/Title";
 
 export default function ContainerPeringkas() {
   const [input, setInput] = useState<string>("");
@@ -111,16 +112,7 @@ export default function ContainerPeringkas() {
   return (
     <div className="w-full flex justify-around text-[.8rem] mb-[2rem]">
       <div className="w-[70%] inline">
-        <div className="w-full flex justify-around py-[2rem]">
-          <div className="w-[30rem]">
-            <p className="text-[3rem] font-bold text-center space-y-2 leading-[3.1rem]">
-              Ringkas Kalimat Anda
-            </p>
-            <p className="font-bold text-center space-y-2 leading-[3.1rem] text-gray-500">
-              Selamat Meringkas
-            </p>
-          </div>
-        </div>
+        <Title title="Ringkas Kalimat Anda" more="Selamat Meringkas" /> 
         <Instruction
           number="1"
           instructions="Copy teks yang ingin anda ringkas"

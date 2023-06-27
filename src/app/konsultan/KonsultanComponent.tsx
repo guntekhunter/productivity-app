@@ -1,6 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import consultAi from "../props/consultAi.json";
+import Image from "next/image";
+import Title from "../components/generateAiComponent/Title";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import ConsultationDescription from "../components/generateAiComponent/ConsultationDescription";
 
 export default function KonsultanComponent() {
   const [input, setInput] = useState("");
@@ -25,7 +30,7 @@ export default function KonsultanComponent() {
           messages: [
             {
               role: "system",
-              content: `${consultAi} Previous Conversation:\n ${conversation}`,
+              content: `${consultAi} Previous Conversation:\n ${conversation} make all response in indonesian, and user name is ${session.data?.user?.name}`,
             },
             {
               role: "user",
@@ -97,9 +102,23 @@ export default function KonsultanComponent() {
     setArrayChat(combinedArray.reverse());
   }, [question, answer]);
 
+  const session = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (session.status === "unauthenticated") {
+      router.push("/");
+    }
+  }, [session, router]);
+
   return (
     <div className="w-full flex justify-around ">
       <div className="w-[70%] py-2">
+        <Title
+          title="Merasa Bernout?, Kami siap membantu anda melewatinya"
+          more="Silahkan Ceritakan kesulitan anda dibawah 👇😊 dan AI akan membantu melewati kesulitan anda. Semua data percakapan
+          anda akan aman dan tidak akan bisa diakses oleh sipapun"
+        />
         <div className="w-full border-[1.5px] h-[30rem] rounded-md flex flex-col">
           <div className="flex-1 flex flex-col-reverse px-[2rem] pt-[1.5rem] space-y-[1rem] overflow-y-scroll scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black py-[1rem]">
             {arrayChat.map((item, key) => (
@@ -137,6 +156,7 @@ export default function KonsultanComponent() {
             <div className="flex-1">
               <input
                 value={input}
+                placeholder="Ketik Pesan"
                 onChange={(e) => {
                   setInput(e.target.value);
                 }}
@@ -152,13 +172,24 @@ export default function KonsultanComponent() {
               />
             </div>
             <button
-              className="bg-black text-white rounded-md hover:bg-gray-900 w-[5rem] h-[2rem]"
+              className="bg-black text-white rounded-md hover:bg-gray-900 w-[5rem] h-[2rem] flex justify-center items-center"
               onClick={sendMessage}
             >
-              Kirim
+              {isLoading ? (
+                <Image
+                  alt="turtles"
+                  src="/spinner-of-dots.png"
+                  width={500}
+                  height={200}
+                  className="w-[1rem] object-cover invert animate-spin"
+                ></Image>
+              ) : (
+                <p>Kirim</p>
+              )}
             </button>
           </div>
         </div>
+        <ConsultationDescription />
       </div>
     </div>
   );

@@ -1,30 +1,44 @@
 "use client";
 import React, { useState } from "react";
 import axios from "axios";
+import { useSession, signIn, signOut } from "next-auth/react";
+import Home from "../components/homeComponent/Home";
 
 export default function CreateUser() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
+  const { data: session } = useSession();
+
+  const login = () => {
+    console.log(session);
+    signIn();
   };
+  console.log(session);
+
+  if (session) {
+    <div>
+      <Home user={session?.user} />
+      <button
+        onClick={(e) => {
+          signOut;
+        }}
+      ></button>
+    </div>;
+  }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Name"
-      />
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
-      />
-      <button type="submit">Add Data</button>
-    </form>
+    <>
+      <button type="button" onClick={login}>
+        Login
+      </button>
+      <button
+        onClick={(e) => {
+          signOut;
+        }}
+      >
+        Logout
+      </button>
+    </>
   );
 }

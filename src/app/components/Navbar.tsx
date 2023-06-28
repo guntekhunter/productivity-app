@@ -9,17 +9,13 @@ export default function Navbar() {
 
   const login = () => {
     Cookies.set("loggedin", "true");
-    console.log(session);
     signIn();
   };
 
   const logout = () => {
     Cookies.remove("loggedin");
-    console.log(session);
     signOut();
   };
-
-  console.log(session);
 
   if (session) {
     return (
@@ -42,6 +38,9 @@ export default function Navbar() {
               </Link>
               <Link href="/idekan" className={`hover:font-bold`}>
                 Idea Generator
+              </Link>
+              <Link href="/konsultan" className={`hover:font-bold`}>
+                Konsultan
               </Link>
               <button onClick={logout}>LogOut</button>
             </ul>

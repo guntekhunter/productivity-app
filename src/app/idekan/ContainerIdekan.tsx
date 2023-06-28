@@ -5,6 +5,7 @@ import Image from "next/image";
 import DropDown from "../components/generateAiComponent/DropDown";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Title from "../components/generateAiComponent/Title";
 
 export default function ContainerIdekan() {
   const [input, setInput] = useState<string>("");
@@ -120,16 +121,10 @@ export default function ContainerIdekan() {
   return (
     <div className="w-full flex justify-around text-[.8rem] mb-[2rem]">
       <div className="w-[70%] inline">
-        <div className="w-full flex justify-around py-[2rem]">
-          <div className="w-[30rem]">
-            <p className="text-[3rem] font-bold text-center space-y-2 leading-[3.1rem]">
-              Mencari Inspirasi Ide Dengan Idekan
-            </p>
-            <p className="font-bold text-center space-y-2 leading-[3.1rem] text-gray-500">
-              Selamat Ber-ide
-            </p>
-          </div>
-        </div>
+        <Title
+          title="Mencari Inspirasi Ide Dengan Idekan"
+          more="Selamat Ber-ide"
+        />
 
         <div className="flex justify-between w-full space-x-[1.3rem]">
           <div className="w-full">

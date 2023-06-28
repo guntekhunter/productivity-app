@@ -1,3 +1,4 @@
+import { Providers } from "./GlobalRedux/providers";
 import ProvidersWrapper from "./ProvidersWrapper";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
@@ -21,10 +22,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={sans.className}>
         <ProvidersWrapper>
-          <Navbar />
-          <GlobalPomodoro />
-          {children}
-          <Footer />
+          <Providers>
+            <Navbar />
+            <GlobalPomodoro />
+            {children}
+            <Footer />
+          </Providers>
         </ProvidersWrapper>
       </body>
     </html>

@@ -1,6 +1,7 @@
 import ProvidersWrapper from "./ProvidersWrapper";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
+import GlobalPomodoro from "./components/pomodoroComponent/GlobalPomodoro";
 import "./globals.css";
 import { Open_Sans } from "next/font/google";
 
@@ -21,6 +22,7 @@ export default function RootLayout({
       <body className={sans.className}>
         <ProvidersWrapper>
           <Navbar />
+          <GlobalPomodoro />
           {children}
           <Footer />
         </ProvidersWrapper>

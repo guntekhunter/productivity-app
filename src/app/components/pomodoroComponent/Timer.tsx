@@ -162,6 +162,10 @@ export default function Timer({ callback }) {
   };
 
   useEffect(() => {
+    localStorage.setItem("timerName", selectedName);
+  }, [selectedName]);
+
+  useEffect(() => {
     if (notifAudio) {
       const audio = new Audio("Nada Dering Telepon Ring.mp3"); // Replace with the actual path to your audio file
       audio.play();

@@ -3,16 +3,20 @@ import React, { useEffect } from "react";
 import { formatTime } from "./TimerFunction";
 
 export default function GlobalPomodoro() {
-  const storedValue = localStorage.getItem("timerValue");
-  const timer = storedValue ? parseInt(storedValue, 10) : 0;
-  console.log(storedValue);
-
-  console.log(timer);
-
+  console.log(localStorage.getItem("timerName"));
+  const timerName = localStorage.getItem("timerName");
   return (
-    <div className="position absolute right-[5rem] top-[6rem]  h-full">
-      <div className="absolute font-bold sticky top-3 bg-red-200 px-[2rem] py-[1rem] rounded-md">
-        {formatTime(timer)}
+    <div className="position absolute right-[2rem] top-[-10rem]  h-full hover:top-0 transition duration-500 ease-in-out">
+      <div
+        className={`absolute  sticky top-[-2.5rem] px-[2rem] py-[1rem] rounded-md mt-3 ${
+          timerName === "pomodoro"
+            ? "bg-red-200"
+            : timerName === "short-break"
+            ? "bg-green-200"
+            : "bg-blue-200"
+        }`}
+      >
+        fokus
       </div>
     </div>
   );

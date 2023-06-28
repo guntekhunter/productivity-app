@@ -2,19 +2,22 @@
 import React, { useEffect, useState } from "react";
 import addNotification from "react-push-notification";
 import { formatTime } from "./TimerFunction";
+import { useDispatch } from "react-redux";
+import { timer } from "@/app/GlobalRedux/features/timerName/timerSlice";
 
 const cycleTimes = [5, 25]; // Cycle times in minutes
 const cycleCountLimit = 4;
 
 //@ts-ignore
 export default function Timer({ callback }) {
-  // const [timer, setTimer] = useState(0);
   const [seconds, setSeconds] = useState(25 * 60);
   const [isActive, setIsActive] = useState(false);
   const [cycleCount, setCycleCount] = useState(0);
   const [selectedTime, setSelectedTime] = useState(25);
   const [notifAudio, setNotifAudio] = useState(false);
   const [selectedName, setSelectedName] = useState("pomodoro");
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const storedValue = localStorage.getItem("timerValue");
@@ -149,7 +152,6 @@ export default function Timer({ callback }) {
   const startCountdown = () => {
     setIsActive(!isActive);
     const status = !isActive;
-    console.log(status);
     localStorage.setItem("timerIsActive", status.toString());
   };
 
@@ -162,9 +164,9 @@ export default function Timer({ callback }) {
   };
 
   useEffect(() => {
-    console.log(selectedName);
+    dispatch(timer(selectedName));
     localStorage.setItem("timerName", selectedName);
-  }, [selectedName]);
+  }, [selectedName, dispatch]);
 
   useEffect(() => {
     if (notifAudio) {
@@ -177,8 +179,6 @@ export default function Timer({ callback }) {
       }, 3000);
     }
   }, [notifAudio]);
-
-  console.log(notifAudio);
 
   return (
     <div className="">

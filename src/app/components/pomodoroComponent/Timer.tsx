@@ -1,6 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import addNotification from "react-push-notification";
+import { formatTime } from "./TimerFunction";
+import { useDispatch } from "react-redux";
+import { timer } from "@/app/GlobalRedux/features/timerName/timerSlice";
 
 const cycleTimes = [5, 25]; // Cycle times in minutes
 const cycleCountLimit = 4;
@@ -13,6 +16,18 @@ export default function Timer({ callback }) {
   const [selectedTime, setSelectedTime] = useState(25);
   const [notifAudio, setNotifAudio] = useState(false);
   const [selectedName, setSelectedName] = useState("pomodoro");
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const storedValue = localStorage.getItem("timerValue");
+    const storedIsActive = localStorage.getItem("timerIsActive");
+
+    if (storedValue && storedIsActive) {
+      setSeconds(parseInt(storedValue, 10));
+      setIsActive(storedIsActive === "true");
+    }
+  }, []);
 
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
@@ -122,23 +137,22 @@ export default function Timer({ callback }) {
       }, 1000);
     }
 
+    localStorage.setItem("timerValue", seconds.toString());
+    localStorage.setItem("timerIsActive", isActive.toString());
+
     return () => {
       if (interval) {
         clearInterval(interval);
       }
     };
-  }, [isActive, cycleCount, selectedName, callback]);
+  }, [isActive, cycleCount, selectedName, callback, seconds]);
 
-  const formatTime = (time: number) => {
-    const minutes = Math.floor(time / 60);
-    const seconds = time % 60;
-    return `${minutes.toString().padStart(2, "0")}:${seconds
-      .toString()
-      .padStart(2, "0")}`;
-  };
+  console.log("inimi", localStorage.getItem("timerValue"));
 
   const startCountdown = () => {
     setIsActive(!isActive);
+    const status = !isActive;
+    localStorage.setItem("timerIsActive", status.toString());
   };
 
   const changeTime = (time: number, name: string) => {
@@ -148,6 +162,11 @@ export default function Timer({ callback }) {
     setSeconds(time * 60);
     setIsActive(false);
   };
+
+  useEffect(() => {
+    dispatch(timer(selectedName));
+    localStorage.setItem("timerName", selectedName);
+  }, [selectedName, dispatch]);
 
   useEffect(() => {
     if (notifAudio) {
@@ -160,8 +179,6 @@ export default function Timer({ callback }) {
       }, 3000);
     }
   }, [notifAudio]);
-
-  console.log(notifAudio);
 
   return (
     <div className="">

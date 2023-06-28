@@ -21,7 +21,7 @@ export default function KonsultanComponent() {
     setIsLoading(true);
     setInput("");
 
-    const conversation = question.map((item) => item.chat);
+    const conversation = arrayChat.map((item) => item.chat);
     try {
       const res = await fetch("/api/paraphrase", {
         method: "POST",
@@ -126,7 +126,7 @@ export default function KonsultanComponent() {
                 key={key}
                 className={`${
                   item.type === "question"
-                    ? "flex items-end justify-end w-full"
+                    ? "flex items-end justify-end w-full my-3"
                     : "flex items-start justify-start w-full"
                 } `}
               >

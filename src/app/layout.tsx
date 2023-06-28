@@ -1,6 +1,8 @@
+import { Providers } from "./GlobalRedux/providers";
 import ProvidersWrapper from "./ProvidersWrapper";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
+import GlobalPomodoro from "./components/pomodoroComponent/GlobalPomodoro";
 import "./globals.css";
 import { Open_Sans } from "next/font/google";
 
@@ -20,9 +22,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={sans.className}>
         <ProvidersWrapper>
-          <Navbar />
-          {children}
-          <Footer />
+          <Providers>
+            <Navbar />
+            <GlobalPomodoro />
+            {children}
+            <Footer />
+          </Providers>
         </ProvidersWrapper>
       </body>
     </html>

@@ -8,13 +8,23 @@ const cycleCountLimit = 4;
 
 //@ts-ignore
 export default function Timer({ callback }) {
-  const [timer, setTimer] = useState(0);
+  // const [timer, setTimer] = useState(0);
   const [seconds, setSeconds] = useState(25 * 60);
   const [isActive, setIsActive] = useState(false);
   const [cycleCount, setCycleCount] = useState(0);
   const [selectedTime, setSelectedTime] = useState(25);
   const [notifAudio, setNotifAudio] = useState(false);
   const [selectedName, setSelectedName] = useState("pomodoro");
+
+  useEffect(() => {
+    const storedValue = localStorage.getItem("timerValue");
+    const storedIsActive = localStorage.getItem("timerIsActive");
+
+    if (storedValue && storedIsActive) {
+      setSeconds(parseInt(storedValue, 10));
+      setIsActive(storedIsActive === "true");
+    }
+  }, []);
 
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
@@ -125,6 +135,7 @@ export default function Timer({ callback }) {
     }
 
     localStorage.setItem("timerValue", seconds.toString());
+    localStorage.setItem("timerIsActive", isActive.toString());
 
     return () => {
       if (interval) {

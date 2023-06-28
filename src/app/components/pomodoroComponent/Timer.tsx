@@ -162,6 +162,7 @@ export default function Timer({ callback }) {
   };
 
   useEffect(() => {
+    console.log(selectedName);
     localStorage.setItem("timerName", selectedName);
   }, [selectedName]);
 

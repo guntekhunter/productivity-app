@@ -1,10 +1,21 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { formatTime } from "./TimerFunction";
 
 export default function GlobalPomodoro() {
-  console.log(localStorage.getItem("timerName"));
-  const timerName = localStorage.getItem("timerName");
+  const [timerName, setTimerName] = useState(localStorage.getItem("timerName"));
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setTimerName(localStorage.getItem("timerName"));
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
   return (
     <div className="position absolute right-[2rem] top-[-10rem]  h-full hover:top-0 transition duration-500 ease-in-out">
       <div

@@ -11,15 +11,12 @@ import {
 } from "@/app/GlobalRedux/features/timerTime/timeSlice";
 
 export default function GlobalPomodoro() {
-  const dispatch = useDispatch();
   const { data: session } = useSession();
-  const minutes = useSelector((state: RootState) => state.time.minutes);
-  const second = useSelector((state: RootState) => state.time.seconds);
 
   const [pomodoro, setPomodoro] = useState(25);
   const [shortBreak, setShortBreak] = useState(5);
   const [longBreak, setLongBreak] = useState(15);
-  const [seconds, setSeconds] = useState(second);
+  const [seconds, setSeconds] = useState(0);
   const [consumedSeconds, setConsumedSeconds] = useState(0);
   const [starting, setStarting] = useState(false);
 
@@ -48,7 +45,6 @@ export default function GlobalPomodoro() {
       2: longBreak,
     };
 
-    dispatch(setMinutes(timeStage[stage]));
     return timeStage[stage];
   };
 
@@ -86,8 +82,6 @@ export default function GlobalPomodoro() {
     } else {
       setSeconds((second) => second - 1);
     }
-
-    dispatch(setSecond(second));
   };
 
   useEffect(() => {
@@ -98,15 +92,11 @@ export default function GlobalPomodoro() {
       }
     }, 1000);
 
-    dispatch(setSecond(seconds));
-
     return () => {
       clearInterval(timer);
     };
   }, [seconds, pomodoro, shortBreak, longBreak, starting]);
 
-  console.log(minutes);
-  console.log(second);
   return (
     <div
       className={`position absolute right-[2rem] transition duration-500 ease-in-out top-[-3rem]  h-full hover:top-0 transition-all ${

@@ -25,7 +25,6 @@ export default function List() {
     setList(deletedList);
   };
 
-  console.log(listChecked);
   return (
     <section className="mt-[2rem] flex justify-around overflow-hidden">
       <div className="w-[60%] py-[2rem] space-y-2">

@@ -5,7 +5,7 @@ import ListComponent from "./ListComponent";
 import AddListButton from "./AddListButton";
 
 //@ts-ignore
-export default function List({ color }) {
+export default function List() {
   const [list, setList] = useState<string[]>([]);
   const [listChecked, setListChecked] = useState<number[]>([]);
 
@@ -35,7 +35,7 @@ export default function List({ color }) {
               name={item}
               index={list.indexOf(item)}
               key={key}
-              color={color}
+              // color={color}
               callback={callbackEdit}
               deleted={deleteCallBack}
             />

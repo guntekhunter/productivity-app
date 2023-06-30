@@ -4,6 +4,7 @@ import addNotification from "react-push-notification";
 import { formatTime } from "./TimerFunction";
 import { useDispatch } from "react-redux";
 import { timer } from "@/app/GlobalRedux/features/timerName/timerSlice";
+import { time } from "@/app/GlobalRedux/features/timerTime/timeSlice";
 
 const cycleTimes = [5, 25]; // Cycle times in minutes
 const cycleCountLimit = 4;
@@ -165,8 +166,9 @@ export default function Timer({ callback }) {
 
   useEffect(() => {
     dispatch(timer(selectedName));
+    dispatch(time(seconds));
     localStorage.setItem("timerName", selectedName);
-  }, [selectedName, dispatch]);
+  }, [selectedName, dispatch, seconds]);
 
   useEffect(() => {
     if (notifAudio) {

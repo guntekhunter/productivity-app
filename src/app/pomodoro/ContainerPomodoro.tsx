@@ -5,15 +5,19 @@ import List from "../components/pomodoroComponent/List";
 import Description from "../components/pomodoroComponent/Description";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import timeSlice, {
+  setMinutes,
+  setSecond,
+} from "../GlobalRedux/features/timerTime/timeSlice";
+import { RootState } from "../GlobalRedux/store";
 
 export default function ContainerPomodoro() {
-  // const [timerType, setTimerType] = useState("pomodoro");
-  // const callbackButton = async (value: string) => {
-  //   setTimerType(value);
-  // };
-
+  const second = useSelector((state: RootState) => state.time.seconds);
+  const globalSeconds = parseInt(localStorage.getItem("seconds") || "0", 10);
   const session = useSession();
   const router = useRouter();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (session.status === "unauthenticated") {
@@ -24,7 +28,7 @@ export default function ContainerPomodoro() {
   const [pomodoro, setPomodoro] = useState(25);
   const [shortBreak, setShortBreak] = useState(5);
   const [longBreak, setLongBreak] = useState(15);
-  const [seconds, setSeconds] = useState(0);
+  const [seconds, setSeconds] = useState(globalSeconds);
   const [consumedSeconds, setConsumedSeconds] = useState(0);
   const [starting, setStarting] = useState(false);
 
@@ -53,6 +57,7 @@ export default function ContainerPomodoro() {
       2: longBreak,
     };
 
+    dispatch(setMinutes(timeStage[stage]));
     return timeStage[stage];
   };
 
@@ -100,10 +105,14 @@ export default function ContainerPomodoro() {
       }
     }, 1000);
 
+    localStorage.setItem("seconds", seconds.toString());
+
     return () => {
       clearInterval(timer);
     };
   }, [seconds, pomodoro, shortBreak, longBreak, starting]);
+
+  console.log(second);
   return (
     <div>
       <Timer
@@ -117,10 +126,5 @@ export default function ContainerPomodoro() {
       <List />
       <Description />
     </div>
-    // <div>
-    //   <Timer callback={callbackButton} />
-    //   <List color={timerType} />
-    //   <Description />
-    // </div>
   );
 }

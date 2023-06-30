@@ -5,159 +5,108 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/GlobalRedux/store";
 import { useSession } from "next-auth/react";
 import addNotification from "react-push-notification";
-
-const cycleTimes = [5, 25]; // Cycle times in minutes
-const cycleCountLimit = 4;
+import {
+  setMinutes,
+  setSecond,
+} from "@/app/GlobalRedux/features/timerTime/timeSlice";
 
 export default function GlobalPomodoro() {
-  const globalTimeActive = useSelector(
-    (state: RootState) => state.timeActive.value
-  );
-  const [seconds, setSeconds] = useState(25 * 60);
-  const [isActive, setIsActive] = useState(globalTimeActive);
-  const [cycleCount, setCycleCount] = useState(0);
-  const [selectedTime, setSelectedTime] = useState(25);
-  const [notifAudio, setNotifAudio] = useState(false);
-  const [selectedName, setSelectedName] = useState("pomodoro");
-
   const dispatch = useDispatch();
+  const { data: session } = useSession();
+  const minutes = useSelector((state: RootState) => state.time.minutes);
+  const second = useSelector((state: RootState) => state.time.seconds);
 
-  useEffect(() => {
-    const storedValue = localStorage.getItem("timerValue");
-    const storedIsActive = localStorage.getItem("timerIsActive");
+  const [pomodoro, setPomodoro] = useState(25);
+  const [shortBreak, setShortBreak] = useState(5);
+  const [longBreak, setLongBreak] = useState(15);
+  const [seconds, setSeconds] = useState(second);
+  const [consumedSeconds, setConsumedSeconds] = useState(0);
+  const [starting, setStarting] = useState(false);
 
-    if (storedValue && storedIsActive) {
-      setSeconds(parseInt(storedValue, 10));
-      setIsActive(storedIsActive === "true");
+  const [stage, setStage] = useState(0);
+
+  const switchStage = (index: React.SetStateAction<number>) => {
+    const isYes =
+      consumedSeconds && stage !== index
+        ? confirm(
+            "Yakin ingin mengganti waktu timer?. Satu sesi belum berakhir"
+          )
+        : false;
+
+    if (isYes) {
+      reset();
+      setStage(index);
+    } else if (!consumedSeconds) {
+      setStage(index);
     }
-  }, []);
+  };
 
-  useEffect(() => {
-    let interval: NodeJS.Timeout | null = null;
+  const getTimerTime = () => {
+    const timeStage: { [key: number]: number } = {
+      0: pomodoro,
+      1: shortBreak,
+      2: longBreak,
+    };
 
-    if (isActive) {
-      interval = setInterval(() => {
-        setSeconds((prevSeconds) => {
-          if (prevSeconds === 0) {
-            setIsActive(false);
+    dispatch(setMinutes(timeStage[stage]));
+    return timeStage[stage];
+  };
 
-            if (cycleCount === cycleCountLimit) {
-              setSeconds(15 * 60);
-              setCycleCount(0);
-              setSelectedName("long-break");
-              // callback("long-break");
-              addNotification({
-                title: "ISTIRAHAT",
-                subtitle: "Istirahat",
-                message: "Waktunya Istirahat",
-                theme: "darkblue",
-                native: false,
-                duration: 6000,
-              });
-              setNotifAudio(true);
-              return 15 * 60;
-            } else if (selectedName === "short-break") {
-              const nextCycleSeconds = cycleTimes[1] * 60;
-              setSeconds(nextCycleSeconds);
-              setCycleCount((prevCount) => prevCount + 1);
-              setSelectedName("pomodoro");
-              // callback("pomodoro");
-              addNotification({
-                title: "FOKUS",
-                subtitle: "Fokus",
-                message: "Waktunya Fokus",
-                theme: "darkblue",
-                native: false,
-                duration: 6000,
-              });
-              setNotifAudio(true);
-              return nextCycleSeconds;
-            } else if (selectedName === "long-break") {
-              const nextCycleSeconds = cycleTimes[1] * 60;
-              setSeconds(nextCycleSeconds);
-              setCycleCount((prevCount) => prevCount + 1);
-              setSelectedName("pomodoro");
-              // callback("pomodoro");
-              addNotification({
-                title: "FOKUS",
-                subtitle: "Fokus",
-                message: "Waktunya Fokus",
-                theme: "darkblue",
-                native: false,
-                duration: 6000,
-              });
-              setNotifAudio(true);
-              return nextCycleSeconds;
-            } else {
-              const nextCycleIndex = cycleCount % cycleTimes.length;
-              const nextCycleSeconds = cycleTimes[nextCycleIndex] * 60;
-              if (nextCycleIndex === 0) {
-                setSelectedName("short-break");
-                // callback("short-break");
-                addNotification({
-                  title: "ISTIRAHAT",
-                  subtitle: "Istirahat",
-                  message: "Waktunya Istirahat",
-                  theme: "darkblue",
-                  native: false,
-                  duration: 6000,
-                });
-                setNotifAudio(true);
-              } else if (nextCycleIndex === 1) {
-                setSelectedName("pomodoro");
-                // callback("pomodoro");
-                addNotification({
-                  title: "FOKUS",
-                  subtitle: "Fokus",
-                  message: "Waktunya Fokus",
-                  theme: "darkblue",
-                  native: false,
-                  duration: 6000,
-                });
-                setNotifAudio(true);
-              } else {
-                setSelectedName("long-break");
-                // callback("long-break");
-                addNotification({
-                  title: "ISTIRAHAT",
-                  subtitle: "Istirahat",
-                  message: "Waktunya Istirahat",
-                  theme: "darkblue",
-                  native: false,
-                  duration: 6000,
-                });
-                setNotifAudio(true);
-              }
-              setSeconds(nextCycleSeconds);
-              setCycleCount((prevCount) => prevCount + 1);
-              setNotifAudio(true);
-              return nextCycleSeconds;
-            }
-          } else {
-            return prevSeconds - 1;
-          }
-        });
-      }, 1000);
+  const UpdateMinute = () => {
+    const updateStage: {
+      [key: number]: React.Dispatch<React.SetStateAction<number>>;
+    } = {
+      0: setPomodoro,
+      1: setShortBreak,
+      2: setLongBreak,
+    };
+
+    return updateStage[stage];
+  };
+
+  const reset = () => {
+    setConsumedSeconds(0);
+    setSeconds(0);
+    setStarting(false);
+    setPomodoro(25);
+    setShortBreak(5);
+    setLongBreak(15);
+  };
+
+  const clockStart = () => {
+    const minutes = getTimerTime();
+    const setMinutes = UpdateMinute();
+
+    if (minutes === 0 && seconds === 0) {
+      reset();
+    } else if (seconds === 0) {
+      setMinutes((minute) => minute - 1);
+
+      setSeconds(59);
+    } else {
+      setSeconds((second) => second - 1);
     }
 
-    localStorage.setItem("timerValue", seconds.toString());
-    localStorage.setItem("timerIsActive", isActive.toString());
+    dispatch(setSecond(second));
+  };
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (starting) {
+        setConsumedSeconds((value) => value + 1);
+        clockStart();
+      }
+    }, 1000);
+
+    dispatch(setSecond(seconds));
 
     return () => {
-      if (interval) {
-        clearInterval(interval);
-      }
+      clearInterval(timer);
     };
-  }, [isActive, cycleCount, selectedName, seconds]);
+  }, [seconds, pomodoro, shortBreak, longBreak, starting]);
 
-  const { data: session } = useSession();
-  const globalTimer = useSelector((state: RootState) => state.timer.value);
-  const globalTime = useSelector((state: RootState) => state.time.value);
-
-  console.log(globalTime);
-
-  // need to set the count to global variable to
-
+  console.log(minutes);
+  console.log(second);
   return (
     <div
       className={`position absolute right-[2rem] transition duration-500 ease-in-out top-[-3rem]  h-full hover:top-0 transition-all ${
@@ -165,19 +114,9 @@ export default function GlobalPomodoro() {
       }`}
     >
       <div
-        className={`absolute sticky top-0 top-[-2rem] px-[2rem] py-[.5rem] rounded-md mt-3 ${
-          globalTimer === "pomodoro"
-            ? "bg-red-200"
-            : globalTimer === "short-break"
-            ? "bg-green-200"
-            : "bg-blue-200"
-        }`}
+        className={`absolute sticky top-0 top-[-2rem] px-[2rem] py-[.5rem] rounded-md mt-3 bg-blue-200`}
       >
-        {globalTimer === "pomodoro"
-          ? "fokus"
-          : globalTimer === "short-break"
-          ? "Istirahat"
-          : "Istirahat"}
+        Istirahat
       </div>
     </div>
   );

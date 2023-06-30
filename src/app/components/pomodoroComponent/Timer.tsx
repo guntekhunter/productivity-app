@@ -1,10 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import addNotification from "react-push-notification";
-import { formatTime } from "./TimerFunction";
-import { useDispatch } from "react-redux";
-import { timer } from "@/app/GlobalRedux/features/timerName/timerSlice";
-import { time } from "@/app/GlobalRedux/features/timerTime/timeSlice";
 
 //@ts-ignore
 export default function Timer({ stage, switchStage, getTimerTime, seconds, starting,setStarting }) {

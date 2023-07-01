@@ -14,14 +14,11 @@ export default function GlobalPomodoro() {
     (state: RootState) => state.timeActive.value
   );
 
-  
   // need to set the count to global variable to
 
   return (
     <div
-      className={`position absolute right-[2rem] transition duration-500 ease-in-out top-[-3rem]  h-full hover:top-0 transition-all
-        // session ? "" : "hidden"
-      `}
+      className={`position absolute right-[2rem] transition duration-500 ease-in-out top-[-3rem]  h-full hover:top-0 transition-all hidden`}
     >
       <div
         className={`absolute sticky top-0 top-[-2rem] px-[2rem] py-[.5rem] rounded-md mt-3

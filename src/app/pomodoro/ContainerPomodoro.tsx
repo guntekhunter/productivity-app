@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import timeSlice, {
+  setActive,
   setMinutes,
   setSecond,
 } from "../GlobalRedux/features/timerTime/timeSlice";
@@ -23,14 +24,28 @@ export default function ContainerPomodoro() {
     }
   }, [session, router]);
 
-  const [pomodoro, setPomodoro] = useState(25);
-  const [shortBreak, setShortBreak] = useState(5);
-  const [longBreak, setLongBreak] = useState(15);
-  const [seconds, setSeconds] = useState(0);
+  const isActive = useSelector((state: RootState) => state.timeActive.value);
+
+  const [stage, setStage] = useState(
+    parseInt(localStorage.getItem("name") || "0", 10)
+  );
+
+  const [pomodoro, setPomodoro] = useState(
+    stage === 0 ? parseInt(localStorage.getItem("minutes") || "0", 10) : 25
+  );
+  const [shortBreak, setShortBreak] = useState(
+    stage === 1 ? parseInt(localStorage.getItem("minutes") || "0", 10) : 5
+  );
+  const [longBreak, setLongBreak] = useState(
+    stage === 2 ? parseInt(localStorage.getItem("minutes") || "0", 10) : 15
+  );
+  const [seconds, setSeconds] = useState(
+    parseInt(localStorage.getItem("seconds") || "0", 10)
+  );
   const [consumedSeconds, setConsumedSeconds] = useState(0);
   const [starting, setStarting] = useState(false);
 
-  const [stage, setStage] = useState(0);
+  console.log(isActive);
 
   const switchStage = (index: React.SetStateAction<number>) => {
     const isYes =
@@ -48,6 +63,31 @@ export default function ContainerPomodoro() {
     }
   };
 
+  useEffect(() => {
+    localStorage.setItem("seconds", seconds.toString());
+    localStorage.setItem("name", stage.toString());
+
+    const secondsInteger = localStorage.getItem("seconds");
+    const nameInteger = parseInt(localStorage.getItem("name") || "0", 10);
+
+    setSecond(secondsInteger);
+    setStage(nameInteger);
+  }, [stage, seconds, starting]);
+
+  useEffect(() => {
+    dispatch(setActive(starting));
+    localStorage.setItem("active", starting.toString());
+    console.log(starting);
+  }, [dispatch, starting]);
+
+  console.log("inimi active nda", localStorage.getItem("active"));
+
+  useEffect(() => {
+    if (stage === 0) {
+      setPomodoro(parseInt(localStorage.getItem("minutes") || "0", 10));
+    }
+  }, [stage]);
+
   const getTimerTime = () => {
     const timeStage: { [key: number]: number } = {
       0: pomodoro,
@@ -55,7 +95,9 @@ export default function ContainerPomodoro() {
       2: longBreak,
     };
 
-    return timeStage[stage];
+    localStorage.setItem("minutes", timeStage[stage].toString());
+    const minutesInteger = parseInt(localStorage.getItem("minutes") || "0", 10);
+    return minutesInteger;
   };
 
   const UpdateMinute = () => {
@@ -67,6 +109,7 @@ export default function ContainerPomodoro() {
       2: setLongBreak,
     };
 
+    localStorage.setItem("updateMinutes", updateStage[stage].toString());
     return updateStage[stage];
   };
 
@@ -86,12 +129,18 @@ export default function ContainerPomodoro() {
     if (minutes === 0 && seconds === 0) {
       reset();
     } else if (seconds === 0) {
-      setMinutes((minute) => minute - 1);
+      setMinutes((minute) => {
+        localStorage.setItem("minutes", (minute - 1).toString());
+        return minute - 1;
+      });
 
       setSeconds(59);
     } else {
       setSeconds((second) => second - 1);
     }
+
+    localStorage.setItem("active", starting.toString());
+    dispatch(setActive(starting));
   };
 
   useEffect(() => {
@@ -106,6 +155,8 @@ export default function ContainerPomodoro() {
       clearInterval(timer);
     };
   }, [seconds, pomodoro, shortBreak, longBreak, starting]);
+
+  console.log("di container", localStorage.getItem("active"));
 
   return (
     <div>

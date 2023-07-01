@@ -6,12 +6,14 @@ export interface timeState {
   minutes: number;
   seconds: number;
   name: string;
+  active: boolean;
 }
 
 const initialState: timeState = {
   minutes: 0,
   seconds: 0,
   name: "",
+  active: false,
 };
 
 export const timeSlice = createSlice({
@@ -27,10 +29,13 @@ export const timeSlice = createSlice({
     setName: (state, action) => {
       state.name = action.payload;
     },
+    setActive: (state, action) => {
+      state.name = action.payload;
+    },
   },
 });
 
-export const { setMinutes, setSecond, setName } = timeSlice.actions;
+export const { setMinutes, setSecond, setName, setActive } = timeSlice.actions;
 // export const {increment, decrement, incrementByAmount} = timerSlice.actions;
 
 export default timeSlice.reducer;

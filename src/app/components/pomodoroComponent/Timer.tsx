@@ -34,7 +34,7 @@ export default function Timer({ callback }) {
 
     if (storedValue && storedIsActive) {
       setSeconds(parseInt(storedValue, 10));
-      setIsActive(!globalTimeActive);
+      setIsActive(globalTimeActive);
     }
   }, [globalTimeActive]);
 

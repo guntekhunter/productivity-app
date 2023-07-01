@@ -193,6 +193,38 @@ export default function Navbar() {
               <button onClick={login}>Login</button>
             </ul>
           </div>
+          <div
+            className="flex justify-center items-center md:hidden"
+            onClick={activateNav}
+          >
+            <Image
+              src="/more.png"
+              alt=""
+              width={500}
+              height={500}
+              className="w-[1rem] h-[1rem]"
+            />
+          </div>
+
+          {/* mobile nav */}
+          <div
+            className={`absolute md:hidden bg-black text-white py-[1.6rem] px-[2rem] space-y-[1rem] left-0 transform duration-500 transition-opacity ${
+              isActive ? "" : "hidden"
+            }`}
+          >
+            <div>
+              <Link
+                onClick={activateNav}
+                href="/"
+                className={`hover:font-bold ${
+                  pathname === "" ? "font-bold" : ""
+                }`}
+              >
+                Home
+              </Link>
+            </div>
+            <button onClick={login}>LogIn</button>
+          </div>
         </div>
       </div>
     );

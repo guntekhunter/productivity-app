@@ -2,21 +2,29 @@
 import React, { useEffect, useState } from "react";
 import addNotification from "react-push-notification";
 import { formatTime } from "./TimerFunction";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { timer } from "@/app/GlobalRedux/features/timerName/timerSlice";
 import { time } from "@/app/GlobalRedux/features/timerTime/timeSlice";
+import { RootState } from "@/app/GlobalRedux/store";
+import { timeActive } from "@/app/GlobalRedux/features/timerActive/timeActiveSlice";
 
 const cycleTimes = [5, 25]; // Cycle times in minutes
 const cycleCountLimit = 4;
 
 //@ts-ignore
 export default function Timer({ callback }) {
-  const [seconds, setSeconds] = useState(25 * 60);
-  const [isActive, setIsActive] = useState(false);
+  const globalTimeActive = useSelector(
+    (state: RootState) => state.timeActive.value
+  );
+  const theTime = parseInt(localStorage.getItem("timerValue") || "0", 10);
+  console.log(theTime);
+  const [seconds, setSeconds] = useState(theTime);
+  const [isActive, setIsActive] = useState(globalTimeActive);
   const [cycleCount, setCycleCount] = useState(0);
   const [selectedTime, setSelectedTime] = useState(25);
   const [notifAudio, setNotifAudio] = useState(false);
-  const [selectedName, setSelectedName] = useState("pomodoro");
+  const typeTimer = localStorage.getItem("timerName");
+  const [selectedName, setSelectedName] = useState(typeTimer);
 
   const dispatch = useDispatch();
 
@@ -26,9 +34,9 @@ export default function Timer({ callback }) {
 
     if (storedValue && storedIsActive) {
       setSeconds(parseInt(storedValue, 10));
-      setIsActive(storedIsActive === "true");
+      setIsActive(!globalTimeActive);
     }
-  }, []);
+  }, [globalTimeActive]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
@@ -43,6 +51,7 @@ export default function Timer({ callback }) {
               setSeconds(15 * 60);
               setCycleCount(0);
               setSelectedName("long-break");
+              localStorage.setItem("timerName", "long-break");
               callback("long-break");
               addNotification({
                 title: "ISTIRAHAT",
@@ -59,6 +68,7 @@ export default function Timer({ callback }) {
               setSeconds(nextCycleSeconds);
               setCycleCount((prevCount) => prevCount + 1);
               setSelectedName("pomodoro");
+              localStorage.setItem("timerName", "pomodoro");
               callback("pomodoro");
               addNotification({
                 title: "FOKUS",
@@ -75,6 +85,7 @@ export default function Timer({ callback }) {
               setSeconds(nextCycleSeconds);
               setCycleCount((prevCount) => prevCount + 1);
               setSelectedName("pomodoro");
+              localStorage.setItem("timerName", "pomodoro");
               callback("pomodoro");
               addNotification({
                 title: "FOKUS",
@@ -91,6 +102,7 @@ export default function Timer({ callback }) {
               const nextCycleSeconds = cycleTimes[nextCycleIndex] * 60;
               if (nextCycleIndex === 0) {
                 setSelectedName("short-break");
+                localStorage.setItem("timerName", "short-break");
                 callback("short-break");
                 addNotification({
                   title: "ISTIRAHAT",
@@ -103,6 +115,7 @@ export default function Timer({ callback }) {
                 setNotifAudio(true);
               } else if (nextCycleIndex === 1) {
                 setSelectedName("pomodoro");
+                localStorage.setItem("timerName", "pomodoro");
                 callback("pomodoro");
                 addNotification({
                   title: "FOKUS",
@@ -115,6 +128,7 @@ export default function Timer({ callback }) {
                 setNotifAudio(true);
               } else {
                 setSelectedName("long-break");
+                localStorage.setItem("timerName", "long-break");
                 callback("long-break");
                 addNotification({
                   title: "ISTIRAHAT",
@@ -148,8 +162,6 @@ export default function Timer({ callback }) {
     };
   }, [isActive, cycleCount, selectedName, callback, seconds]);
 
-  console.log("inimi", localStorage.getItem("timerValue"));
-
   const startCountdown = () => {
     setIsActive(!isActive);
     const status = !isActive;
@@ -157,17 +169,24 @@ export default function Timer({ callback }) {
   };
 
   const changeTime = (time: number, name: string) => {
+    alert("yakin");
     setSelectedTime(time);
     setSelectedName(name);
     callback(name);
-    setSeconds(time * 60);
+    const theSeconds = time * 60;
+    localStorage.setItem("timerValue", theSeconds.toString());
+    setSeconds(parseInt(localStorage.getItem("timerValue") || "0", 10));
+    localStorage.setItem("timerName", name);
     setIsActive(false);
   };
 
   useEffect(() => {
     dispatch(timer(selectedName));
     dispatch(time(seconds));
-    localStorage.setItem("timerName", selectedName);
+    if (selectedName !== null) {
+      dispatch(timer(selectedName));
+      // localStorage.setItem("timerName", selectedName);
+    }
   }, [selectedName, dispatch, seconds]);
 
   useEffect(() => {
@@ -181,6 +200,43 @@ export default function Timer({ callback }) {
       }, 3000);
     }
   }, [notifAudio]);
+
+  const reset = () => {
+    localStorage.setItem("reset", "true");
+    console.log(localStorage.getItem("timerName"));
+    const name = localStorage.getItem("timerName");
+    dispatch(timeActive(false));
+    if (name === "short-break") {
+      setSelectedTime(5);
+      setSelectedName("short-break");
+      callback("short-break");
+      const theSeconds = 5 * 60;
+      localStorage.setItem("timerValue", theSeconds.toString());
+      setSeconds(parseInt(localStorage.getItem("timerValue") || "0", 10));
+      localStorage.setItem("timerName", "short-break");
+      setIsActive(false);
+    } else if (name === "long-break") {
+      setSelectedTime(15);
+      setSelectedName("long-break");
+      callback("long-break");
+      const theSeconds = 15 * 60;
+      localStorage.setItem("timerValue", theSeconds.toString());
+      setSeconds(parseInt(localStorage.getItem("timerValue") || "0", 10));
+      localStorage.setItem("timerName", "long-break");
+      setIsActive(false);
+    } else {
+      setSelectedTime(25);
+      setSelectedName("pomodoro");
+      callback("pomodoro");
+      const theSeconds = 25 * 60;
+      localStorage.setItem("timerValue", theSeconds.toString());
+      setSeconds(parseInt(localStorage.getItem("timerValue") || "0", 10));
+      localStorage.setItem("timerName", "pomodoro");
+      setIsActive(false);
+    }
+  };
+
+  console.log(seconds);
 
   return (
     <div className="">
@@ -250,6 +306,20 @@ export default function Timer({ callback }) {
               className="bg-black text-white text-[3rem] font-bold w-[25rem] rounded-md"
             >
               {isActive ? <p>PAUSE</p> : <p>START</p>}
+            </button>
+          </div>
+          <div className="flex justify-around">
+            <button
+              onKeyDown={(e) => {
+                if (e.code === "Space") {
+                  e.preventDefault();
+                  reset();
+                }
+              }}
+              onClick={reset}
+              className="bg-white text-black text-[3rem] font-bold w-[25rem] rounded-md"
+            >
+              <p>RESET</p>
             </button>
           </div>
         </div>

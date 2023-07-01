@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 export default function ContainerPomodoro() {
-  const [timerType, setTimerType] = useState("pomodoro");
+  const [timerType, setTimerType] = useState(localStorage.getItem("timerName"));
   const callbackButton = async (value: string) => {
     setTimerType(value);
   };

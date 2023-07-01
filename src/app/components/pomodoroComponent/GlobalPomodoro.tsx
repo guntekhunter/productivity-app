@@ -13,12 +13,14 @@ export default function GlobalPomodoro() {
   const globalTimeActive = useSelector(
     (state: RootState) => state.timeActive.value
   );
-  const [seconds, setSeconds] = useState(25 * 60);
+  const theTime = parseInt(localStorage.getItem("timerValue") || "0", 10);
+  const typeTimer = localStorage.getItem("timerName");
+  const [seconds, setSeconds] = useState(theTime);
   const [isActive, setIsActive] = useState(globalTimeActive);
   const [cycleCount, setCycleCount] = useState(0);
   const [selectedTime, setSelectedTime] = useState(25);
   const [notifAudio, setNotifAudio] = useState(false);
-  const [selectedName, setSelectedName] = useState("pomodoro");
+  const [selectedName, setSelectedName] = useState(typeTimer);
 
   const dispatch = useDispatch();
 
@@ -154,7 +156,7 @@ export default function GlobalPomodoro() {
   const globalTimer = useSelector((state: RootState) => state.timer.value);
   const globalTime = useSelector((state: RootState) => state.time.value);
 
-  console.log(globalTime);
+  console.log();
 
   // need to set the count to global variable to
 

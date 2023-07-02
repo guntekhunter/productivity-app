@@ -151,7 +151,7 @@ export default function Footer() {
               type="text"
               className="hidden"
               name="user_name"
-              value={session?.user?.name !== null ? session?.user?.name : ""}
+              value={session?.user?.email !== null ? session?.user?.email : ""}
             />
             <input type="text" className="hidden" name="user_email" />
             <textarea

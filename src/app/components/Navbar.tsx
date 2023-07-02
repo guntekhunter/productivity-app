@@ -1,18 +1,21 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { PrismaClient } from "@prisma/client";
+import axios from "axios";
 
 // @ts-ignore
 export default function Navbar() {
   const pathname = usePathname();
+  const [userIsAdded, setUserIsAdded] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const { data: session } = useSession();
 
-  const login = () => {
+  const login = async () => {
     Cookies.set("loggedin", "true");
     signIn();
   };
@@ -27,6 +30,28 @@ export default function Navbar() {
   };
 
   console.log(isActive);
+
+  useEffect(() => {
+    const addUser = async () => {
+      if (!userIsAdded) {
+        try {
+          const data = await axios.post("/api/user", {
+            name: session?.user?.name,
+            email: session?.user?.email,
+            image: session?.user?.image,
+          });
+          console.log(data);
+          setUserIsAdded(true);
+          return data;
+        } catch (error) {
+          console.error("Error adding user:", error);
+        }
+      }
+    };
+    addUser();
+  }, [session, userIsAdded]);
+  
+  console.log("coba", userIsAdded);
 
   if (session) {
     return (

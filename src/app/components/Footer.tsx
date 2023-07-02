@@ -3,9 +3,19 @@ import Cookies from "js-cookie";
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { useForm, ValidationError } from "@formspree/react";
+import { useDispatch } from "react-redux";
+import { navbarActive } from "../GlobalRedux/features/navbar/navbarActiveSlice";
 
 export default function Footer() {
+  const [value, setValue] = useState("");
+  const [modalActive, setModalActive] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const [state, handleSubmit] = useForm("mvojpyga");
+
   const pathname = usePathname();
   const [isActive, setIsActive] = useState(false);
   const { data: session } = useSession();
@@ -18,8 +28,23 @@ export default function Footer() {
   const activateNav = () => {
     setIsActive(!isActive);
   };
+
+  const sendMessage = () => {
+    console.log(value);
+    dispatch(navbarActive(true));
+    setTimeout(() => {
+      dispatch(navbarActive(false));
+    }, 3000);
+  };
+
+  // useEffect(() => {
+  //   if (state.succeeded) {
+  //     setValue("");
+  //   }
+  // }, [value, state]);
+
   return (
-    <section className="w-full bg-black text-white flex justify-around">
+    <section className="w-full bg-black text-white flex justify-around relative">
       <div className="md:w-[70%] w-[90%] pt-[5rem] pb-[1rem] md:space-y-[3rem]">
         <div className="md:flex justify-between px-[1rem]">
           <div className="flex space-x-[2rem]">
@@ -109,20 +134,40 @@ export default function Footer() {
             </div>
           </div>
           {/* feedback */}
-          <div
+          <form
+            onSubmit={handleSubmit}
             className={`space-y-2 md:my-0 my-[2rem] ${session ? "" : "hidden"}`}
           >
             <p className="text-white">
               Kritik dan saran teman-teman sangat berarti bagi kami 😊
             </p>
+            <input
+              type="text"
+              className="hidden"
+              name="user_name"
+              value={session?.user?.name !== null ? session?.user?.name : ""}
+            />
+            <input
+              type="text"
+              className="hidden"
+              name="user_name"
+              value={session?.user?.name !== null ? session?.user?.name : ""}
+            />
+            <input type="text" className="hidden" name="user_email" />
             <textarea
+              onChange={(e) => setValue(e.target.value)}
+              value={value}
               className="w-full text-black px-2 rounded-md"
               placeholder="ketik pesan"
+              name="message"
             />
-            <button className="bg-white text-black px-3 py-1 rounded-md font-bold">
+            <button
+              className="bg-white text-black px-3 py-1 rounded-md font-bold"
+              onClick={sendMessage}
+            >
               Kirim
             </button>
-          </div>
+          </form>
         </div>
 
         <div className="flex justify-between text-[.8rem]">

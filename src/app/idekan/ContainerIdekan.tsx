@@ -120,13 +120,13 @@ export default function ContainerIdekan() {
   }, [session, router]);
   return (
     <div className="w-full flex justify-around text-[.8rem] mb-[2rem]">
-      <div className="w-[70%] inline">
+      <div className="md:w-[70%] w-[90%] inline">
         <Title
           title="Mencari Inspirasi Ide Dengan Idekan"
           more="Selamat Ber-ide"
         />
 
-        <div className="flex justify-between w-full space-x-[1.3rem]">
+        <div className="md:flex justify-between w-full md:space-x-[1.3rem]">
           <div className="w-full">
             <Instruction
               number="1"
@@ -169,7 +169,7 @@ export default function ContainerIdekan() {
         />
         <div className="relative">
           <textarea
-            placeholder="ahhay"
+            placeholder="Contoh: Sebuah Produk"
             className="w-full border-[1.5px] border-gray-200 rounded-md appearance-none h-[5rem] overflow-y-scroll border-t-[1px] px-5 scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black resize-none focus:ring-0 focus:outline-none py-[1rem] text-gray-600 "
             name=""
             id=""
@@ -259,7 +259,7 @@ export default function ContainerIdekan() {
                 alt="turtles"
                 src="/copy.png"
                 width={500}
-                height={0}
+                height={500}
                 className="w-[1.5rem]"
                 onMouseEnter={() => setHoverCopy(true)}
                 onMouseLeave={() => setHoverCopy(false)}

@@ -126,7 +126,7 @@ export default function ContainerParaphrase() {
 
   return (
     <div className="w-full flex justify-around text-[.8rem] mb-[2rem]">
-      <div className="w-[70%] inline">
+      <div className="md:w-[70%] w-[90%] inline">
         <Title
           title="Hindari Plagiarisme Dengan Paraphrase"
           more="Selamat Memparaphrase"
@@ -139,7 +139,7 @@ export default function ContainerParaphrase() {
         />
         <div className="relative">
           <textarea
-            placeholder="Contoh: Teknologi dapat diartikan sebagai penerapan ilmu pengetahuan, penemuan, dan keterampilan yang digunakan untuk merancang, membuat, dan memanfaatkan alat, mesin, perangkat lunak, sistem, dan proses untuk memecahkan masalah dan memenuhi kebutuhan manusia. Secara umum, teknologi melibatkan penggunaan pengetahuan dan keterampilan untuk menciptakan solusi yang memfasilitasi atau meningkatkan aktivitas manusia dalam berbagai bidang kehidupan, seperti komunikasi, transportasi, kesehatan, industri, pendidikan....."
+            placeholder="Contoh: Teknologi dapat diartikan sebagai penerapan ilmu pengetahuan, penemuan, dan keterampilan yang digunakan untuk merancang, membuat, dan memanfaatkan alat, mesin, perangkat lunak, sistem, dan proses untuk memecahkan masalah dan memenuhi kebutuhan pendidikan....."
             className="w-full border-[1.5px] border-gray-200 rounded-md appearance-none h-[15rem] overflow-y-scroll border-t-[1px] px-5 scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black resize-none focus:ring-0 focus:outline-none py-[1rem] text-gray-600 "
             name=""
             id=""
@@ -187,7 +187,7 @@ export default function ContainerParaphrase() {
           instructions="Masukkan Mode Paraphrase Anda"
           suggestions=""
         />
-        <div className="flex space-x-5">
+        <div className="md:flex md:space-x-5 space-y-[.6rem] md:space-y-0">
           <div className="w-full relative space-y-[.4rem]">
             <button
               onClick={hanldeDropDown}
@@ -231,27 +231,29 @@ export default function ContainerParaphrase() {
             </div>
           </div>
 
-          <button
-            onClick={startResume}
-            className="w-full bg-black text-white font-bold rounded-md  hover:bg-gray-900 flex items-center justify-center space-x-[1rem]"
-          >
-            <div
-              className={`flex items-center justify-center  ${
-                isLoading ? "" : "hidden"
-              }`}
+          <div className="w-full">
+            <button
+              onClick={startResume}
+              className="w-full bg-black text-white font-bold rounded-md hover:bg-gray-900 flex items-center justify-center space-x-[1rem] h-[4rem] md:h-full"
             >
-              <div className="rounded-full overflow-hidden w-[1.5rem] h-[1.5rem]">
-                <Image
-                  alt="turtles"
-                  src="/spinner-of-dots.png"
-                  width={500}
-                  height={200}
-                  className="w-full h-full object-cover invert animate-spin"
-                ></Image>
+              <div
+                className={`flex items-center justify-center  ${
+                  isLoading ? "" : "hidden"
+                }`}
+              >
+                <div className="rounded-full overflow-hidden w-[1.5rem] h-[1.5rem]">
+                  <Image
+                    alt="turtles"
+                    src="/spinner-of-dots.png"
+                    width={500}
+                    height={200}
+                    className="w-full h-full object-cover invert animate-spin"
+                  ></Image>
+                </div>
               </div>
-            </div>
-            {isLoading ? <p>Loading ...</p> : <p>Mulai Paraphrase</p>}
-          </button>
+              {isLoading ? <p>Loading ...</p> : <p>Mulai Paraphrase</p>}
+            </button>
+          </div>
         </div>
         <div className="relative z-0">
           <div

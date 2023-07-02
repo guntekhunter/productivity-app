@@ -111,8 +111,8 @@ export default function ContainerPeringkas() {
   }, [session, router]);
   return (
     <div className="w-full flex justify-around text-[.8rem] mb-[2rem]">
-      <div className="w-[70%] inline">
-        <Title title="Ringkas Kalimat Anda" more="Selamat Meringkas" /> 
+      <div className="md:w-[70%] w-[90%] inline">
+        <Title title="Ringkas Kalimat Anda" more="Selamat Meringkas" />
         <Instruction
           number="1"
           instructions="Copy teks yang ingin anda ringkas"
@@ -120,7 +120,7 @@ export default function ContainerPeringkas() {
         />
         <div className="relative">
           <textarea
-            placeholder="Contoh: Teknologi dapat diartikan sebagai penerapan ilmu pengetahuan, penemuan, dan keterampilan yang digunakan untuk merancang, membuat, dan memanfaatkan alat, mesin, perangkat lunak, sistem, dan proses untuk memecahkan masalah dan memenuhi kebutuhan manusia. Secara umum, teknologi melibatkan penggunaan pengetahuan dan keterampilan untuk menciptakan solusi yang memfasilitasi atau meningkatkan aktivitas manusia dalam berbagai bidang kehidupan, seperti komunikasi, transportasi, kesehatan, industri, pendidikan....."
+            placeholder="Contoh: Teknologi dapat diartikan sebagai penerapan ilmu pengetahuan, penemuan, dan keterampilan yang digunakan untuk merancang, membuat, dan memanfaatkan alat, mesin, perangkat lunak, sistem, dan proses untuk memecahkan masalah dan memenuhi kebutuhan pendidikan....."
             className="w-full border-[1.5px] border-gray-200 rounded-md appearance-none h-[15rem] overflow-y-scroll border-t-[1px] px-5 scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black resize-none focus:ring-0 focus:outline-none py-[1rem] text-gray-600 "
             name=""
             id=""

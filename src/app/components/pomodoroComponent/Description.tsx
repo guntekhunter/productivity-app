@@ -4,8 +4,8 @@ import React from "react";
 export default function Description() {
   return (
     <section className="w-full flex justify-around">
-      <div className="w-[60%] py-[2rem] space-y-[1rem]">
-        <h1 className="font-bold text-[1.8rem]">
+      <div className="md:w-[60%] w-[90%] py-[2rem] space-y-[1rem]">
+        <h1 className="font-bold md:text-[1.8rem] text-[1.6rem]">
           Pomodoro Timer Untuk Meningkatkan Produktifitas Teman-Teman Sekalinya
         </h1>
         <p className="font-bold text-[1.4rem]">Apa Itu Pomodoro ?</p>

@@ -30,8 +30,8 @@ export default function Navbar() {
 
   if (session) {
     return (
-      <div className="fixed w-full flex justify-around relative">
-        <div className="w-[70%] flex justify-between border-b-2 h-full md:py-[1.3rem] py-[.5rem] sticky top-0">
+      <div className="fixed w-full flex justify-around relative z-20">
+        <div className="md:w-[70%] w-[90%] flex justify-between border-b-2 h-full md:py-[1.3rem] py-[.5rem] sticky top-0">
           <div className="font-bold">Teman</div>
           <div className="md:flex hidden sm:hidden">
             <ul className="flex space-x-[3rem] text-[.8rem]">

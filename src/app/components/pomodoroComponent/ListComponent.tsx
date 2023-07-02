@@ -48,7 +48,7 @@ export default function ListComponent({ name, color, callback, index, deleted}) 
           : color === "short-break"
           ? "bg-green-200"
           : "bg-blue-200"
-      } px-[3rem] py-[1.5rem] rounded-md relative flex justify-between`}
+      } md:px-[3rem] px-[2rem] py-[1.5rem] rounded-md relative flex justify-between h-auto inline-block`}
     >
       <div className="absolute bg-black w-2 left-0 h-full top-0"></div>
       {isEdit ? (
@@ -57,7 +57,7 @@ export default function ListComponent({ name, color, callback, index, deleted}) 
           value={editedName}
           onChange={handleInputChange}
           onKeyDown={editList}
-          className={`w-full appearance-none focus:ring-0 focus:outline-none focus:border-none transition duration-200 ease-in-out font-bold ${
+          className={`w-full md:text-[1rem] text-[.8rem] appearance-none focus:ring-0 focus:outline-none focus:border-none transition duration-200 ease-in-out font-bold ${
             color === "pomodoro"
               ? "bg-red-200"
               : color === "short-break"
@@ -66,7 +66,7 @@ export default function ListComponent({ name, color, callback, index, deleted}) 
           }`}
         />
       ) : (
-        <p className="font-bold w-full" onClick={handleDoubleClick}>
+        <p className="font-bold md:w-[80%] w-[76%] break-words md:text-[1rem] text-[.8rem]" onClick={handleDoubleClick}>
           {name}
         </p>
       )}
@@ -76,7 +76,7 @@ export default function ListComponent({ name, color, callback, index, deleted}) 
             alt="turtles"
             src="/delete.png"
             width={500}
-            height={0}
+            height={500}
             className={`w-[1.5rem]`}
           />
         </button>
@@ -85,7 +85,7 @@ export default function ListComponent({ name, color, callback, index, deleted}) 
             alt="turtles"
             src="/checklist.png"
             width={500}
-            height={0}
+            height={500}
             className={`${check ? "" : "opacity-10"} w-[1.6rem]`}
           />
         </button>

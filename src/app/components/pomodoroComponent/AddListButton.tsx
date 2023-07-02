@@ -19,7 +19,7 @@ export default function AddListButton({ callback }) {
   return (
     <div>
       {isActive ? (
-        <div className="px-[2.5rem] py-[1.5rem] rounded-md relative flex border-[.2rem] border-black w-full">
+        <div className="md:px-[2.5rem] px-[1.5rem] py-[1.5rem] rounded-md relative flex border-[.2rem] border-black w-full">
           <div className="space-y-2 w-full">
             <p className="text-[1.5rem] font-bold">Tambah List</p>
             <input
@@ -35,7 +35,7 @@ export default function AddListButton({ callback }) {
               }}
               className="w-full appearance-none focus:ring-0 focus:outline-none focus:border-none"
             />
-            <div className="my-2 flex justify-end w-full pt-[1rem] space-x-[2rem]">
+            <div className="my-2 flex md:justify-end justify-center w-full pt-[1rem] space-x-[2rem]">
               <button
                 onClick={addList}
                 className="bg-gray-200 text-black hover:bg-gray-300 px-[3rem] py-[.5rem] rounded-md font-light"

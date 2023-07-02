@@ -113,11 +113,11 @@ export default function KonsultanComponent() {
 
   return (
     <div className="w-full flex justify-around ">
-      <div className="w-[70%] py-2">
+      <div className="md:w-[70%] w-[90%] py-2">
         <Title
-          title="Merasa Bernout?, Kami siap membantu anda melewatinya"
-          more="Silahkan Ceritakan kesulitan anda dibawah 👇😊 dan AI akan membantu melewati kesulitan anda. Semua data percakapan
-          anda akan aman dan tidak akan bisa diakses oleh sipapun"
+          title="Merasa Bernout?, Kami siap membantu melewatinya"
+          more="Silahkan Curhat dibawah 👇😊 dan AI akan membantu melewati kesulitan anda. Semua data percakapan
+          tidak akan bisa diakses oleh sipapun"
         />
         <div className="w-full border-[1.5px] h-[30rem] rounded-md flex flex-col">
           <div className="flex-1 flex flex-col-reverse px-[2rem] pt-[1.5rem] space-y-[1rem] overflow-y-scroll scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black py-[1rem]">

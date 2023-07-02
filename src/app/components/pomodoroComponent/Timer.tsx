@@ -169,7 +169,9 @@ export default function Timer({ callback }) {
   };
 
   const changeTime = (time: number, name: string) => {
-    alert("yakin");
+    if (isActive) {
+      alert("Anda yakin mengganti timer, satu sesi belum selesai");
+    }
     setSelectedTime(time);
     setSelectedName(name);
     callback(name);
@@ -248,16 +250,16 @@ export default function Timer({ callback }) {
               : selectedName === "short-break"
               ? "bg-green-200"
               : "bg-blue-200"
-          } w-[60%] p-[2rem] rounded-md`}
+          } md:w-[60%] w-[90%] p-[2rem] rounded-md`}
         >
-          <div className="flex justify-around pt-[1.5rem]">
-            <div className="flex justify-between w-[60%]">
+          <div className="flex justify-around pt-[1.5rem] ">
+            <div className="flex justify-between md:w-[60%] w-full md:text-[1rem] text-[.8rem]">
               <button
                 className={`${
                   selectedName === "pomodoro"
                     ? "bg-black text-white"
                     : "hover:bg-opacity-10 hover:bg-black"
-                } px-5 py-2 rounded-md `}
+                } md:px-5 md:py-2 px-2 py-2 rounded-md `}
                 onClick={() => {
                   changeTime(25, "pomodoro");
                 }}
@@ -269,7 +271,7 @@ export default function Timer({ callback }) {
                   selectedName === "short-break"
                     ? "bg-black text-white"
                     : "hover:bg-opacity-10 hover:bg-black"
-                } px-5 py-2 rounded-md `}
+                } md:px-5 md:py-2 px-2 py-2 rounded-md `}
                 onClick={() => {
                   changeTime(5, "short-break");
                 }}
@@ -284,14 +286,16 @@ export default function Timer({ callback }) {
                   selectedName === "long-break"
                     ? "bg-black text-white"
                     : "hover:bg-opacity-10 hover:bg-black"
-                } px-5 py-2 rounded-md `}
+                } md:px-5 md:py-2 px-2 py-2 rounded-md `}
               >
                 Break Lama
               </button>
             </div>
           </div>
           <div className="w-full flex justify-around">
-            <div className="text-[8rem] font-bold">{formatTime(seconds)}</div>
+            <div className="md:text-[8rem] text-[7rem] font-bold">
+              {formatTime(seconds)}
+            </div>
           </div>
           <div className="flex justify-around py-[2rem]">
             <button

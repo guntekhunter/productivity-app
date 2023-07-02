@@ -28,7 +28,7 @@ export default function List({ color }) {
   console.log(listChecked);
   return (
     <section className="mt-[2rem] flex justify-around overflow-hidden">
-      <div className="w-[60%] py-[2rem] space-y-2">
+      <div className="md:w-[60%] w-[90%] py-[2rem] space-y-2">
         {list.map((item, key) => {
           return (
             <ListComponent

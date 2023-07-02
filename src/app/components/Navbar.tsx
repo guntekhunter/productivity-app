@@ -33,24 +33,21 @@ export default function Navbar() {
 
   useEffect(() => {
     const addUser = async () => {
-      if (!userIsAdded) {
-        try {
-          const data = await axios.post("/api/user", {
-            name: session?.user?.name,
-            email: session?.user?.email,
-            image: session?.user?.image,
-          });
-          console.log(data);
-          setUserIsAdded(true);
-          return data;
-        } catch (error) {
-          console.error("Error adding user:", error);
-        }
+      try {
+        const data = await axios.post("/api/user", {
+          name: session?.user?.name,
+          email: session?.user?.email,
+          image: session?.user?.image,
+        });
+        console.log(data);
+        return data;
+      } catch (error) {
+        console.error("Error adding user:", error);
       }
     };
     addUser();
   }, [session, userIsAdded]);
-  
+
   console.log("coba", userIsAdded);
 
   if (session) {

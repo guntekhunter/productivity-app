@@ -22,12 +22,11 @@ export const POST = async (req: NextResponse, res: NextRequest) => {
           image: reqBody.image,
         },
       });
-      return user;
+      return NextResponse.json({ response: `success adding ${user}` });
     } catch (error) {
       console.log(error);
     }
   } else {
-    console.log("User already exist");
-    return "user exist";
+    return NextResponse.json({ response: "user exist" });
   }
 };

@@ -1,19 +1,30 @@
 "use client";
+import axios from "axios";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // @ts-ignore
 export default function AddListButton({ callback }) {
   const [isActive, setIsActive] = useState(false);
   const [listName, setListName] = useState("");
+  const { data: session } = useSession();
 
   const addList = () => {
     setIsActive(!isActive);
   };
 
-  const saveList = () => {
+  const saveList = async () => {
     const newList = listName;
     callback(newList);
+    try {
+      const responds = await axios.post("/api/list", {
+        listName: listName,
+        userEmail: session?.user?.email,
+      });
+    } catch (error) {
+      console.log(error);
+    }
     setIsActive(false);
   };
   return (

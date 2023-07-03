@@ -4,6 +4,11 @@ import { NextRequest, NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
+export async function GET(  ) {
+  const user = await prisma.user.findMany();
+  return NextResponse.json({ data: user });
+}
+
 export const POST = async (req: NextResponse, res: NextRequest) => {
   const reqBody = await req.json();
   const userEmail = reqBody.email;

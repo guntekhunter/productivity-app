@@ -40,15 +40,18 @@ export default function Navbar() {
           image: session?.user?.image,
         });
         console.log(data);
-        return data;
+        if (data.data === "user exist") {
+          console.log("User already exists");
+          return;
+        }
+
+        console.log(data.data);
       } catch (error) {
         console.error("Error adding user:", error);
       }
     };
     addUser();
-  }, [session, userIsAdded]);
-
-  console.log("coba", userIsAdded);
+  }, [session]);
 
   if (session) {
     return (

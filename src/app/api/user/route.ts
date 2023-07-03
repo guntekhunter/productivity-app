@@ -27,7 +27,7 @@ export const POST = async (req: NextResponse, res: NextRequest) => {
       console.log(error);
     }
   } else {
-    console.log("User already exists");
+    console.log("User already exist");
     return "user exist";
   }
 };

@@ -11,7 +11,7 @@ import axios from "axios";
 // @ts-ignore
 export default function Navbar() {
   const pathname = usePathname();
-  const [userIsAdded, setUserIsAdded] = useState(false);
+  const [userExist, setUserExist] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const { data: session } = useSession();
 
@@ -34,18 +34,17 @@ export default function Navbar() {
   useEffect(() => {
     const addUser = async () => {
       try {
-        const data = await axios.post("/api/user", {
-          name: session?.user?.name,
-          email: session?.user?.email,
-          image: session?.user?.image,
-        });
-        console.log(data);
-        if (data.data === "user exist") {
-          console.log("User already exists");
-          return;
+        if (!userExist) {
+          const data = await axios.post("/api/user", {
+            name: session?.user?.name,
+            email: session?.user?.email,
+            image: session?.user?.image,
+          });
+          if (data.data.response === "user exist") {
+            setUserExist(true);
+            return;
+          }
         }
-
-        console.log(data.data);
       } catch (error) {
         console.error("Error adding user:", error);
       }

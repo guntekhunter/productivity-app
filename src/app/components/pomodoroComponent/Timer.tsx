@@ -17,7 +17,6 @@ export default function Timer({ callback }) {
     (state: RootState) => state.timeActive.value
   );
   const theTime = parseInt(localStorage.getItem("timerValue") || "0", 10);
-  console.log(theTime);
   const [seconds, setSeconds] = useState(theTime);
   const [isActive, setIsActive] = useState(globalTimeActive);
   const [cycleCount, setCycleCount] = useState(0);
@@ -37,6 +36,11 @@ export default function Timer({ callback }) {
       setIsActive(globalTimeActive);
     }
   }, [globalTimeActive]);
+
+  useEffect(() => {
+    dispatch(timeActive(isActive));
+    console.log(isActive);
+  }, [isActive, dispatch]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
@@ -239,6 +243,7 @@ export default function Timer({ callback }) {
   };
 
   console.log(seconds);
+  console.log(parseInt(localStorage.getItem("timerValue") || "0", 10));
 
   return (
     <div className="">

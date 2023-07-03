@@ -10,6 +10,7 @@ import { useSession } from "next-auth/react";
 export default function List({ color }) {
   const [list, setList] = useState<string[]>([]);
   const [listChecked, setListChecked] = useState<number[]>([]);
+  const [listId, setListId] = useState<number[]>([]);
   const [id, setId] = useState(0);
   const { data: session } = useSession();
 
@@ -53,7 +54,8 @@ export default function List({ color }) {
         const data = listData.data.data;
         const filteredData = data.filter((item: any) => item.userId === id);
         const names = filteredData.map((item: any) => item.listName);
-        console.log(filteredData);
+        const idList = filteredData.map((item: any) => item.id);
+        setListId(idList);
         setList(names);
       } catch (error) {
         console.log(error);
@@ -63,14 +65,19 @@ export default function List({ color }) {
     fetchList();
   }, [id]);
 
+  console.log(listId);
+  console.log(list);
+
   return (
     <section className="mt-[2rem] flex justify-around overflow-hidden">
       <div className="md:w-[60%] w-[90%] py-[2rem] space-y-2">
         {list.map((item, key) => {
+          const id = listId[list.indexOf(item)];
           return (
             <ListComponent
               name={item}
               index={list.indexOf(item)}
+              id={id}
               key={key}
               color={color}
               callback={callbackEdit}

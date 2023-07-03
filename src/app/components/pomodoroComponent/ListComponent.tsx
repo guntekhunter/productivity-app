@@ -1,9 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
+import axios from "axios";
 
 // @ts-ignore
-export default function ListComponent({ name, color, callback, index, deleted}) {
+export default function ListComponent({name,color,callback,index,deleted,id}) {
   const [check, setCheck] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [editedName, setEditedName] = useState(name);
@@ -13,8 +14,17 @@ export default function ListComponent({ name, color, callback, index, deleted}) 
     const status = check;
   };
 
-  const deleting = () => {
+  console.log(id);
+  const deleting = async () => {
     deleted(index);
+    try {
+      const res = await axios.post("/api/delete", {
+        id: id,
+      });
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleInputChange = (e: { target: { value: any } }) => {
@@ -33,10 +43,19 @@ export default function ListComponent({ name, color, callback, index, deleted}) 
     }, delay);
   };
 
-  const editList = (event: { key: string }) => {
+  const editList = async (event: { key: string }) => {
     if (event.key === "Enter") {
       callback(editedName, index);
       setIsEdit(!isEdit);
+      try {
+        const response = await axios.post("/api/edit", {
+          id: id,
+          listName: editedName,
+        });
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -66,7 +85,10 @@ export default function ListComponent({ name, color, callback, index, deleted}) 
           }`}
         />
       ) : (
-        <p className="font-bold md:w-[80%] w-[76%] break-words md:text-[1rem] text-[.8rem]" onClick={handleDoubleClick}>
+        <p
+          className="font-bold md:w-[80%] w-[76%] break-words md:text-[1rem] text-[.8rem]"
+          onClick={handleDoubleClick}
+        >
           {name}
         </p>
       )}

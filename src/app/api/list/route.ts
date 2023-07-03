@@ -7,6 +7,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
   const isUser = await prisma.list.findMany();
   return NextResponse.json({ data: isUser });
 }
+
 export async function POST(req: NextRequest, res: NextResponse) {
   const reqBody = await req.json();
   const userEmail = reqBody.userEmail;

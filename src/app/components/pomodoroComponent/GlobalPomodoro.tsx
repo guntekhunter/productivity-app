@@ -36,13 +36,6 @@ export default function GlobalPomodoro() {
     }
   }, [pathname, seconds]);
 
-  // useEffect(() => {
-  //   if (seconds === 0) {
-  //     dispatch(timeActive(false));
-  //     setNotifAudio(true);
-  //   }
-  // }, [seconds, dispatch]);
-
   useEffect(() => {
     if (pathname !== "/pomodoro") {
       setSeconds(theSecond);
@@ -59,14 +52,14 @@ export default function GlobalPomodoro() {
 
   useEffect(() => {
     if (pathname !== "/pomodoro") {
-      if (theName === "pomodoro" && seconds === 0 && theCount !== 4) {
+      if (theName === "pomodoro" && seconds === 0 && theCount !== 8) {
         setSelectedName("short-break");
         // localStorage.setItem("timerName", "short-break");
         localStorage.setItem("count", (theCount + 1).toString());
         localStorage.setItem("timerValue", "300");
         dispatch(timeActive(false));
         setNotifAudio(true);
-      } else if (theName === "pomodoro" && seconds === 0 && theCount === 4) {
+      } else if (theName === "pomodoro" && seconds === 0 && theCount === 8) {
         setSelectedName("long-break");
         // localStorage.setItem("timerName", "long-break");
         localStorage.setItem("timerValue", "900");

@@ -9,7 +9,7 @@ import { RootState } from "@/app/GlobalRedux/store";
 import { timeActive } from "@/app/GlobalRedux/features/timerActive/timeActiveSlice";
 
 const cycleTimes = [5, 25]; // Cycle times in minutes
-const cycleCountLimit = 4;
+const cycleCountLimit = 8;
 
 //@ts-ignore
 export default function Timer({ callback }) {

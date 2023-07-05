@@ -9,7 +9,7 @@ import { RootState } from "@/app/GlobalRedux/store";
 import { timeActive } from "@/app/GlobalRedux/features/timerActive/timeActiveSlice";
 
 const cycleTimes = [5, 25]; // Cycle times in minutes
-const cycleCountLimit = 4;
+const cycleCountLimit = 8;
 
 //@ts-ignore
 export default function Timer({ callback }) {
@@ -17,16 +17,22 @@ export default function Timer({ callback }) {
     (state: RootState) => state.timeActive.value
   );
   const theTime = parseInt(localStorage.getItem("timerValue") || "0", 10);
-  console.log(theTime);
+  const theCount = parseInt(localStorage.getItem("count") || "0", 10);
   const [seconds, setSeconds] = useState(theTime);
   const [isActive, setIsActive] = useState(globalTimeActive);
-  const [cycleCount, setCycleCount] = useState(0);
+  const [cycleCount, setCycleCount] = useState(theCount);
   const [selectedTime, setSelectedTime] = useState(25);
   const [notifAudio, setNotifAudio] = useState(false);
   const typeTimer = localStorage.getItem("timerName");
-  const [selectedName, setSelectedName] = useState(typeTimer);
+  const [selectedName, setSelectedName] = useState(typeTimer || "");
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    localStorage.setItem("timerName", selectedName);
+  }, [selectedName]);
+
+  console.log(typeTimer);
 
   useEffect(() => {
     const storedValue = localStorage.getItem("timerValue");
@@ -37,6 +43,11 @@ export default function Timer({ callback }) {
       setIsActive(globalTimeActive);
     }
   }, [globalTimeActive]);
+
+  useEffect(() => {
+    dispatch(timeActive(isActive));
+    console.log(isActive);
+  }, [isActive, dispatch]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
@@ -183,6 +194,10 @@ export default function Timer({ callback }) {
   };
 
   useEffect(() => {
+    localStorage.setItem("timerValue", seconds.toString());
+  }, [seconds]);
+
+  useEffect(() => {
     dispatch(timer(selectedName));
     dispatch(time(seconds));
     if (selectedName !== null) {
@@ -193,7 +208,7 @@ export default function Timer({ callback }) {
 
   useEffect(() => {
     if (notifAudio) {
-      const audio = new Audio("Nada Dering Telepon Ring.mp3"); // Replace with the actual path to your audio file
+      const audio = new Audio("Nada Dering Telepon Ring.mp3");
       audio.play();
 
       setTimeout(() => {
@@ -238,7 +253,12 @@ export default function Timer({ callback }) {
     }
   };
 
+  useEffect(() => {
+    localStorage.setItem("count", cycleCount.toString());
+  }, [cycleCount]);
+
   console.log(seconds);
+  // console.log(parseInt(localStorage.getItem("timerValue") || "0", 10));
 
   return (
     <div className="">

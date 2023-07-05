@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { use, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { useSession, signIn, signOut } from "next-auth/react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import { PrismaClient } from "@prisma/client";
 import axios from "axios";
@@ -11,6 +11,7 @@ import axios from "axios";
 // @ts-ignore
 export default function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
   const [userExist, setUserExist] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const { data: session } = useSession();
@@ -50,7 +51,7 @@ export default function Navbar() {
       }
     };
     addUser();
-  }, [session]);
+  }, [session, userExist]);
 
   if (session) {
     return (
@@ -59,14 +60,6 @@ export default function Navbar() {
           <div className="font-bold">Teman</div>
           <div className="md:flex hidden sm:hidden">
             <ul className="flex space-x-[3rem] text-[.8rem]">
-              <Link
-                href="/"
-                className={`hover:font-bold ${
-                  pathname === "" ? "font-bold" : ""
-                }`}
-              >
-                Home
-              </Link>
               <Link
                 href="/pomodoro"
                 className={`hover:font-bold ${
@@ -107,7 +100,11 @@ export default function Navbar() {
               >
                 Konsultan
               </Link>
-              <button onClick={logout}>LogOut</button>
+              <Link href="">
+                <button onClick={logout} className="">
+                  LogOut
+                </button>
+              </Link>
             </ul>
           </div>
           <div
@@ -129,17 +126,6 @@ export default function Navbar() {
             isActive ? "" : "hidden"
           }`}
         >
-          <div>
-            <Link
-              onClick={activateNav}
-              href="/"
-              className={`hover:font-bold ${
-                pathname === "" ? "font-bold" : ""
-              }`}
-            >
-              Home
-            </Link>
-          </div>
           <div>
             <Link
               onClick={activateNav}
@@ -202,19 +188,24 @@ export default function Navbar() {
   } else {
     return (
       <div className="w-full flex justify-around">
-        <div className="w-[70%] flex justify-between border-b-2 h-full py-[1.3rem] sticky top-0">
+        <div className="md:w-[70%] w-[90%] flex justify-between border-b-2 h-full py-[1.3rem] sticky top-0">
           <div className="font-bold">Teman</div>
           <div>
-            <ul className="flex space-x-[3rem] text-[.8rem]">
+            <ul className="space-x-[3rem] text-[.8rem] md:flex hidden sm:hidden">
               <Link
                 href="/"
                 className={`hover:font-bold ${
-                  pathname === "" ? "font-bold" : ""
+                  pathname === "/" ? "font-bold" : ""
                 }`}
               >
                 Home
               </Link>
-              <button onClick={login}>Login</button>
+              <button
+                onClick={login}
+                className="bg-black text-white py-[.1rem] px-[1rem] rounded-md hover:bg-gray-900 duration-200"
+              >
+                Login
+              </button>
             </ul>
           </div>
           <div
@@ -240,14 +231,19 @@ export default function Navbar() {
               <Link
                 onClick={activateNav}
                 href="/"
-                className={`hover:font-bold ${
-                  pathname === "" ? "font-bold" : ""
+                className={`hover:font-bold flex justify-center ${
+                  pathname === "/" ? "font-bold" : ""
                 }`}
               >
                 Home
               </Link>
             </div>
-            <button onClick={login}>LogIn</button>
+            <button
+              onClick={login}
+              className="bg-white text-black rounded-md py-[.1rem] px-[1rem]"
+            >
+              LogIn
+            </button>
           </div>
         </div>
       </div>

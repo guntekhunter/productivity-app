@@ -11,7 +11,7 @@ export default function ConsultationDescription() {
         <p>
           Konsultan adalah sebuah sebuah chatbot yang menggunakan teknologi AI
           untuk membantu anda dalam melewati masalah mental atau burnout yang
-          sedang anda hadapi
+          sedang anda hadapi, atau bahkan membantu anda menyelesaikan tugas
         </p>
 
         <p className="font-bold text-[1.4rem]">
@@ -21,11 +21,12 @@ export default function ConsultationDescription() {
           <p>
             Perlu diperhatikan jika halaman ini menggunakan AI atau kecerdasan
             buatan yang hanya dapat membantu anda memberikan saran dan masukan
-            mengenai kesehatan mental dan pengembangan diri, jika anda mengalami
-            masalah mental yang berat lebih disarankan untuk melakukan
-            konsultasi langsung dengan psikolog atau psikiater untuk penenganan
-            lebih lanjut. Tapi kami berharap halaman ini dapat membantu
-            meringankan beban anda
+            mengenai kesehatan mental, pengembangan diri dan memberikan saran
+            yang membantu menyelesaikan tugas, jika anda mengalami masalah
+            mental yang berat lebih disarankan untuk melakukan konsultasi
+            langsung dengan psikolog atau psikiater untuk penenganan lebih
+            lanjut. Tapi kami berharap halaman ini dapat membantu meringankan
+            beban anda
           </p>
         </div>
       </div>

@@ -53,7 +53,7 @@ export default function ContainerParaphrase() {
               },
               {
                 role: "user",
-                content: `make this sentence ${input} in a ${selected} mode`,
+                content: `make this sentence ${input} in a ${selected} mode in indonesian languange`,
               },
             ],
             temperature: temperatures,

@@ -45,13 +45,13 @@ export default function Footer() {
 
   return (
     <section className="w-full bg-black text-white flex justify-around relative">
-      <div className="md:w-[70%] w-[90%] pt-[5rem] pb-[1rem] md:space-y-[3rem]">
+      <div className="md:w-[70%] w-[90%] pt-[5rem] pb-[1rem] md:space-y-[5rem]">
         <div className="md:flex justify-between px-[1rem]">
-          <div className="flex space-x-[2rem]">
+          <div className="flex space-x-[4rem]">
             <p className="text-[1.8rem]">Teman</p>
             <div className="pt-[1rem]">
               {session ? (
-                <>
+                <div className="space-y-[1rem]">
                   <div>
                     <Link
                       onClick={activateNav}
@@ -118,7 +118,7 @@ export default function Footer() {
                       Konsultan
                     </Link>
                   </div>
-                </>
+                </div>
               ) : (
                 <>
                   <div>
@@ -136,7 +136,9 @@ export default function Footer() {
           {/* feedback */}
           <form
             onSubmit={handleSubmit}
-            className={`space-y-2 md:my-0 my-[2rem] ${session ? "" : "hidden"}`}
+            className={`space-y-[1rem] md:my-0 my-[2rem] ${
+              session ? "" : "hidden"
+            }`}
           >
             <p className="text-white">
               Kritik dan saran teman-teman sangat berarti bagi kami 😊
@@ -170,7 +172,7 @@ export default function Footer() {
           </form>
         </div>
 
-        <div className="flex justify-between text-[.8rem]">
+        <div className="flex justify-between text-[.8rem] md:my-0 my-[3rem]">
           <div>
             <p>Copyright © 2023</p>
           </div>

@@ -41,7 +41,7 @@ export default function ContainerPeringkas() {
               },
               {
                 role: "user",
-                content: `${input} buat kalimat tersebut menjadi ${sentenceLength} kalimat`,
+                content: `${input} buat kalimat tersebut menjadi ${sentenceLength} kalimat in indonesian languange`,
               },
             ],
             temperature: 0,

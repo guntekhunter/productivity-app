@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import { useSession, signIn } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function HomePage() {
   const { data: session } = useSession();
@@ -233,7 +233,10 @@ export default function HomePage() {
             Dengan Tugas Dan Masalah Teman-teman Silahkan Login Ke Teman.com
           </div>
           <div className="flex justify-center  py-[2rem]">
-            <button className="bg-black text-white px-[2rem] py-[.5rem] rounded-md">
+            <button
+              className="bg-black text-white px-[2rem] py-[.5rem] rounded-md"
+              onClick={() => tryFitures("pomodoro")}
+            >
               Login
             </button>
           </div>

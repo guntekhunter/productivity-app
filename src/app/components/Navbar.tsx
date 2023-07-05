@@ -18,6 +18,7 @@ export default function Navbar() {
 
   const login = async () => {
     Cookies.set("loggedin", "true");
+    localStorage.setItem("redirectPage", "pomodoro");
     signIn();
   };
 

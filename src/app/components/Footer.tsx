@@ -141,7 +141,7 @@ export default function Footer() {
             }`}
           >
             <p className="text-white">
-              Kritik dan saran teman-teman sangat berarti bagi kami 😊
+              Apa yang perlu kami tambahkan untuk kenyamanan teman-teman 😊
             </p>
             <input
               type="text"

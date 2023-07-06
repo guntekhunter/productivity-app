@@ -24,6 +24,9 @@ export default function ContainerParaphrase() {
   const [isDrop, setIsDrop] = useState(false);
   const [selected, setSelected] = useState("");
   const [isSelected, setIsSelected] = useState(false);
+  const [isLoadingPage, setIsLoadingPage] = useState(
+    localStorage.getItem("loading")
+  );
 
   const session = useSession();
   const router = useRouter();
@@ -124,168 +127,198 @@ export default function ContainerParaphrase() {
     }
   }, [session, router]);
 
+  useEffect(() => {
+    if (
+      isLoadingPage === "true" &&
+      localStorage.getItem("redirectPage") === "paraphrase"
+    ) {
+      localStorage.setItem("loading", "false");
+      setIsLoadingPage("false");
+    }
+  }, [isLoading, isLoadingPage]);
+
+  useEffect(() => {
+    setTimeout(function () {
+      localStorage.setItem("redirectPage", "");
+    }, 1000);
+  }, []);
+
   return (
-    <div className="w-full flex justify-around text-[.8rem] mb-[2rem]">
-      <div className="md:w-[70%] w-[90%] inline">
-        <Title
-          title="Hindari Plagiarisme Dengan Paraphrase"
-          more="Selamat Memparaphrase"
-        />
+    <>
+      {isLoadingPage === "false" ? (
+        <div className="w-full flex justify-around text-[.8rem] mb-[2rem]">
+          <div className="md:w-[70%] w-[90%] inline">
+            <Title
+              title="Hindari Plagiarisme Dengan Paraphrase"
+              more="Selamat Memparaphrase"
+            />
 
-        <Instruction
-          number="1"
-          instructions="Copy teks yang ingin anda paraphrase"
-          suggestions="Atau ketik teks"
-        />
-        <div className="relative">
-          <textarea
-            placeholder="Contoh: Teknologi dapat diartikan sebagai penerapan ilmu pengetahuan, penemuan, dan keterampilan yang digunakan untuk merancang, membuat, dan memanfaatkan alat, mesin, perangkat lunak, sistem, dan proses untuk memecahkan masalah dan memenuhi kebutuhan pendidikan....."
-            className="w-full border-[1.5px] border-gray-200 rounded-md appearance-none h-[15rem] overflow-y-scroll border-t-[1px] px-5 scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black resize-none focus:ring-0 focus:outline-none py-[1rem] text-gray-600 "
-            name=""
-            id=""
-            value={input}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && !e.shiftKey) {
-                e.preventDefault();
-                startResume();
-              }
-            }}
-            onChange={(e) => {
-              e.preventDefault();
-              setInput(e.target.value);
-              setInputRequired(false);
-            }}
-          />
-          <p className={`${inputRequired ? "" : "hidden"}`}>
-            Jangan Lupa Masukan Teks Teman-teman!
-          </p>
-          <button className="absolute z-1 right-5 top-5" onClick={handleClear}>
-            <div className="relative pl-2">
-              <Image
-                alt="turtles"
-                src="/clean.png"
-                width={500}
-                height={0}
-                className="w-[1.5rem]"
-                onMouseEnter={(e) => setHoverClear(true)}
-                onMouseLeave={(e) => setHoverClear(false)}
-              ></Image>
-              <div
-                className={`rounded-md absolute h-[2rem] top-0 mt-[100%] left-0 transition duration-200 ${
-                  hoverClear ? "opacity-1" : "opacity-0"
-                }`}
-              >
-                <div className="bg-gray-200 bottom-[-.9rem] mr-[1rem] px-2 rounded-md">
-                  bersihkan
-                </div>
-              </div>
-            </div>
-          </button>
-        </div>
-        <Instruction
-          number="2"
-          instructions="Masukkan Mode Paraphrase Anda"
-          suggestions=""
-        />
-        <div className="md:flex md:space-x-5 space-y-[.6rem] md:space-y-0">
-          <div className="w-full relative space-y-[.4rem]">
-            <button
-              onClick={hanldeDropDown}
-              className="w-full border-[1.5px] rounded-md flex px-[1rem] py-[1rem] space-x-[.7rem]"
-            >
-              <Image
-                alt="turtles"
-                src="/down.png"
-                width={500}
-                height={0}
-                className={`w-[1.5rem] transform duration-100 ${
-                  isDrop ? "rotate-180" : ""
-                }`}
-              ></Image>
-              <p className={`${isSelected ? "" : "text-gray-400"}`}>
-                {isSelected ? selected : "Contoh : Creative"}
+            <Instruction
+              number="1"
+              instructions="Copy teks yang ingin anda paraphrase"
+              suggestions="Atau ketik teks"
+            />
+            <div className="relative">
+              <textarea
+                placeholder="Contoh: Teknologi dapat diartikan sebagai penerapan ilmu pengetahuan, penemuan, dan keterampilan yang digunakan untuk merancang, membuat, dan memanfaatkan alat, mesin, perangkat lunak, sistem, dan proses untuk memecahkan masalah dan memenuhi kebutuhan pendidikan....."
+                className="w-full border-[1.5px] border-gray-200 rounded-md appearance-none h-[15rem] overflow-y-scroll border-t-[1px] px-5 scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black resize-none focus:ring-0 focus:outline-none py-[1rem] text-gray-600 "
+                name=""
+                id=""
+                value={input}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && !e.shiftKey) {
+                    e.preventDefault();
+                    startResume();
+                  }
+                }}
+                onChange={(e) => {
+                  e.preventDefault();
+                  setInput(e.target.value);
+                  setInputRequired(false);
+                }}
+              />
+              <p className={`${inputRequired ? "" : "hidden"}`}>
+                Jangan Lupa Masukan Teks Teman-teman!
               </p>
-            </button>
-            <div
-              className={`transfrom duration-100 ease-in z-10 ${
-                isDrop ? "" : "opacity-0"
-              } absolute bg-white border-[1.5px] rounded-md w-full right-0 h-[5rem] overflow-y-scroll border-t-[1px] scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black focus:ring-0 focus:outline-none`}
-            >
-              <div className="">
-                {arrayMode.map((item, key) => (
-                  <div
-                    key={key}
-                    onClick={(e) => {
-                      setSelected(item);
-                      setIsSelected(true);
-                      setIsDrop(false);
-                    }}
-                    className={`${
-                      key === arrayMode.length - 1 ? "" : "border-b-[1.5px]"
-                    } py-[.5rem] px-[1rem] cursor-pointer trasnform duration-200 hover:bg-black hover:text-white w-full`}
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="w-full">
-            <button
-              onClick={startResume}
-              className="w-full bg-black text-white font-bold rounded-md hover:bg-gray-900 flex items-center justify-center space-x-[1rem] h-[4rem] md:h-full"
-            >
-              <div
-                className={`flex items-center justify-center  ${
-                  isLoading ? "" : "hidden"
-                }`}
+              <button
+                className="absolute z-1 right-5 top-5"
+                onClick={handleClear}
               >
-                <div className="rounded-full overflow-hidden w-[1.5rem] h-[1.5rem]">
+                <div className="relative pl-2">
                   <Image
                     alt="turtles"
-                    src="/spinner-of-dots.png"
+                    src="/clean.png"
                     width={500}
-                    height={200}
-                    className="w-full h-full object-cover invert animate-spin"
+                    height={0}
+                    className="w-[1.5rem]"
+                    onMouseEnter={(e) => setHoverClear(true)}
+                    onMouseLeave={(e) => setHoverClear(false)}
                   ></Image>
+                  <div
+                    className={`rounded-md absolute h-[2rem] top-0 mt-[100%] left-0 transition duration-200 ${
+                      hoverClear ? "opacity-1" : "opacity-0"
+                    }`}
+                  >
+                    <div className="bg-gray-200 bottom-[-.9rem] mr-[1rem] px-2 rounded-md">
+                      bersihkan
+                    </div>
+                  </div>
+                </div>
+              </button>
+            </div>
+            <Instruction
+              number="2"
+              instructions="Masukkan Mode Paraphrase Anda"
+              suggestions=""
+            />
+            <div className="md:flex md:space-x-5 space-y-[.6rem] md:space-y-0">
+              <div className="w-full relative space-y-[.4rem]">
+                <button
+                  onClick={hanldeDropDown}
+                  className="w-full border-[1.5px] rounded-md flex px-[1rem] py-[1rem] space-x-[.7rem]"
+                >
+                  <Image
+                    alt="turtles"
+                    src="/down.png"
+                    width={500}
+                    height={0}
+                    className={`w-[1.5rem] transform duration-100 ${
+                      isDrop ? "rotate-180" : ""
+                    }`}
+                  ></Image>
+                  <p className={`${isSelected ? "" : "text-gray-400"}`}>
+                    {isSelected ? selected : "Contoh : Creative"}
+                  </p>
+                </button>
+                <div
+                  className={`transfrom duration-100 ease-in z-10 ${
+                    isDrop ? "" : "opacity-0"
+                  } absolute bg-white border-[1.5px] rounded-md w-full right-0 h-[5rem] overflow-y-scroll border-t-[1px] scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black focus:ring-0 focus:outline-none`}
+                >
+                  <div className="">
+                    {arrayMode.map((item, key) => (
+                      <div
+                        key={key}
+                        onClick={(e) => {
+                          setSelected(item);
+                          setIsSelected(true);
+                          setIsDrop(false);
+                        }}
+                        className={`${
+                          key === arrayMode.length - 1 ? "" : "border-b-[1.5px]"
+                        } py-[.5rem] px-[1rem] cursor-pointer trasnform duration-200 hover:bg-black hover:text-white w-full`}
+                      >
+                        {item}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
-              {isLoading ? <p>Loading ...</p> : <p>Mulai Paraphrase</p>}
-            </button>
-          </div>
-        </div>
-        <div className="relative z-0">
-          <div
-            id=""
-            className="text-gray-600 w-full border-[1.5px] border-gray-200 rounded-md appearance-none h-[15rem] overflow-y-scroll border-t-[1px] px-5 scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black resize-none focus:ring-0 focus:outline-none py-[1rem] mt-[1.4rem] "
-          >
-            {summary}
-          </div>
-          <button className="absolute z-1 right-5 top-5" onClick={handleCopy}>
-            <div className="relative pl-2">
-              <Image
-                alt="turtles"
-                src="/copy.png"
-                width={500}
-                height={0}
-                className="w-[1.5rem]"
-                onMouseEnter={(e) => setHoverCopy(true)}
-                onMouseLeave={(e) => setHoverCopy(false)}
-              ></Image>
-              <div
-                className={`rounded-md absolute h-[2rem] top-0 mt-[100%] left-0 transition duration-200 ${
-                  hoverCopy ? "opacity-1" : "opacity-0"
-                }`}
-              >
-                <div className="bg-gray-200 bottom-[-.9rem] mr-[1rem] px-2 rounded-md">
-                  copy
-                </div>
+
+              <div className="w-full">
+                <button
+                  onClick={startResume}
+                  className="w-full bg-black text-white font-bold rounded-md hover:bg-gray-900 flex items-center justify-center space-x-[1rem] h-[4rem] md:h-full"
+                >
+                  <div
+                    className={`flex items-center justify-center  ${
+                      isLoading ? "" : "hidden"
+                    }`}
+                  >
+                    <div className="rounded-full overflow-hidden w-[1.5rem] h-[1.5rem]">
+                      <Image
+                        alt="turtles"
+                        src="/spinner-of-dots.png"
+                        width={500}
+                        height={200}
+                        className="w-full h-full object-cover invert animate-spin"
+                      ></Image>
+                    </div>
+                  </div>
+                  {isLoading ? <p>Loading ...</p> : <p>Mulai Paraphrase</p>}
+                </button>
               </div>
             </div>
-          </button>
+            <div className="relative z-0">
+              <div
+                id=""
+                className="text-gray-600 w-full border-[1.5px] border-gray-200 rounded-md appearance-none h-[15rem] overflow-y-scroll border-t-[1px] px-5 scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black resize-none focus:ring-0 focus:outline-none py-[1rem] mt-[1.4rem] "
+              >
+                {summary}
+              </div>
+              <button
+                className="absolute z-1 right-5 top-5"
+                onClick={handleCopy}
+              >
+                <div className="relative pl-2">
+                  <Image
+                    alt="turtles"
+                    src="/copy.png"
+                    width={500}
+                    height={0}
+                    className="w-[1.5rem]"
+                    onMouseEnter={(e) => setHoverCopy(true)}
+                    onMouseLeave={(e) => setHoverCopy(false)}
+                  ></Image>
+                  <div
+                    className={`rounded-md absolute h-[2rem] top-0 mt-[100%] left-0 transition duration-200 ${
+                      hoverCopy ? "opacity-1" : "opacity-0"
+                    }`}
+                  >
+                    <div className="bg-gray-200 bottom-[-.9rem] mr-[1rem] px-2 rounded-md">
+                      copy
+                    </div>
+                  </div>
+                </div>
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      ) : (
+        <div className="h-[100vh] justify-around flex items-center">
+          Loading...
+        </div>
+      )}
+    </>
   );
 }

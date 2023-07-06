@@ -14,6 +14,9 @@ export default function KonsultanComponent() {
   const [question, setQuestion] = useState<{ chat: any; type: string }[]>([]);
   const [arrayChat, setArrayChat] = useState<{ chat: any; type: string }[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingPage, setIsLoadingPage] = useState(
+    localStorage.getItem("loading")
+  );
 
   const sendMessage = async () => {
     let loading = true;
@@ -78,7 +81,6 @@ export default function KonsultanComponent() {
       }
       loading = false;
 
-      //   setAnswer([...answer, { chat: individualAnswer, type: "answer" }]);
       setIsLoading(false);
     } catch (error) {
       console.log(error);
@@ -111,90 +113,114 @@ export default function KonsultanComponent() {
     }
   }, [session, router]);
 
+  useEffect(() => {
+    if (
+      isLoadingPage === "true" &&
+      localStorage.getItem("redirectPage") === "konsultan"
+    ) {
+      localStorage.setItem("loading", "false");
+      setIsLoadingPage("false");
+    }
+  }, [isLoading, isLoadingPage]);
+
+  useEffect(() => {
+    setTimeout(function () {
+      localStorage.setItem("redirectPage", "");
+    }, 1000);
+  }, []);
+
   return (
-    <div className="w-full flex justify-around ">
-      <div className="md:w-[70%] w-full py-2">
-        <div className="px-[1rem]">
-          <Title
-            title="Merasa Bernout?, Kami siap membantu melewatinya"
-            more="Silahkan Ceritakan dibawah 👇😊 dan AI akan membantu melewati kesulitan anda. Semua data percakapan
+    <>
+      {isLoadingPage === "false" ? (
+        <div className="w-full flex justify-around ">
+          <div className="md:w-[70%] w-full py-2">
+            <div className="px-[1rem]">
+              <Title
+                title="Merasa Bernout?, Kami siap membantu melewatinya"
+                more="Silahkan Ceritakan dibawah 👇😊 dan AI akan membantu melewati kesulitan anda. Semua data percakapan
           tidak akan bisa diakses oleh sipapun"
-          />
-        </div>
-        <div className="w-full border-[1.5px] md:h-[30rem] h-[35rem] rounded-md flex flex-col">
-          <div className="flex-1 flex flex-col-reverse px-[2rem] pt-[1.5rem] space-y-[2rem] overflow-y-scroll scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black py-[1rem]">
-            {arrayChat.map((item, key) => (
-              <div
-                key={key}
-                className={`${
-                  item.type === "question"
-                    ? "flex items-end justify-end w-full"
-                    : "flex items-start justify-start w-full mt-5"
-                } `}
-              >
-                <div className="md:w-[30rem] w-[17rem]">
-                  <div
-                    className={`rounded-md whitespace-pre-wrap ${
-                      item.type === "question"
-                        ? "flex items-end justify-end"
-                        : "flex items-start justify-start"
-                    }`}
-                  >
-                    <p
-                      className={`rounded-md ${
-                        item.type === "question"
-                          ? "flex items-end justify-end shadow-md bg-black text-white px-[1rem] py-[.5rem]"
-                          : "flex items-start justify-start shadow-md bg-white px-[2rem] py-[1rem]"
-                      }`}
-                    >
-                      {item.chat}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="h-[5rem] flex flex-rows items-center px-[2rem] py-4 space-x-2 bg-gray-100">
-            <div className="flex-1">
-              <input
-                value={input}
-                placeholder="Ketik Pesan"
-                onChange={(e) => {
-                  setInput(e.target.value);
-                }}
-                onKeyDown={(event) => {
-                  if (event.key === "Enter" && !event.shiftKey) {
-                    event.preventDefault();
-                    sendMessage();
-                  }
-                }}
-                type="text"
-                className="w-full h-[2rem] px-[.5rem]"
-                autoFocus
               />
             </div>
-            <button
-              className="bg-black text-white rounded-md hover:bg-gray-900 w-[5rem] h-[2rem] flex justify-center items-center"
-              onClick={sendMessage}
-            >
-              {isLoading ? (
-                <Image
-                  alt="turtles"
-                  src="/spinner-of-dots.png"
-                  width={500}
-                  height={200}
-                  className="w-[1rem] object-cover invert animate-spin"
-                ></Image>
-              ) : (
-                <p>Kirim</p>
-              )}
-            </button>
+            <div className="w-full border-[1.5px] md:h-[30rem] h-[35rem] rounded-md flex flex-col">
+              <div className="flex-1 flex flex-col-reverse px-[2rem] pt-[1.5rem] space-y-[2rem] overflow-y-scroll scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black py-[1rem]">
+                {arrayChat.map((item, key) => (
+                  <div
+                    key={key}
+                    className={`${
+                      item.type === "question"
+                        ? "flex items-end justify-end w-full"
+                        : "flex items-start justify-start w-full mt-5"
+                    } `}
+                  >
+                    <div className="md:w-[30rem] w-[17rem]">
+                      <div
+                        className={`rounded-md whitespace-pre-wrap ${
+                          item.type === "question"
+                            ? "flex items-end justify-end"
+                            : "flex items-start justify-start"
+                        }`}
+                      >
+                        <p
+                          className={`rounded-md ${
+                            item.type === "question"
+                              ? "flex items-end justify-end shadow-md bg-black text-white px-[1rem] py-[.5rem]"
+                              : "flex items-start justify-start shadow-md bg-white px-[2rem] py-[1rem]"
+                          }`}
+                        >
+                          {item.chat}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="h-[5rem] flex flex-rows items-center px-[2rem] py-4 space-x-2 bg-gray-100">
+                <div className="flex-1">
+                  <input
+                    value={input}
+                    placeholder="Ketik Pesan"
+                    onChange={(e) => {
+                      setInput(e.target.value);
+                    }}
+                    onKeyDown={(event) => {
+                      if (event.key === "Enter" && !event.shiftKey) {
+                        event.preventDefault();
+                        sendMessage();
+                      }
+                    }}
+                    type="text"
+                    className="w-full h-[2rem] px-[.5rem]"
+                    autoFocus
+                  />
+                </div>
+                <button
+                  className="bg-black text-white rounded-md hover:bg-gray-900 w-[5rem] h-[2rem] flex justify-center items-center"
+                  onClick={sendMessage}
+                >
+                  {isLoading ? (
+                    <Image
+                      alt="turtles"
+                      src="/spinner-of-dots.png"
+                      width={500}
+                      height={200}
+                      className="w-[1rem] object-cover invert animate-spin"
+                    ></Image>
+                  ) : (
+                    <p>Kirim</p>
+                  )}
+                </button>
+              </div>
+            </div>
+            <div className="px-[1rem]">
+              <ConsultationDescription />
+            </div>
           </div>
         </div>
-        <div className="px-[1rem]">
-          <ConsultationDescription />
+      ) : (
+        <div className="h-[100vh] justify-around flex items-center">
+          Loading...
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 }

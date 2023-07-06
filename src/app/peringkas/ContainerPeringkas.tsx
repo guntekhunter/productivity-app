@@ -21,6 +21,9 @@ export default function ContainerPeringkas() {
   const [isCopied, setIsCopied] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [inputRequired, setInputRequired] = useState(false);
+  const [isLoadingPage, setIsLoadingPage] = useState(
+    localStorage.getItem("loading")
+  );
 
   const startResume = async () => {
     setQuestions([...questions, { chat: input }]);
@@ -109,136 +112,166 @@ export default function ContainerPeringkas() {
       router.push("/");
     }
   }, [session, router]);
+
+  useEffect(() => {
+    if (
+      isLoadingPage === "true" &&
+      localStorage.getItem("redirectPage") === "peringkas"
+    ) {
+      localStorage.setItem("loading", "false");
+      setIsLoadingPage("false");
+    }
+  }, [isLoading, isLoadingPage]);
+
+  useEffect(() => {
+    setTimeout(function () {
+      localStorage.setItem("redirectPage", "");
+    }, 1000);
+  }, []);
   return (
-    <div className="w-full flex justify-around text-[.8rem] mb-[2rem]">
-      <div className="md:w-[70%] w-[90%] inline">
-        <Title title="Ringkas Kalimat Anda" more="Selamat Meringkas" />
-        <Instruction
-          number="1"
-          instructions="Copy teks yang ingin anda ringkas"
-          suggestions="Atau ketik teks"
-        />
-        <div className="relative">
-          <textarea
-            placeholder="Contoh: Teknologi dapat diartikan sebagai penerapan ilmu pengetahuan, penemuan, dan keterampilan yang digunakan untuk merancang, membuat, dan memanfaatkan alat, mesin, perangkat lunak, sistem, dan proses untuk memecahkan masalah dan memenuhi kebutuhan pendidikan....."
-            className="w-full border-[1.5px] border-gray-200 rounded-md appearance-none h-[15rem] overflow-y-scroll border-t-[1px] px-5 scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black resize-none focus:ring-0 focus:outline-none py-[1rem] text-gray-600 "
-            name=""
-            id=""
-            value={input}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && !e.shiftKey) {
-                e.preventDefault();
-                startResume();
-              }
-            }}
-            onChange={(e) => {
-              e.preventDefault();
-              setInput(e.target.value);
-              setInputRequired(false);
-            }}
-          />
-          <p className={`${inputRequired ? "" : "hidden"}`}>
-            Jangan Lupa Masukan Teks Teman-teman!
-          </p>
-          <button className="absolute z-1 right-5 top-5" onClick={handleClear}>
-            <div className="relative pl-2">
-              <Image
-                alt="turtles"
-                src="/clean.png"
-                width={500}
-                height={0}
-                className="w-[1.5rem]"
-                onMouseEnter={(e) => setHoverClear(true)}
-                onMouseLeave={(e) => setHoverClear(false)}
-              ></Image>
-              <div
-                className={`rounded-md absolute h-[2rem] top-0 mt-[100%] left-0 transition duration-200 ${
-                  hoverClear ? "opacity-1" : "opacity-0"
-                }`}
-              >
-                <div className="bg-gray-200 bottom-[-.9rem] mr-[1rem] px-2 rounded-md">
-                  bersihkan
-                </div>
-              </div>
-            </div>
-          </button>
-        </div>
-        <Instruction
-          number="2"
-          instructions="Masukkan panjang kalimat ringkasan"
-          suggestions=""
-        />
-        <div className="flex space-x-5 ">
-          <div className="w-full relative space-y-[.4rem]">
-            <input
-              placeholder="Contoh: 20"
-              type="number"
-              onChange={(e) => {
-                setSentenceLength(e.target.value);
-              }}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && !e.shiftKey) {
-                  e.preventDefault();
-                  startResume();
-                }
-              }}
-              value={sentenceLength}
-              className="w-full border-[1.5px] rounded-md flex px-[1rem] py-[1rem] space-x-[.7rem] text-gray-600 "
+    <>
+      {isLoadingPage === "false" ? (
+        <div className="w-full flex justify-around text-[.8rem] mb-[2rem]">
+          <div className="md:w-[70%] w-[90%] inline">
+            <Title title="Ringkas Kalimat Anda" more="Selamat Meringkas" />
+            <Instruction
+              number="1"
+              instructions="Copy teks yang ingin anda ringkas"
+              suggestions="Atau ketik teks"
             />
-          </div>
-          <button
-            onClick={startResume}
-            className="w-full bg-black text-white font-bold rounded-md  hover:bg-gray-900 flex items-center justify-center space-x-[1rem]"
-          >
-            <div
-              className={`flex items-center justify-center  ${
-                isLoading ? "" : "hidden"
-              }`}
-            >
-              <div className="rounded-full overflow-hidden w-[1.5rem] h-[1.5rem]">
-                <Image
-                  alt="turtles"
-                  src="/spinner-of-dots.png"
-                  width={500}
-                  height={200}
-                  className="w-full h-full object-cover invert animate-spin"
-                ></Image>
-              </div>
-            </div>
-            {isLoading ? <p>Loading ...</p> : <p>Mulai Meringkas</p>}
-          </button>
-        </div>
-        <div className="relative z-0">
-          <div
-            id=""
-            className="text-gray-600 w-full border-[1.5px] border-gray-200 rounded-md appearance-none h-[15rem] overflow-y-scroll border-t-[1px] px-5 scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black resize-none focus:ring-0 focus:outline-none py-[1rem] mt-[1.4rem] "
-          >
-            {summary}
-          </div>
-          <button className="absolute z-1 right-5 top-5" onClick={handleCopy}>
-            <div className="relative pl-2">
-              <Image
-                alt="turtles"
-                src="/copy.png"
-                width={500}
-                height={0}
-                className="w-[1.5rem]"
-                onMouseEnter={(e) => setHoverCopy(true)}
-                onMouseLeave={(e) => setHoverCopy(false)}
-              ></Image>
-              <div
-                className={`rounded-md absolute h-[2rem] top-0 mt-[100%] left-0 transition duration-200 ${
-                  hoverCopy ? "opacity-1" : "opacity-0"
-                }`}
+            <div className="relative">
+              <textarea
+                placeholder="Contoh: Teknologi dapat diartikan sebagai penerapan ilmu pengetahuan, penemuan, dan keterampilan yang digunakan untuk merancang, membuat, dan memanfaatkan alat, mesin, perangkat lunak, sistem, dan proses untuk memecahkan masalah dan memenuhi kebutuhan pendidikan....."
+                className="w-full border-[1.5px] border-gray-200 rounded-md appearance-none h-[15rem] overflow-y-scroll border-t-[1px] px-5 scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black resize-none focus:ring-0 focus:outline-none py-[1rem] text-gray-600 "
+                name=""
+                id=""
+                value={input}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && !e.shiftKey) {
+                    e.preventDefault();
+                    startResume();
+                  }
+                }}
+                onChange={(e) => {
+                  e.preventDefault();
+                  setInput(e.target.value);
+                  setInputRequired(false);
+                }}
+              />
+              <p className={`${inputRequired ? "" : "hidden"}`}>
+                Jangan Lupa Masukan Teks Teman-teman!
+              </p>
+              <button
+                className="absolute z-1 right-5 top-5"
+                onClick={handleClear}
               >
-                <div className="bg-gray-200 bottom-[-.9rem] mr-[1rem] px-2 rounded-md">
-                  copy
+                <div className="relative pl-2">
+                  <Image
+                    alt="turtles"
+                    src="/clean.png"
+                    width={500}
+                    height={0}
+                    className="w-[1.5rem]"
+                    onMouseEnter={(e) => setHoverClear(true)}
+                    onMouseLeave={(e) => setHoverClear(false)}
+                  ></Image>
+                  <div
+                    className={`rounded-md absolute h-[2rem] top-0 mt-[100%] left-0 transition duration-200 ${
+                      hoverClear ? "opacity-1" : "opacity-0"
+                    }`}
+                  >
+                    <div className="bg-gray-200 bottom-[-.9rem] mr-[1rem] px-2 rounded-md">
+                      bersihkan
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </button>
             </div>
-          </button>
+            <Instruction
+              number="2"
+              instructions="Masukkan panjang kalimat ringkasan"
+              suggestions=""
+            />
+            <div className="flex space-x-5 ">
+              <div className="w-full relative space-y-[.4rem]">
+                <input
+                  placeholder="Contoh: 20"
+                  type="number"
+                  onChange={(e) => {
+                    setSentenceLength(e.target.value);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && !e.shiftKey) {
+                      e.preventDefault();
+                      startResume();
+                    }
+                  }}
+                  value={sentenceLength}
+                  className="w-full border-[1.5px] rounded-md flex px-[1rem] py-[1rem] space-x-[.7rem] text-gray-600 "
+                />
+              </div>
+              <button
+                onClick={startResume}
+                className="w-full bg-black text-white font-bold rounded-md  hover:bg-gray-900 flex items-center justify-center space-x-[1rem]"
+              >
+                <div
+                  className={`flex items-center justify-center  ${
+                    isLoading ? "" : "hidden"
+                  }`}
+                >
+                  <div className="rounded-full overflow-hidden w-[1.5rem] h-[1.5rem]">
+                    <Image
+                      alt="turtles"
+                      src="/spinner-of-dots.png"
+                      width={500}
+                      height={200}
+                      className="w-full h-full object-cover invert animate-spin"
+                    ></Image>
+                  </div>
+                </div>
+                {isLoading ? <p>Loading ...</p> : <p>Mulai Meringkas</p>}
+              </button>
+            </div>
+            <div className="relative z-0">
+              <div
+                id=""
+                className="text-gray-600 w-full border-[1.5px] border-gray-200 rounded-md appearance-none h-[15rem] overflow-y-scroll border-t-[1px] px-5 scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black resize-none focus:ring-0 focus:outline-none py-[1rem] mt-[1.4rem] "
+              >
+                {summary}
+              </div>
+              <button
+                className="absolute z-1 right-5 top-5"
+                onClick={handleCopy}
+              >
+                <div className="relative pl-2">
+                  <Image
+                    alt="turtles"
+                    src="/copy.png"
+                    width={500}
+                    height={0}
+                    className="w-[1.5rem]"
+                    onMouseEnter={(e) => setHoverCopy(true)}
+                    onMouseLeave={(e) => setHoverCopy(false)}
+                  ></Image>
+                  <div
+                    className={`rounded-md absolute h-[2rem] top-0 mt-[100%] left-0 transition duration-200 ${
+                      hoverCopy ? "opacity-1" : "opacity-0"
+                    }`}
+                  >
+                    <div className="bg-gray-200 bottom-[-.9rem] mr-[1rem] px-2 rounded-md">
+                      copy
+                    </div>
+                  </div>
+                </div>
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      ) : (
+        <div className="h-[100vh] justify-around flex items-center">
+          Loading...
+        </div>
+      )}
+    </>
   );
 }

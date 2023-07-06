@@ -19,11 +19,13 @@ export default function Navbar() {
   const login = async () => {
     Cookies.set("loggedin", "true");
     localStorage.setItem("redirectPage", "pomodoro");
+    localStorage.setItem("loading", "true");
     signIn();
   };
 
   const logout = () => {
     Cookies.remove("loggedin");
+    localStorage.setItem("loading", "true");
     signOut();
   };
 
@@ -53,6 +55,8 @@ export default function Navbar() {
     };
     addUser();
   }, [session, userExist]);
+
+  console.log("ini navbarnya", localStorage.getItem("loading"));
 
   if (session) {
     return (

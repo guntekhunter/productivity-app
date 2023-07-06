@@ -30,18 +30,12 @@ export default function Footer() {
   };
 
   const sendMessage = () => {
-    console.log(value);
     dispatch(navbarActive(true));
     setTimeout(() => {
       dispatch(navbarActive(false));
     }, 3000);
   };
 
-  // useEffect(() => {
-  //   if (state.succeeded) {
-  //     setValue("");
-  //   }
-  // }, [value, state]);
 
   return (
     <section className="w-full bg-black text-white flex justify-around relative">

@@ -65,9 +65,6 @@ export default function List({ color }) {
     fetchList();
   }, [id]);
 
-  console.log(listId);
-  console.log(list);
-
   return (
     <section className="mt-[2rem] flex justify-around overflow-hidden">
       <div className="md:w-[60%] w-[90%] py-[2rem] space-y-2">

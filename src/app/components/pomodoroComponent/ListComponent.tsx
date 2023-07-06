@@ -14,14 +14,12 @@ export default function ListComponent({name,color,callback,index,deleted,id}) {
     const status = check;
   };
 
-  console.log(id);
   const deleting = async () => {
     deleted(index);
     try {
       const res = await axios.post("/api/delete", {
         id: id,
       });
-      console.log(res);
     } catch (error) {
       console.log(error);
     }
@@ -52,7 +50,6 @@ export default function ListComponent({name,color,callback,index,deleted,id}) {
           id: id,
           listName: editedName,
         });
-        console.log(response);
       } catch (error) {
         console.log(error);
       }

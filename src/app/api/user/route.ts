@@ -17,7 +17,6 @@ export const POST = async (req: NextResponse, res: NextRequest) => {
       email: userEmail,
     },
   });
-  console.log(req);
   if (!isUser) {
     try {
       const user = await prisma.user.create({

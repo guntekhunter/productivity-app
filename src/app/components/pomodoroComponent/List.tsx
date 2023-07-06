@@ -1,13 +1,16 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import Image from "next/image";
 import ListComponent from "./ListComponent";
 import AddListButton from "./AddListButton";
 import axios from "axios";
 import { useSession } from "next-auth/react";
+import LoadingList from "../loading/LoadingList";
 
 //@ts-ignore
 export default function List({ color }) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [deletedId, setDeletedId] = useState(0);
   const [list, setList] = useState<string[]>([]);
   const [listChecked, setListChecked] = useState<number[]>([]);
   const [listId, setListId] = useState<number[]>([]);
@@ -24,10 +27,14 @@ export default function List({ color }) {
     );
   };
 
-  const deleteCallBack = (index: number) => {
+  const deleteCallBack = (index: number, id: number) => {
     list.splice(index, 1);
+    listId.splice(index, 1);
     const deletedList = [...list];
+    const deletedListId = [...listId];
     setList(deletedList);
+    setListId(deletedListId);
+    console.log("ini di list", id);
   };
 
   useEffect(() => {
@@ -50,6 +57,7 @@ export default function List({ color }) {
   useEffect(() => {
     const fetchList = async () => {
       try {
+        setIsLoading(true);
         const listData = await axios.get("/api/list");
         const data = listData.data.data;
         const filteredData = data.filter((item: any) => item.userId === id);
@@ -57,6 +65,7 @@ export default function List({ color }) {
         const idList = filteredData.map((item: any) => item.id);
         setListId(idList);
         setList(names);
+        setIsLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -65,23 +74,37 @@ export default function List({ color }) {
     fetchList();
   }, [id]);
 
+  console.log("the loading", isLoading);
+  console.log("the list", list);
+
   return (
     <section className="mt-[2rem] flex justify-around overflow-hidden">
       <div className="md:w-[60%] w-[90%] py-[2rem] space-y-2">
-        {list.map((item, key) => {
-          const id = listId[list.indexOf(item)];
-          return (
-            <ListComponent
-              name={item}
-              index={list.indexOf(item)}
-              id={id}
-              key={key}
-              color={color}
-              callback={callbackEdit}
-              deleted={deleteCallBack}
-            />
-          );
-        })}
+        {isLoading ? (
+          <LoadingList />
+        ) : (
+          list.length > 0 &&
+          list.map((item, key) => {
+            const id = listId[list.indexOf(item)];
+            return (
+              <>
+                {!isLoading ? (
+                  <ListComponent
+                    name={item}
+                    index={list.indexOf(item)}
+                    id={id}
+                    key={key}
+                    color={color}
+                    callback={callbackEdit}
+                    deleted={deleteCallBack}
+                  />
+                ) : (
+                  <LoadingList />
+                )}
+              </>
+            );
+          })
+        )}
         <AddListButton callback={callbackButton} />
       </div>
     </section>

@@ -12,7 +12,7 @@ import axios from "axios";
 export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
-  const [userExist, setUserExist] = useState(false);
+  // const [userExist, setUserExist] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const { data: session } = useSession();
 
@@ -35,28 +35,26 @@ export default function Navbar() {
 
   console.log(isActive);
 
-  useEffect(() => {
-    const addUser = async () => {
-      try {
-        if (!userExist) {
-          const data = await axios.post("/api/user", {
-            name: session?.user?.name,
-            email: session?.user?.email,
-            image: session?.user?.image,
-          });
-          if (data.data.response === "user exist") {
-            setUserExist(true);
-            return;
-          }
-        }
-      } catch (error) {
-        console.error("Error adding user:", error);
-      }
-    };
-    addUser();
-  }, [session, userExist]);
-
-  console.log("ini navbarnya", localStorage.getItem("loading"));
+  // useEffect(() => {
+  //   const addUser = async () => {
+  //     try {
+  //       if (!userExist) {
+  //         const data = await axios.post("/api/user", {
+  //           name: session?.user?.name,
+  //           email: session?.user?.email,
+  //           image: session?.user?.image,
+  //         });
+  //         if (data.data.response === "user exist") {
+  //           setUserExist(true);
+  //           return;
+  //         }
+  //       }
+  //     } catch (error) {
+  //       console.error("Error adding user:", error);
+  //     }
+  //   };
+  //   addUser();
+  // }, [session, userExist]);
 
   if (session) {
     return (

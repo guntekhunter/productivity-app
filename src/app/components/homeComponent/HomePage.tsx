@@ -1,14 +1,40 @@
 "use client";
+import axios from "axios";
 import Cookies from "js-cookie";
 import { useSession, signIn } from "next-auth/react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(localStorage.getItem("loading"));
+  const [userExist, setUserExist] = useState(false);
   const { data: session } = useSession();
   const route = useRouter();
+  const path = usePathname();
+
+  useEffect(() => {
+    const addUser = async () => {
+      if (session) {
+        try {
+          if (!userExist) {
+            const data = await axios.post("/api/user", {
+              name: session?.user?.name,
+              email: session?.user?.email,
+              image: session?.user?.image,
+            });
+            if (data.data.response === "user exist") {
+              setUserExist(true);
+              return;
+            }
+          }
+        } catch (error) {
+          console.error("Error adding user:", error);
+        }
+      }
+    };
+    addUser();
+  }, [session, userExist]);
 
   useEffect(() => {
     if (session) {
@@ -31,6 +57,12 @@ export default function HomePage() {
   }, [isLoading]);
 
   console.log(localStorage.getItem("redirectPage"));
+
+  useEffect(() => {
+    if (path === "") {
+      localStorage.setItem("loading", "false");
+    }
+  }, [path]);
 
   return (
     <>

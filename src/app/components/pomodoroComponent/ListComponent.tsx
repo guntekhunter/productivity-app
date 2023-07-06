@@ -4,26 +4,43 @@ import Image from "next/image";
 import axios from "axios";
 
 // @ts-ignore
-export default function ListComponent({name,color,callback,index,deleted,id}) {
+export default function ListComponent({name,color,callback,index,deleted,id,
+}) {
   const [check, setCheck] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [editedName, setEditedName] = useState(name);
+
+  const theId = id;
 
   const checked = () => {
     setCheck(!check);
     const status = check;
   };
 
-  const deleting = async () => {
-    deleted(index);
-    try {
-      const res = await axios.post("/api/delete", {
-        id: id,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+  const createDeletingHandler = (idList: number, index: number) => {
+    return async () => {
+      console.log("ini idnya yang didelete", theId);
+      console.log("ini indexnya yang didelete", index);
+      deleted(index, idList);
+      try {
+        const res = await axios.post(
+          "/api/delete",
+          {
+            id: idList,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    };
   };
+
+  const deleting = createDeletingHandler(id, index);
 
   const handleInputChange = (e: { target: { value: any } }) => {
     setEditedName(e.target.value);
@@ -41,7 +58,10 @@ export default function ListComponent({name,color,callback,index,deleted,id}) {
     }, delay);
   };
 
+
   const editList = async (event: { key: string }) => {
+    console.log("ini idnya yang diedit", id);
+    console.log("ini indexnya yang diedit", index);
     if (event.key === "Enter") {
       callback(editedName, index);
       setIsEdit(!isEdit);
@@ -55,6 +75,8 @@ export default function ListComponent({name,color,callback,index,deleted,id}) {
       }
     }
   };
+
+  console.log(id)
 
   return (
     <div
@@ -90,6 +112,7 @@ export default function ListComponent({name,color,callback,index,deleted,id}) {
         </p>
       )}
       <div className="flex space-x-3">
+        <p>{id}</p>
         <button onClick={deleting}>
           <Image
             alt="turtles"

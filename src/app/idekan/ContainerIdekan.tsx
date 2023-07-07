@@ -42,7 +42,7 @@ export default function ContainerIdekan() {
               },
               {
                 role: "user",
-                content: `create an idea in ${category} category, target of the idea is ${target} and the idea is about ${input}, and the dificulty to execute the idea is ${difficulty} in indonesian languange`,
+                content: `buat sebuah ide dalam kategori ${category}, target idenya adalah ${target}, idenya tentang ${input}, tingkat kesulitan eksekusi idenya adalah ${difficulty}. buat idenya dalam bahasa indonesia`,
               },
             ],
             temperature: 1,
@@ -77,7 +77,6 @@ export default function ContainerIdekan() {
               }
             }
             setSummary(completeSummary);
-            setIsLoading(false);
           }
         }
         setIsLoading(false);
@@ -273,7 +272,7 @@ export default function ContainerIdekan() {
             <div className="relative z-0">
               <div
                 id=""
-                className="text-gray-600 w-full border-[1.5px] border-gray-200 rounded-md appearance-none h-[15rem] overflow-y-scroll border-t-[1px] px-5 scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black resize-none focus:ring-0 focus:outline-none py-[1rem] mt-[1.4rem] "
+                className="text-gray-600 w-full border-[1.5px] border-gray-200 rounded-md appearance-none h-[15rem] overflow-y-scroll border-t-[1px] px-5 scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black resize-none focus:ring-0 focus:outline-none py-[1rem] mt-[1.4rem] whitespace-pre-wrap"
               >
                 {summary}
               </div>

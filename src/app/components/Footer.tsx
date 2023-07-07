@@ -36,7 +36,6 @@ export default function Footer() {
     }, 3000);
   };
 
-
   return (
     <section className="w-full bg-black text-white flex justify-around relative">
       <div className="md:w-[70%] w-[90%] pt-[5rem] pb-[1rem] md:space-y-[5rem]">
@@ -46,17 +45,6 @@ export default function Footer() {
             <div className="pt-[1rem]">
               {session ? (
                 <div className="space-y-[1rem]">
-                  <div>
-                    <Link
-                      onClick={activateNav}
-                      href="/"
-                      className={`transform duration-100 hover:pl-[.3rem] ${
-                        pathname === "" ? "font-bold" : ""
-                      }`}
-                    >
-                      Home
-                    </Link>
-                  </div>
                   <div>
                     <Link
                       onClick={activateNav}

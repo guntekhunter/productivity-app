@@ -200,7 +200,6 @@ export default function Timer({ callback }) {
     dispatch(time(seconds));
     if (selectedName !== null) {
       dispatch(timer(selectedName));
-      // Cookies.set("timerName", selectedName);
     }
   }, [selectedName, dispatch, seconds]);
 

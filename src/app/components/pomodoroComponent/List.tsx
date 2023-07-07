@@ -34,7 +34,6 @@ export default function List({ color }) {
     const deletedListId = [...listId];
     setList(deletedList);
     setListId(deletedListId);
-    console.log("ini di list", id);
   };
 
   useEffect(() => {
@@ -73,9 +72,6 @@ export default function List({ color }) {
 
     fetchList();
   }, [id]);
-
-  console.log("the loading", isLoading);
-  console.log("the list", list);
 
   return (
     <section className="mt-[2rem] flex justify-around overflow-hidden">

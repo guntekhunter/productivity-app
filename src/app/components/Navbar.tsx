@@ -33,8 +33,6 @@ export default function Navbar() {
     setIsActive(!isActive);
   };
 
-  console.log(isActive);
-
   if (session) {
     return (
       <div className="fixed w-full flex justify-around relative z-20">

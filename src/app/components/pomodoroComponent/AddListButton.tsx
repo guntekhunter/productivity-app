@@ -27,8 +27,6 @@ export default function AddListButton({ callback }) {
     }
   };
 
-  console.log("the name", listName);
-
   return (
     <div>
       {isActive ? (

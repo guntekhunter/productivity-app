@@ -32,8 +32,6 @@ export default function ContainerPomodoro() {
     }
   }, [session, route]);
 
-  console.log(Cookies.get("redirectPage"));
-
   useEffect(() => {
     if (isLoading === "true" && Cookies.get("redirectPage") === "pomodoro") {
       Cookies.set("loading", "false");

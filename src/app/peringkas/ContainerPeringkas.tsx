@@ -10,7 +10,6 @@ import Instruction from "../components/generateAiComponent/Instruction";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Title from "../components/generateAiComponent/Title";
-import Cookies from "js-cookie";
 
 export default function ContainerPeringkas() {
   const [input, setInput] = useState<string>("");
@@ -22,7 +21,9 @@ export default function ContainerPeringkas() {
   const [isCopied, setIsCopied] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [inputRequired, setInputRequired] = useState(false);
-  const [isLoadingPage, setIsLoadingPage] = useState(Cookies.get("loading"));
+  const [isLoadingPage, setIsLoadingPage] = useState(
+    sessionStorage.getItem("loading")
+  );
 
   const startResume = async () => {
     setQuestions([...questions, { chat: input }]);
@@ -115,16 +116,16 @@ export default function ContainerPeringkas() {
   useEffect(() => {
     if (
       isLoadingPage === "true" &&
-      Cookies.get("redirectPage") === "peringkas"
+      sessionStorage.getItem("redirectPage") === "peringkas"
     ) {
-      Cookies.set("loading", "false");
+      sessionStorage.setItem("loading", "false");
       setIsLoadingPage("false");
     }
   }, [isLoading, isLoadingPage]);
 
   useEffect(() => {
     setTimeout(function () {
-      Cookies.set("redirectPage", "");
+      sessionStorage.setItem("redirectPage", "");
     }, 1000);
   }, []);
   return (

@@ -6,7 +6,6 @@ import Title from "../components/generateAiComponent/Title";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import ConsultationDescription from "../components/generateAiComponent/ConsultationDescription";
-import Cookies from "js-cookie";
 
 export default function KonsultanComponent() {
   const [input, setInput] = useState("");
@@ -15,7 +14,9 @@ export default function KonsultanComponent() {
   const [question, setQuestion] = useState<{ chat: any; type: string }[]>([]);
   const [arrayChat, setArrayChat] = useState<{ chat: any; type: string }[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isLoadingPage, setIsLoadingPage] = useState(Cookies.get("loading"));
+  const [isLoadingPage, setIsLoadingPage] = useState(
+    sessionStorage.getItem("loading")
+  );
 
   const sendMessage = async () => {
     let loading = true;
@@ -115,16 +116,16 @@ export default function KonsultanComponent() {
   useEffect(() => {
     if (
       isLoadingPage === "true" &&
-      Cookies.get("redirectPage") === "konsultan"
+      sessionStorage.getItem("redirectPage") === "konsultan"
     ) {
-      Cookies.set("loading", "false");
+      sessionStorage.setItem("loading", "false");
       setIsLoadingPage("false");
     }
   }, [isLoading, isLoadingPage]);
 
   useEffect(() => {
     setTimeout(function () {
-      Cookies.set("redirectPage", "");
+      sessionStorage.setItem("redirectPage", "");
     }, 1000);
   }, []);
 

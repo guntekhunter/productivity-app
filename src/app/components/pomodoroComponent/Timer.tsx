@@ -7,6 +7,7 @@ import { timer } from "@/app/GlobalRedux/features/timerName/timerSlice";
 import { time } from "@/app/GlobalRedux/features/timerTime/timeSlice";
 import { RootState } from "@/app/GlobalRedux/store";
 import { timeActive } from "@/app/GlobalRedux/features/timerActive/timeActiveSlice";
+import Cookies from "js-cookie";
 
 const cycleTimes = [5, 25]; // Cycle times in minutes
 const cycleCountLimit = 8;
@@ -16,25 +17,25 @@ export default function Timer({ callback }) {
   const globalTimeActive = useSelector(
     (state: RootState) => state.timeActive.value
   );
-  const theTime = parseInt(localStorage.getItem("timerValue") || "0", 10);
-  const theCount = parseInt(localStorage.getItem("count") || "0", 10);
+  const theTime = parseInt(Cookies.get("timerValue") || "0", 10);
+  const theCount = parseInt(Cookies.get("count") || "0", 10);
   const [seconds, setSeconds] = useState(theTime);
   const [isActive, setIsActive] = useState(globalTimeActive);
   const [cycleCount, setCycleCount] = useState(theCount);
   const [selectedTime, setSelectedTime] = useState(25);
   const [notifAudio, setNotifAudio] = useState(false);
-  const typeTimer = localStorage.getItem("timerName");
+  const typeTimer = Cookies.get("timerName");
   const [selectedName, setSelectedName] = useState(typeTimer || "");
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    localStorage.setItem("timerName", selectedName);
+    Cookies.set("timerName", selectedName);
   }, [selectedName]);
 
   useEffect(() => {
-    const storedValue = localStorage.getItem("timerValue");
-    const storedIsActive = localStorage.getItem("timerIsActive");
+    const storedValue = Cookies.get("timerValue");
+    const storedIsActive = Cookies.get("timerIsActive");
 
     if (storedValue && storedIsActive) {
       setSeconds(parseInt(storedValue, 10));
@@ -59,7 +60,7 @@ export default function Timer({ callback }) {
               setSeconds(15 * 60);
               setCycleCount(0);
               setSelectedName("long-break");
-              localStorage.setItem("timerName", "long-break");
+              Cookies.set("timerName", "long-break");
               callback("long-break");
               addNotification({
                 title: "ISTIRAHAT",
@@ -76,7 +77,7 @@ export default function Timer({ callback }) {
               setSeconds(nextCycleSeconds);
               setCycleCount((prevCount) => prevCount + 1);
               setSelectedName("pomodoro");
-              localStorage.setItem("timerName", "pomodoro");
+              Cookies.set("timerName", "pomodoro");
               callback("pomodoro");
               addNotification({
                 title: "FOKUS",
@@ -93,7 +94,7 @@ export default function Timer({ callback }) {
               setSeconds(nextCycleSeconds);
               setCycleCount((prevCount) => prevCount + 1);
               setSelectedName("pomodoro");
-              localStorage.setItem("timerName", "pomodoro");
+              Cookies.set("timerName", "pomodoro");
               callback("pomodoro");
               addNotification({
                 title: "FOKUS",
@@ -110,7 +111,7 @@ export default function Timer({ callback }) {
               const nextCycleSeconds = cycleTimes[nextCycleIndex] * 60;
               if (nextCycleIndex === 0) {
                 setSelectedName("short-break");
-                localStorage.setItem("timerName", "short-break");
+                Cookies.set("timerName", "short-break");
                 callback("short-break");
                 addNotification({
                   title: "ISTIRAHAT",
@@ -123,7 +124,7 @@ export default function Timer({ callback }) {
                 setNotifAudio(true);
               } else if (nextCycleIndex === 1) {
                 setSelectedName("pomodoro");
-                localStorage.setItem("timerName", "pomodoro");
+                Cookies.set("timerName", "pomodoro");
                 callback("pomodoro");
                 addNotification({
                   title: "FOKUS",
@@ -136,7 +137,7 @@ export default function Timer({ callback }) {
                 setNotifAudio(true);
               } else {
                 setSelectedName("long-break");
-                localStorage.setItem("timerName", "long-break");
+                Cookies.set("timerName", "long-break");
                 callback("long-break");
                 addNotification({
                   title: "ISTIRAHAT",
@@ -160,8 +161,8 @@ export default function Timer({ callback }) {
       }, 1000);
     }
 
-    localStorage.setItem("timerValue", seconds.toString());
-    localStorage.setItem("timerIsActive", isActive.toString());
+    Cookies.set("timerValue", seconds.toString());
+    Cookies.set("timerIsActive", isActive.toString());
 
     return () => {
       if (interval) {
@@ -173,7 +174,7 @@ export default function Timer({ callback }) {
   const startCountdown = () => {
     setIsActive(!isActive);
     const status = !isActive;
-    localStorage.setItem("timerIsActive", status.toString());
+    Cookies.set("timerIsActive", status.toString());
   };
 
   const changeTime = (time: number, name: string) => {
@@ -184,14 +185,14 @@ export default function Timer({ callback }) {
     setSelectedName(name);
     callback(name);
     const theSeconds = time * 60;
-    localStorage.setItem("timerValue", theSeconds.toString());
-    setSeconds(parseInt(localStorage.getItem("timerValue") || "0", 10));
-    localStorage.setItem("timerName", name);
+    Cookies.set("timerValue", theSeconds.toString());
+    setSeconds(parseInt(Cookies.get("timerValue") || "0", 10));
+    Cookies.set("timerName", name);
     setIsActive(false);
   };
 
   useEffect(() => {
-    localStorage.setItem("timerValue", seconds.toString());
+    Cookies.set("timerValue", seconds.toString());
   }, [seconds]);
 
   useEffect(() => {
@@ -199,7 +200,7 @@ export default function Timer({ callback }) {
     dispatch(time(seconds));
     if (selectedName !== null) {
       dispatch(timer(selectedName));
-      // localStorage.setItem("timerName", selectedName);
+      // Cookies.set("timerName", selectedName);
     }
   }, [selectedName, dispatch, seconds]);
 
@@ -216,41 +217,41 @@ export default function Timer({ callback }) {
   }, [notifAudio]);
 
   const reset = () => {
-    localStorage.setItem("reset", "true");
-    const name = localStorage.getItem("timerName");
+    Cookies.set("reset", "true");
+    const name = Cookies.get("timerName");
     dispatch(timeActive(false));
     if (name === "short-break") {
       setSelectedTime(5);
       setSelectedName("short-break");
       callback("short-break");
       const theSeconds = 5 * 60;
-      localStorage.setItem("timerValue", theSeconds.toString());
-      setSeconds(parseInt(localStorage.getItem("timerValue") || "0", 10));
-      localStorage.setItem("timerName", "short-break");
+      Cookies.set("timerValue", theSeconds.toString());
+      setSeconds(parseInt(Cookies.get("timerValue") || "0", 10));
+      Cookies.set("timerName", "short-break");
       setIsActive(false);
     } else if (name === "long-break") {
       setSelectedTime(15);
       setSelectedName("long-break");
       callback("long-break");
       const theSeconds = 15 * 60;
-      localStorage.setItem("timerValue", theSeconds.toString());
-      setSeconds(parseInt(localStorage.getItem("timerValue") || "0", 10));
-      localStorage.setItem("timerName", "long-break");
+      Cookies.set("timerValue", theSeconds.toString());
+      setSeconds(parseInt(Cookies.get("timerValue") || "0", 10));
+      Cookies.set("timerName", "long-break");
       setIsActive(false);
     } else {
       setSelectedTime(25);
       setSelectedName("pomodoro");
       callback("pomodoro");
       const theSeconds = 25 * 60;
-      localStorage.setItem("timerValue", theSeconds.toString());
-      setSeconds(parseInt(localStorage.getItem("timerValue") || "0", 10));
-      localStorage.setItem("timerName", "pomodoro");
+      Cookies.set("timerValue", theSeconds.toString());
+      setSeconds(parseInt(Cookies.get("timerValue") || "0", 10));
+      Cookies.set("timerName", "pomodoro");
       setIsActive(false);
     }
   };
 
   useEffect(() => {
-    localStorage.setItem("count", cycleCount.toString());
+    Cookies.set("count", cycleCount.toString());
   }, [cycleCount]);
 
   return (

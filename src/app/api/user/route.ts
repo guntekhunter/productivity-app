@@ -9,7 +9,7 @@ export async function GET(  ) {
   return NextResponse.json({ data: user });
 }
 
-export const POST = async (req: NextResponse, res: NextRequest) => {
+export const POST = async (req: NextRequest, res: NextResponse) => {
   const reqBody = await req.json();
   const userEmail = reqBody.email;
   const isUser = await prisma.user.findFirst({

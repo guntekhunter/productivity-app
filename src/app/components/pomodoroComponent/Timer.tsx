@@ -32,8 +32,6 @@ export default function Timer({ callback }) {
     localStorage.setItem("timerName", selectedName);
   }, [selectedName]);
 
-  console.log(typeTimer);
-
   useEffect(() => {
     const storedValue = localStorage.getItem("timerValue");
     const storedIsActive = localStorage.getItem("timerIsActive");
@@ -46,7 +44,6 @@ export default function Timer({ callback }) {
 
   useEffect(() => {
     dispatch(timeActive(isActive));
-    console.log(isActive);
   }, [isActive, dispatch]);
 
   useEffect(() => {
@@ -220,7 +217,6 @@ export default function Timer({ callback }) {
 
   const reset = () => {
     localStorage.setItem("reset", "true");
-    console.log(localStorage.getItem("timerName"));
     const name = localStorage.getItem("timerName");
     dispatch(timeActive(false));
     if (name === "short-break") {
@@ -256,9 +252,6 @@ export default function Timer({ callback }) {
   useEffect(() => {
     localStorage.setItem("count", cycleCount.toString());
   }, [cycleCount]);
-
-  console.log(seconds);
-  // console.log(parseInt(localStorage.getItem("timerValue") || "0", 10));
 
   return (
     <div className="">

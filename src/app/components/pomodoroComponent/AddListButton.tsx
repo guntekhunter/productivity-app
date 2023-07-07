@@ -25,8 +25,10 @@ export default function AddListButton({ callback }) {
     } catch (error) {
       console.log(error);
     }
-    setIsActive(false);
   };
+
+  console.log("the name", listName);
+
   return (
     <div>
       {isActive ? (
@@ -36,6 +38,7 @@ export default function AddListButton({ callback }) {
             <input
               type="text"
               autoFocus
+              value={listName}
               placeholder="Apa yang ingin kamu selesaikan?"
               onChange={(e) => setListName(e.target.value)}
               onKeyDown={(e) => {

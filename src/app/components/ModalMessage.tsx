@@ -9,7 +9,6 @@ export default function ModalMessage() {
 
   const isActive = useSelector((state: RootState) => state.navbar.value);
 
-  console.log(isActive);
   return (
     <div
       className={`w-full fixed top-0 z-20  md:mt-[1rem] flex transform duration-500 ease-in ${

@@ -104,14 +104,6 @@ export default function GlobalPomodoro() {
     }
   }, [selectedName, pathname]);
 
-  // console.log("ini detek", seconds);
-  // console.log("ini lagi?", theSecond);
-  // console.log(globalTimeActive);
-  console.log(theCount);
-  console.log(seconds);
-  console.log(theName);
-  console.log(selectedName);
-
   useEffect(() => {
     setSelectedName(theName || "");
   }, [theName]);

@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import addNotification from "react-push-notification";
 import { formatTime } from "./TimerFunction";
 import { useDispatch, useSelector } from "react-redux";
 import { timer } from "@/app/GlobalRedux/features/timerName/timerSlice";
@@ -62,14 +61,6 @@ export default function Timer({ callback }) {
               setSelectedName("long-break");
               Cookies.set("timerName", "long-break");
               callback("long-break");
-              addNotification({
-                title: "ISTIRAHAT",
-                subtitle: "Istirahat",
-                message: "Waktunya Istirahat",
-                theme: "darkblue",
-                native: false,
-                duration: 6000,
-              });
               setNotifAudio(true);
               return 15 * 60;
             } else if (selectedName === "short-break") {
@@ -79,14 +70,6 @@ export default function Timer({ callback }) {
               setSelectedName("pomodoro");
               Cookies.set("timerName", "pomodoro");
               callback("pomodoro");
-              addNotification({
-                title: "FOKUS",
-                subtitle: "Fokus",
-                message: "Waktunya Fokus",
-                theme: "darkblue",
-                native: false,
-                duration: 6000,
-              });
               setNotifAudio(true);
               return nextCycleSeconds;
             } else if (selectedName === "long-break") {
@@ -96,14 +79,6 @@ export default function Timer({ callback }) {
               setSelectedName("pomodoro");
               Cookies.set("timerName", "pomodoro");
               callback("pomodoro");
-              addNotification({
-                title: "FOKUS",
-                subtitle: "Fokus",
-                message: "Waktunya Fokus",
-                theme: "darkblue",
-                native: false,
-                duration: 6000,
-              });
               setNotifAudio(true);
               return nextCycleSeconds;
             } else {
@@ -113,40 +88,16 @@ export default function Timer({ callback }) {
                 setSelectedName("short-break");
                 Cookies.set("timerName", "short-break");
                 callback("short-break");
-                addNotification({
-                  title: "ISTIRAHAT",
-                  subtitle: "Istirahat",
-                  message: "Waktunya Istirahat",
-                  theme: "darkblue",
-                  native: false,
-                  duration: 6000,
-                });
                 setNotifAudio(true);
               } else if (nextCycleIndex === 1) {
                 setSelectedName("pomodoro");
                 Cookies.set("timerName", "pomodoro");
                 callback("pomodoro");
-                addNotification({
-                  title: "FOKUS",
-                  subtitle: "Fokus",
-                  message: "Waktunya Fokus",
-                  theme: "darkblue",
-                  native: false,
-                  duration: 6000,
-                });
                 setNotifAudio(true);
               } else {
                 setSelectedName("long-break");
                 Cookies.set("timerName", "long-break");
                 callback("long-break");
-                addNotification({
-                  title: "ISTIRAHAT",
-                  subtitle: "Istirahat",
-                  message: "Waktunya Istirahat",
-                  theme: "darkblue",
-                  native: false,
-                  duration: 6000,
-                });
                 setNotifAudio(true);
               }
               setSeconds(nextCycleSeconds);

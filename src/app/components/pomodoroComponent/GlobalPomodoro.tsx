@@ -1,10 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { formatTime } from "./TimerFunction";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/GlobalRedux/store";
-import { useSession } from "next-auth/react";
-import addNotification from "react-push-notification";
 import { usePathname } from "next/navigation";
 import { timeActive } from "@/app/GlobalRedux/features/timerActive/timeActiveSlice";
 import Cookies from "js-cookie";
@@ -55,28 +52,24 @@ export default function GlobalPomodoro() {
     if (pathname !== "/pomodoro") {
       if (theName === "pomodoro" && seconds === 0 && theCount !== 8) {
         setSelectedName("short-break");
-        // Cookies.set("timerName", "short-break");
         Cookies.set("count", (theCount + 1).toString());
         Cookies.set("timerValue", "300");
         dispatch(timeActive(false));
         setNotifAudio(true);
       } else if (theName === "pomodoro" && seconds === 0 && theCount === 8) {
         setSelectedName("long-break");
-        // Cookies.set("timerName", "long-break");
         Cookies.set("timerValue", "900");
         Cookies.set("count", "0");
         dispatch(timeActive(false));
         setNotifAudio(true);
       } else if (theName === "short-break" && seconds === 0) {
         setSelectedName("pomodoro");
-        // Cookies.set("timerName", "pomodoro");
         Cookies.set("timerValue", "1500");
         Cookies.set("count", (theCount + 1).toString());
         dispatch(timeActive(false));
         setNotifAudio(true);
       } else if (theName === "long-break" && seconds === 0) {
         setSelectedName("pomodoro");
-        // Cookies.set("timerName", "pomodoro");
         Cookies.set("timerValue", "1500");
         Cookies.set("count", "0");
         dispatch(timeActive(false));

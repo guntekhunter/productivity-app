@@ -10,6 +10,7 @@ import Instruction from "../components/generateAiComponent/Instruction";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Title from "../components/generateAiComponent/Title";
+import Cookies from "js-cookie";
 
 export default function ContainerParaphrase() {
   const [input, setInput] = useState<string>("");
@@ -24,9 +25,7 @@ export default function ContainerParaphrase() {
   const [isDrop, setIsDrop] = useState(false);
   const [selected, setSelected] = useState("");
   const [isSelected, setIsSelected] = useState(false);
-  const [isLoadingPage, setIsLoadingPage] = useState(
-    localStorage.getItem("loading")
-  );
+  const [isLoadingPage, setIsLoadingPage] = useState(Cookies.get("loading"));
 
   const session = useSession();
   const router = useRouter();
@@ -129,16 +128,16 @@ export default function ContainerParaphrase() {
   useEffect(() => {
     if (
       isLoadingPage === "true" &&
-      localStorage.getItem("redirectPage") === "paraphrase"
+      Cookies.get("redirectPage") === "paraphrase"
     ) {
-      localStorage.setItem("loading", "false");
+      Cookies.set("loading", "false");
       setIsLoadingPage("false");
     }
   }, [isLoading, isLoadingPage]);
 
   useEffect(() => {
     setTimeout(function () {
-      localStorage.setItem("redirectPage", "");
+      Cookies.set("redirectPage", "");
     }, 1000);
   }, []);
 

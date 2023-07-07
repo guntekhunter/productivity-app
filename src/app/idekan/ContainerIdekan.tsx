@@ -6,6 +6,7 @@ import DropDown from "../components/generateAiComponent/DropDown";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Title from "../components/generateAiComponent/Title";
+import Cookies from "js-cookie";
 
 export default function ContainerIdekan() {
   const [input, setInput] = useState<string>("");
@@ -19,9 +20,7 @@ export default function ContainerIdekan() {
   const [category, setCategory] = useState("");
   const [difficulty, setDifficulty] = useState("");
   const [target, setTarget] = useState("");
-  const [isLoadingPage, setIsLoadingPage] = useState(
-    localStorage.getItem("loading")
-  );
+  const [isLoadingPage, setIsLoadingPage] = useState(Cookies.get("loading"));
 
   const startResume = async () => {
     setQuestions([...questions, { chat: input }]);
@@ -122,18 +121,15 @@ export default function ContainerIdekan() {
   }, [session, router]);
 
   useEffect(() => {
-    if (
-      isLoadingPage === "true" &&
-      localStorage.getItem("redirectPage") === "idekan"
-    ) {
-      localStorage.setItem("loading", "false");
+    if (isLoadingPage === "true" && Cookies.get("redirectPage") === "idekan") {
+      Cookies.set("loading", "false");
       setIsLoadingPage("false");
     }
   }, [isLoading, isLoadingPage]);
 
   useEffect(() => {
     setTimeout(function () {
-      localStorage.setItem("redirectPage", "");
+      Cookies.set("redirectPage", "");
     }, 1000);
   }, []);
   return (

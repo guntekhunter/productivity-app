@@ -5,12 +5,13 @@ import List from "../components/pomodoroComponent/List";
 import Description from "../components/pomodoroComponent/Description";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 export default function ContainerPomodoro() {
-  const [isLoading, setIsLoading] = useState(localStorage.getItem("loading"));
+  const [isLoading, setIsLoading] = useState(Cookies.get("loading"));
   const route = useRouter();
-  const loading = localStorage.getItem("loading");
-  const [timerType, setTimerType] = useState(localStorage.getItem("timerName"));
+  const loading = Cookies.get("loading");
+  const [timerType, setTimerType] = useState(Cookies.get("timerName"));
   const callbackButton = async (value: string) => {
     setTimerType(value);
   };
@@ -26,19 +27,16 @@ export default function ContainerPomodoro() {
 
   useEffect(() => {
     if (session.status !== "unauthenticated") {
-      const thePages = localStorage.getItem("redirectPage");
+      const thePages = Cookies.get("redirectPage");
       route.push(`${thePages}`);
     }
   }, [session, route]);
 
-  console.log(localStorage.getItem("redirectPage"));
+  console.log(Cookies.get("redirectPage"));
 
   useEffect(() => {
-    if (
-      isLoading === "true" &&
-      localStorage.getItem("redirectPage") === "pomodoro"
-    ) {
-      localStorage.setItem("loading", "false");
+    if (isLoading === "true" && Cookies.get("redirectPage") === "pomodoro") {
+      Cookies.set("loading", "false");
       setIsLoading("false");
     }
   }, [isLoading]);

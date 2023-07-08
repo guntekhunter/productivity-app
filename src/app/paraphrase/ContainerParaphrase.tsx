@@ -25,7 +25,9 @@ export default function ContainerParaphrase() {
   const [isDrop, setIsDrop] = useState(false);
   const [selected, setSelected] = useState("");
   const [isSelected, setIsSelected] = useState(false);
-  const [isLoadingPage, setIsLoadingPage] = useState(Cookies.get("loading"));
+  const [isLoadingPage, setIsLoadingPage] = useState(
+    sessionStorage.getItem("loading")
+  );
 
   const session = useSession();
   const router = useRouter();
@@ -128,16 +130,16 @@ export default function ContainerParaphrase() {
   useEffect(() => {
     if (
       isLoadingPage === "true" &&
-      Cookies.get("redirectPage") === "paraphrase"
+      sessionStorage.getItem("redirectPage") === "paraphrase"
     ) {
-      Cookies.set("loading", "false");
+      sessionStorage.setItem("loading", "false");
       setIsLoadingPage("false");
     }
   }, [isLoading, isLoadingPage]);
 
   useEffect(() => {
     setTimeout(function () {
-      Cookies.set("redirectPage", "");
+      sessionStorage.setItem("redirectPage", "");
     }, 1000);
   }, []);
 

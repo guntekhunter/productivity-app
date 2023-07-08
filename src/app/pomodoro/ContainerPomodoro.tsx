@@ -8,10 +8,12 @@ import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 
 export default function ContainerPomodoro() {
-  const [isLoading, setIsLoading] = useState(Cookies.get("loading"));
+  const [isLoading, setIsLoading] = useState(sessionStorage.getItem("loading"));
   const route = useRouter();
-  const loading = Cookies.get("loading");
-  const [timerType, setTimerType] = useState(Cookies.get("timerName"));
+  const loading = sessionStorage.getItem("loading");
+  const [timerType, setTimerType] = useState(
+    sessionStorage.getItem("timerName")
+  );
   const callbackButton = async (value: string) => {
     setTimerType(value);
   };
@@ -27,14 +29,17 @@ export default function ContainerPomodoro() {
 
   useEffect(() => {
     if (session.status !== "unauthenticated") {
-      const thePages = Cookies.get("redirectPage");
+      const thePages = sessionStorage.getItem("redirectPage");
       route.push(`${thePages}`);
     }
   }, [session, route]);
 
   useEffect(() => {
-    if (isLoading === "true" && Cookies.get("redirectPage") === "pomodoro") {
-      Cookies.set("loading", "false");
+    if (
+      isLoading === "true" &&
+      sessionStorage.getItem("redirectPage") === "pomodoro"
+    ) {
+      sessionStorage.setItem("loading", "false");
       setIsLoading("false");
     }
   }, [isLoading]);

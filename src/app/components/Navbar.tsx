@@ -17,15 +17,15 @@ export default function Navbar() {
   const { data: session } = useSession();
 
   const login = async () => {
-    Cookies.set("loggedin", "true");
-    Cookies.set("redirectPage", "pomodoro");
-    Cookies.set("loading", "true");
+    sessionStorage.setItem("loggedin", "true");
+    sessionStorage.setItem("redirectPage", "pomodoro");
+    sessionStorage.setItem("loading", "true");
     signIn();
   };
 
   const logout = () => {
     Cookies.remove("loggedin");
-    Cookies.set("loading", "true");
+    sessionStorage.setItem("loading", "true");
     signOut();
   };
 

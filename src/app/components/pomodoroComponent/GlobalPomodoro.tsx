@@ -13,9 +13,9 @@ export default function GlobalPomodoro() {
   const globalTimeActive = useSelector(
     (state: RootState) => state.timeActive.value
   );
-  const theSecond = parseInt(Cookies.get("timerValue") || "0", 10);
-  const theCount = parseInt(Cookies.get("count") || "0", 10);
-  const theName = Cookies.get("timerName");
+  const theSecond = parseInt(sessionStorage.getItem("timerValue") || "0", 10);
+  const theCount = parseInt(sessionStorage.getItem("count") || "0", 10);
+  const theName = sessionStorage.getItem("timerName");
   const [seconds, setSeconds] = useState(theSecond);
   const [selectedName, setSelectedName] = useState(theName || "");
 
@@ -30,7 +30,7 @@ export default function GlobalPomodoro() {
 
   useEffect(() => {
     if (pathname === "/pomodoro") {
-      Cookies.set("timerValue", seconds.toString());
+      sessionStorage.setItem("timerValue", seconds.toString());
     }
   }, [pathname, seconds]);
 
@@ -43,7 +43,7 @@ export default function GlobalPomodoro() {
   useEffect(() => {
     if (pathname !== "/pomodoro") {
       if (theCount > 4) {
-        Cookies.set("count", "0");
+        sessionStorage.setItem("count", "0");
       }
     }
   }, [theCount, pathname]);
@@ -52,26 +52,26 @@ export default function GlobalPomodoro() {
     if (pathname !== "/pomodoro") {
       if (theName === "pomodoro" && seconds === 0 && theCount !== 8) {
         setSelectedName("short-break");
-        Cookies.set("count", (theCount + 1).toString());
-        Cookies.set("timerValue", "300");
+        sessionStorage.setItem("count", (theCount + 1).toString());
+        sessionStorage.setItem("timerValue", "300");
         dispatch(timeActive(false));
         setNotifAudio(true);
       } else if (theName === "pomodoro" && seconds === 0 && theCount === 8) {
         setSelectedName("long-break");
-        Cookies.set("timerValue", "900");
-        Cookies.set("count", "0");
+        sessionStorage.setItem("timerValue", "900");
+        sessionStorage.setItem("count", "0");
         dispatch(timeActive(false));
         setNotifAudio(true);
       } else if (theName === "short-break" && seconds === 0) {
         setSelectedName("pomodoro");
-        Cookies.set("timerValue", "1500");
-        Cookies.set("count", (theCount + 1).toString());
+        sessionStorage.setItem("timerValue", "1500");
+        sessionStorage.setItem("count", (theCount + 1).toString());
         dispatch(timeActive(false));
         setNotifAudio(true);
       } else if (theName === "long-break" && seconds === 0) {
         setSelectedName("pomodoro");
-        Cookies.set("timerValue", "1500");
-        Cookies.set("count", "0");
+        sessionStorage.setItem("timerValue", "1500");
+        sessionStorage.setItem("count", "0");
         dispatch(timeActive(false));
         setNotifAudio(true);
       }
@@ -94,7 +94,7 @@ export default function GlobalPomodoro() {
 
   useEffect(() => {
     if (pathname !== "/pomodoro") {
-      Cookies.set("timerName", selectedName);
+      sessionStorage.setItem("timerName", selectedName);
     }
   }, [selectedName, pathname]);
 

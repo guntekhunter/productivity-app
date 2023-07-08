@@ -7,7 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 export default function HomePage() {
-  const [isLoading, setIsLoading] = useState(Cookies.get("loading"));
+  const [isLoading, setIsLoading] = useState(sessionStorage.getItem("loading"));
   const [userExist, setUserExist] = useState(false);
   const { data: session } = useSession();
   const route = useRouter();
@@ -43,24 +43,24 @@ export default function HomePage() {
   }, [session, route]);
 
   const tryFitures = (e: string) => {
-    Cookies.set("loggedin", "true");
-    Cookies.set("redirectPage", e);
-    Cookies.set("loading", "true");
+    sessionStorage.setItem("loggedin", "true");
+    sessionStorage.setItem("redirectPage", e);
+    sessionStorage.setItem("loading", "true");
     signIn();
   };
 
   useEffect(() => {
-    if (isLoading === "true" && Cookies.get("redirectPage") === "") {
-      Cookies.set("loading", "false");
+    if (isLoading === "true" && sessionStorage.getItem("redirectPage") === "") {
+      sessionStorage.setItem("loading", "false");
       setIsLoading("false");
     }
   }, [isLoading]);
 
-  console.log(Cookies.get("redirectPage"));
+  console.log(sessionStorage.getItem("redirectPage"));
 
   useEffect(() => {
     if (path === "") {
-      Cookies.set("loading", "false");
+      sessionStorage.setItem("loading", "false");
     }
   }, [path]);
 

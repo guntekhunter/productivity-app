@@ -7,7 +7,13 @@ import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 export default function HomePage() {
-  const [isLoading, setIsLoading] = useState(sessionStorage.getItem("loading"));
+  let theLoading;
+  if (typeof window !== "undefined") {
+    theLoading = localStorage.getItem("loading");
+  } else {
+    console.log("you are on the server");
+  }
+  const [isLoading, setIsLoading] = useState(theLoading);
   const [userExist, setUserExist] = useState(false);
   const { data: session } = useSession();
   const route = useRouter();
@@ -43,24 +49,34 @@ export default function HomePage() {
   }, [session, route]);
 
   const tryFitures = (e: string) => {
-    sessionStorage.setItem("loggedin", "true");
-    sessionStorage.setItem("redirectPage", e);
-    sessionStorage.setItem("loading", "true");
+    Cookies.set("loggedin", "true");
+    if (typeof window !== "undefined") {
+      localStorage.setItem("redirectPage", e);
+      localStorage.setItem("loading", "true");
+    } else {
+      console.log("You are on the server");
+    }
     signIn();
   };
 
   useEffect(() => {
-    if (isLoading === "true" && sessionStorage.getItem("redirectPage") === "") {
-      sessionStorage.setItem("loading", "false");
-      setIsLoading("false");
+    if (typeof window !== "undefined") {
+      if (isLoading === "true" && localStorage.getItem("redirectPage") === "") {
+        localStorage.setItem("loading", "false");
+        setIsLoading("false");
+      }
+    } else {
+      console.log("You are on the server");
     }
   }, [isLoading]);
 
-  console.log(sessionStorage.getItem("redirectPage"));
-
   useEffect(() => {
     if (path === "") {
-      sessionStorage.setItem("loading", "false");
+      if (typeof window !== "undefined") {
+        localStorage.setItem("loading", "false");
+      }
+    } else {
+      console.log("You are on the server");
     }
   }, [path]);
 

@@ -5,15 +5,19 @@ import List from "../components/pomodoroComponent/List";
 import Description from "../components/pomodoroComponent/Description";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import Cookies from "js-cookie";
 
 export default function ContainerPomodoro() {
-  const [isLoading, setIsLoading] = useState(sessionStorage.getItem("loading"));
+  let isLoadings: any;
+  let theNames: any;
+  if (typeof window !== "undefined") {
+    isLoadings = localStorage.getItem("loading");
+    theNames = localStorage.getItem("timerName");
+  }
+  const theLoading = isLoadings;
+  const theName = theNames;
+  const [isLoading, setIsLoading] = useState(theLoading);
   const route = useRouter();
-  const loading = sessionStorage.getItem("loading");
-  const [timerType, setTimerType] = useState(
-    sessionStorage.getItem("timerName")
-  );
+  const [timerType, setTimerType] = useState(theName);
   const callbackButton = async (value: string) => {
     setTimerType(value);
   };
@@ -29,23 +33,31 @@ export default function ContainerPomodoro() {
 
   useEffect(() => {
     if (session.status !== "unauthenticated") {
-      const thePages = sessionStorage.getItem("redirectPage");
+      let theRedirects: any;
+      if (typeof window !== "undefined") {
+        if (typeof window !== "undefined") {
+          theRedirects = localStorage.getItem("redirectPage");
+        }
+      }
+      const thePages = theRedirects;
       route.push(`${thePages}`);
     }
   }, [session, route]);
 
   useEffect(() => {
-    if (
-      isLoading === "true" &&
-      sessionStorage.getItem("redirectPage") === "pomodoro"
-    ) {
-      sessionStorage.setItem("loading", "false");
-      setIsLoading("false");
+    if (typeof window !== "undefined") {
+      if (
+        isLoading === "true" &&
+        localStorage.getItem("redirectPage") === "pomodoro"
+      ) {
+        localStorage.setItem("loading", "false");
+        setIsLoading("false");
+      }
     }
   }, [isLoading]);
   return (
     <div>
-      {loading === "false" ? (
+      {theLoading === "false" ? (
         <div>
           <Timer callback={callbackButton} />
           <List color={timerType} />

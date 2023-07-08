@@ -12,6 +12,11 @@ import { useRouter } from "next/navigation";
 import Title from "../components/generateAiComponent/Title";
 
 export default function ContainerPeringkas() {
+  let theLoadings: any;
+  if (typeof window !== "undefined") {
+    theLoadings = localStorage.getItem("loading");
+  }
+  const theLoading = theLoadings;
   const [input, setInput] = useState<string>("");
   const [questions, setQuestions] = useState<{ chat: any }[]>([]);
   const [sentenceLength, setSentenceLength] = useState("");
@@ -21,9 +26,7 @@ export default function ContainerPeringkas() {
   const [isCopied, setIsCopied] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [inputRequired, setInputRequired] = useState(false);
-  const [isLoadingPage, setIsLoadingPage] = useState(
-    sessionStorage.getItem("loading")
-  );
+  const [isLoadingPage, setIsLoadingPage] = useState(theLoading);
 
   const startResume = async () => {
     setQuestions([...questions, { chat: input }]);
@@ -116,16 +119,16 @@ export default function ContainerPeringkas() {
   useEffect(() => {
     if (
       isLoadingPage === "true" &&
-      sessionStorage.getItem("redirectPage") === "peringkas"
+      localStorage.getItem("redirectPage") === "peringkas"
     ) {
-      sessionStorage.setItem("loading", "false");
+      localStorage.setItem("loading", "false");
       setIsLoadingPage("false");
     }
   }, [isLoading, isLoadingPage]);
 
   useEffect(() => {
     setTimeout(function () {
-      sessionStorage.setItem("redirectPage", "");
+      localStorage.setItem("redirectPage", "");
     }, 1000);
   }, []);
   return (

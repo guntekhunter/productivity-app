@@ -1,4 +1,5 @@
 "use client";
+import Cookies from "js-cookie";
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -20,7 +21,7 @@ export default function Footer() {
   const { data: session } = useSession();
 
   const login = () => {
-    sessionStorage.setItem("loggedin", "true");
+    Cookies.set("loggedin", "true");
     signIn();
   };
 

@@ -10,6 +10,8 @@ export default function ListComponent({name,color,callback,index,deleted,id,
   const [isEdit, setIsEdit] = useState(false);
   const [editedName, setEditedName] = useState(name);
 
+  const theId = id;
+
   const checked = () => {
     setCheck(!check);
     const status = check;
@@ -17,6 +19,8 @@ export default function ListComponent({name,color,callback,index,deleted,id,
 
   const createDeletingHandler = (idList: number, index: number) => {
     return async () => {
+      console.log("ini idnya yang didelete", theId);
+      console.log("ini indexnya yang didelete", index);
       deleted(index, idList);
       try {
         const res = await axios.post(
@@ -72,6 +76,8 @@ export default function ListComponent({name,color,callback,index,deleted,id,
     }
   };
 
+  console.log(id)
+
   return (
     <div
       className={`transition duration-200 ease-in-out ${
@@ -106,6 +112,7 @@ export default function ListComponent({name,color,callback,index,deleted,id,
         </p>
       )}
       <div className="flex space-x-3">
+        <p>{id}</p>
         <button onClick={deleting}>
           <Image
             alt="turtles"

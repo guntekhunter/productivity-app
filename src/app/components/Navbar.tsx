@@ -17,21 +17,44 @@ export default function Navbar() {
   const { data: session } = useSession();
 
   const login = async () => {
-    sessionStorage.setItem("loggedin", "true");
-    sessionStorage.setItem("redirectPage", "pomodoro");
-    sessionStorage.setItem("loading", "true");
+    Cookies.set("loggedin", "true");
+    localStorage.setItem("redirectPage", "pomodoro");
+    localStorage.setItem("loading", "true");
     signIn();
   };
 
   const logout = () => {
     Cookies.remove("loggedin");
-    sessionStorage.setItem("loading", "true");
+    localStorage.setItem("loading", "true");
     signOut();
   };
 
   const activateNav = () => {
     setIsActive(!isActive);
   };
+
+  console.log(isActive);
+
+  // useEffect(() => {
+  //   const addUser = async () => {
+  //     try {
+  //       if (!userExist) {
+  //         const data = await axios.post("/api/user", {
+  //           name: session?.user?.name,
+  //           email: session?.user?.email,
+  //           image: session?.user?.image,
+  //         });
+  //         if (data.data.response === "user exist") {
+  //           setUserExist(true);
+  //           return;
+  //         }
+  //       }
+  //     } catch (error) {
+  //       console.error("Error adding user:", error);
+  //     }
+  //   };
+  //   addUser();
+  // }, [session, userExist]);
 
   if (session) {
     return (

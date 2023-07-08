@@ -8,6 +8,11 @@ import { useRouter } from "next/navigation";
 import Title from "../components/generateAiComponent/Title";
 
 export default function ContainerIdekan() {
+  let theLoadings: any;
+  if (typeof window !== "undefined") {
+    theLoadings = localStorage.getItem("loading");
+  }
+  const theLoading = theLoadings;
   const [input, setInput] = useState<string>("");
   const [questions, setQuestions] = useState<{ chat: any }[]>([]);
   const [summary, setSummary] = useState("");
@@ -19,9 +24,7 @@ export default function ContainerIdekan() {
   const [category, setCategory] = useState("");
   const [difficulty, setDifficulty] = useState("");
   const [target, setTarget] = useState("");
-  const [isLoadingPage, setIsLoadingPage] = useState(
-    sessionStorage.get("loading")
-  );
+  const [isLoadingPage, setIsLoadingPage] = useState(theLoading);
 
   const startResume = async () => {
     setQuestions([...questions, { chat: input }]);
@@ -124,16 +127,16 @@ export default function ContainerIdekan() {
   useEffect(() => {
     if (
       isLoadingPage === "true" &&
-      sessionStorage.get("redirectPage") === "idekan"
+      localStorage.getItem("redirectPage") === "idekan"
     ) {
-      sessionStorage.setItem("loading", "false");
+      localStorage.setItem("loading", "false");
       setIsLoadingPage("false");
     }
   }, [isLoading, isLoadingPage]);
 
   useEffect(() => {
     setTimeout(function () {
-      sessionStorage.setItem("redirectPage", "");
+      localStorage.setItem("redirectPage", "");
     }, 1000);
   }, []);
   return (

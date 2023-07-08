@@ -8,15 +8,18 @@ import { useRouter } from "next/navigation";
 import ConsultationDescription from "../components/generateAiComponent/ConsultationDescription";
 
 export default function KonsultanComponent() {
+  let theLoadings: any;
+  if (typeof window !== "undefined") {
+    theLoadings = localStorage.getItem("loading");
+  }
+  const theLoading = theLoadings;
   const [input, setInput] = useState("");
   const [individualAnswer, setIndividualAnswer] = useState("");
   const [answer, setAnswer] = useState<{ chat: any; type: string }[]>([]);
   const [question, setQuestion] = useState<{ chat: any; type: string }[]>([]);
   const [arrayChat, setArrayChat] = useState<{ chat: any; type: string }[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isLoadingPage, setIsLoadingPage] = useState(
-    sessionStorage.getItem("loading")
-  );
+  const [isLoadingPage, setIsLoadingPage] = useState(theLoading);
 
   const sendMessage = async () => {
     let loading = true;
@@ -116,16 +119,16 @@ export default function KonsultanComponent() {
   useEffect(() => {
     if (
       isLoadingPage === "true" &&
-      sessionStorage.getItem("redirectPage") === "konsultan"
+      localStorage.getItem("redirectPage") === "konsultan"
     ) {
-      sessionStorage.setItem("loading", "false");
+      localStorage.setItem("loading", "false");
       setIsLoadingPage("false");
     }
   }, [isLoading, isLoadingPage]);
 
   useEffect(() => {
     setTimeout(function () {
-      sessionStorage.setItem("redirectPage", "");
+      localStorage.setItem("redirectPage", "");
     }, 1000);
   }, []);
 

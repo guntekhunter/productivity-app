@@ -1,10 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { formatTime } from "./TimerFunction";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/GlobalRedux/store";
+import { useSession } from "next-auth/react";
+import addNotification from "react-push-notification";
 import { usePathname } from "next/navigation";
 import { timeActive } from "@/app/GlobalRedux/features/timerActive/timeActiveSlice";
-import Cookies from "js-cookie";
 
 export default function GlobalPomodoro() {
   const [notifAudio, setNotifAudio] = useState(false);
@@ -13,16 +15,24 @@ export default function GlobalPomodoro() {
   const globalTimeActive = useSelector(
     (state: RootState) => state.timeActive.value
   );
-  const theSecond = parseInt(sessionStorage.getItem("timerValue") || "0", 10);
-  const theCount = parseInt(sessionStorage.getItem("count") || "0", 10);
-  const theName = sessionStorage.getItem("timerName");
+  let theSeconds: any;
+  let theCounts: any;
+  let theNames: any;
+  if (typeof window !== "undefined") {
+    theSeconds = parseInt(localStorage.getItem("timerValue") || "0", 10);
+    theCounts = parseInt(localStorage.getItem("count") || "0", 10);
+    theNames = localStorage.getItem("timerName");
+  }
+  const theSecond = theSeconds;
+  const theCount = theCounts;
+  const theName = theNames;
   const [seconds, setSeconds] = useState(theSecond);
   const [selectedName, setSelectedName] = useState(theName || "");
 
   useEffect(() => {
     if (globalTimeActive) {
       const intervalId = setInterval(() => {
-        setSeconds((prevSeconds) => prevSeconds - 1);
+        setSeconds((prevSeconds: number) => prevSeconds - 1);
       }, 1000);
       return () => clearInterval(intervalId);
     }
@@ -30,7 +40,9 @@ export default function GlobalPomodoro() {
 
   useEffect(() => {
     if (pathname === "/pomodoro") {
-      sessionStorage.setItem("timerValue", seconds.toString());
+      if (typeof window !== "undefined") {
+        localStorage.setItem("timerValue", seconds.toString());
+      }
     }
   }, [pathname, seconds]);
 
@@ -43,7 +55,9 @@ export default function GlobalPomodoro() {
   useEffect(() => {
     if (pathname !== "/pomodoro") {
       if (theCount > 4) {
-        sessionStorage.setItem("count", "0");
+        if (typeof window !== "undefined") {
+          localStorage.setItem("count", "0");
+        }
       }
     }
   }, [theCount, pathname]);
@@ -52,26 +66,38 @@ export default function GlobalPomodoro() {
     if (pathname !== "/pomodoro") {
       if (theName === "pomodoro" && seconds === 0 && theCount !== 8) {
         setSelectedName("short-break");
-        sessionStorage.setItem("count", (theCount + 1).toString());
-        sessionStorage.setItem("timerValue", "300");
+        // localStorage.setItem("timerName", "short-break");
+        if (typeof window !== "undefined") {
+          localStorage.setItem("count", (theCount + 1).toString());
+          localStorage.setItem("timerValue", "300");
+        }
         dispatch(timeActive(false));
         setNotifAudio(true);
       } else if (theName === "pomodoro" && seconds === 0 && theCount === 8) {
         setSelectedName("long-break");
-        sessionStorage.setItem("timerValue", "900");
-        sessionStorage.setItem("count", "0");
+        // localStorage.setItem("timerName", "long-break");
+        if (typeof window !== "undefined") {
+          localStorage.setItem("timerValue", "900");
+          localStorage.setItem("count", "0");
+        }
         dispatch(timeActive(false));
         setNotifAudio(true);
       } else if (theName === "short-break" && seconds === 0) {
         setSelectedName("pomodoro");
-        sessionStorage.setItem("timerValue", "1500");
-        sessionStorage.setItem("count", (theCount + 1).toString());
+        // localStorage.setItem("timerName", "pomodoro");
+        if (typeof window !== "undefined") {
+          localStorage.setItem("timerValue", "1500");
+          localStorage.setItem("count", (theCount + 1).toString());
+        }
         dispatch(timeActive(false));
         setNotifAudio(true);
       } else if (theName === "long-break" && seconds === 0) {
         setSelectedName("pomodoro");
-        sessionStorage.setItem("timerValue", "1500");
-        sessionStorage.setItem("count", "0");
+        // localStorage.setItem("timerName", "pomodoro");
+        if (typeof window !== "undefined") {
+          localStorage.setItem("timerValue", "1500");
+          localStorage.setItem("count", "0");
+        }
         dispatch(timeActive(false));
         setNotifAudio(true);
       }
@@ -94,7 +120,9 @@ export default function GlobalPomodoro() {
 
   useEffect(() => {
     if (pathname !== "/pomodoro") {
-      sessionStorage.setItem("timerName", selectedName);
+      if (typeof window !== "undefined") {
+        localStorage.setItem("timerName", selectedName);
+      }
     }
   }, [selectedName, pathname]);
 

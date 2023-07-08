@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import addNotification from "react-push-notification";
 import { formatTime } from "./TimerFunction";
 import { useDispatch, useSelector } from "react-redux";
 import { timer } from "@/app/GlobalRedux/features/timerName/timerSlice";
@@ -15,25 +16,37 @@ export default function Timer({ callback }) {
   const globalTimeActive = useSelector(
     (state: RootState) => state.timeActive.value
   );
-  const theTime = parseInt(sessionStorage.getItem("timerValue") || "0", 10);
-  const theCount = parseInt(sessionStorage.getItem("count") || "0", 10);
+  let theTimes: any;
+  let theCounts: any;
+  let typeTimers: any;
+  if (typeof window !== "undefined") {
+    theTimes = parseInt(localStorage.getItem("timerValue") || "0", 10);
+    theCounts = parseInt(localStorage.getItem("count") || "0", 10);
+    typeTimers = localStorage.getItem("timerName");
+  } else {
+    console.log("you are in a server");
+  }
+  const theTime = theTimes;
+  const theCount = theCounts;
+  const typeTimer = typeTimers;
   const [seconds, setSeconds] = useState(theTime);
   const [isActive, setIsActive] = useState(globalTimeActive);
   const [cycleCount, setCycleCount] = useState(theCount);
   const [selectedTime, setSelectedTime] = useState(25);
   const [notifAudio, setNotifAudio] = useState(false);
-  const typeTimer = sessionStorage.getItem("timerName");
   const [selectedName, setSelectedName] = useState(typeTimer || "");
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    sessionStorage.setItem("timerName", selectedName);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("timerName", selectedName);
+    }
   }, [selectedName]);
 
   useEffect(() => {
-    const storedValue = sessionStorage.getItem("timerValue");
-    const storedIsActive = sessionStorage.getItem("timerIsActive");
+    const storedValue = localStorage.getItem("timerValue");
+    const storedIsActive = localStorage.getItem("timerIsActive");
 
     if (storedValue && storedIsActive) {
       setSeconds(parseInt(storedValue, 10));
@@ -50,7 +63,7 @@ export default function Timer({ callback }) {
 
     if (isActive) {
       interval = setInterval(() => {
-        setSeconds((prevSeconds) => {
+        setSeconds((prevSeconds: number) => {
           if (prevSeconds === 0) {
             setIsActive(false);
 
@@ -58,26 +71,50 @@ export default function Timer({ callback }) {
               setSeconds(15 * 60);
               setCycleCount(0);
               setSelectedName("long-break");
-              sessionStorage.setItem("timerName", "long-break");
+              localStorage.setItem("timerName", "long-break");
               callback("long-break");
+              addNotification({
+                title: "ISTIRAHAT",
+                subtitle: "Istirahat",
+                message: "Waktunya Istirahat",
+                theme: "darkblue",
+                native: false,
+                duration: 6000,
+              });
               setNotifAudio(true);
               return 15 * 60;
             } else if (selectedName === "short-break") {
               const nextCycleSeconds = cycleTimes[1] * 60;
               setSeconds(nextCycleSeconds);
-              setCycleCount((prevCount) => prevCount + 1);
+              setCycleCount((prevCount: number) => prevCount + 1);
               setSelectedName("pomodoro");
-              sessionStorage.setItem("timerName", "pomodoro");
+              localStorage.setItem("timerName", "pomodoro");
               callback("pomodoro");
+              addNotification({
+                title: "FOKUS",
+                subtitle: "Fokus",
+                message: "Waktunya Fokus",
+                theme: "darkblue",
+                native: false,
+                duration: 6000,
+              });
               setNotifAudio(true);
               return nextCycleSeconds;
             } else if (selectedName === "long-break") {
               const nextCycleSeconds = cycleTimes[1] * 60;
               setSeconds(nextCycleSeconds);
-              setCycleCount((prevCount) => prevCount + 1);
+              setCycleCount((prevCount: number) => prevCount + 1);
               setSelectedName("pomodoro");
-              sessionStorage.setItem("timerName", "pomodoro");
+              localStorage.setItem("timerName", "pomodoro");
               callback("pomodoro");
+              addNotification({
+                title: "FOKUS",
+                subtitle: "Fokus",
+                message: "Waktunya Fokus",
+                theme: "darkblue",
+                native: false,
+                duration: 6000,
+              });
               setNotifAudio(true);
               return nextCycleSeconds;
             } else {
@@ -85,22 +122,46 @@ export default function Timer({ callback }) {
               const nextCycleSeconds = cycleTimes[nextCycleIndex] * 60;
               if (nextCycleIndex === 0) {
                 setSelectedName("short-break");
-                sessionStorage.setItem("timerName", "short-break");
+                localStorage.setItem("timerName", "short-break");
                 callback("short-break");
+                addNotification({
+                  title: "ISTIRAHAT",
+                  subtitle: "Istirahat",
+                  message: "Waktunya Istirahat",
+                  theme: "darkblue",
+                  native: false,
+                  duration: 6000,
+                });
                 setNotifAudio(true);
               } else if (nextCycleIndex === 1) {
                 setSelectedName("pomodoro");
-                sessionStorage.setItem("timerName", "pomodoro");
+                localStorage.setItem("timerName", "pomodoro");
                 callback("pomodoro");
+                addNotification({
+                  title: "FOKUS",
+                  subtitle: "Fokus",
+                  message: "Waktunya Fokus",
+                  theme: "darkblue",
+                  native: false,
+                  duration: 6000,
+                });
                 setNotifAudio(true);
               } else {
                 setSelectedName("long-break");
-                sessionStorage.setItem("timerName", "long-break");
+                localStorage.setItem("timerName", "long-break");
                 callback("long-break");
+                addNotification({
+                  title: "ISTIRAHAT",
+                  subtitle: "Istirahat",
+                  message: "Waktunya Istirahat",
+                  theme: "darkblue",
+                  native: false,
+                  duration: 6000,
+                });
                 setNotifAudio(true);
               }
               setSeconds(nextCycleSeconds);
-              setCycleCount((prevCount) => prevCount + 1);
+              setCycleCount((prevCount: number) => prevCount + 1);
               setNotifAudio(true);
               return nextCycleSeconds;
             }
@@ -111,8 +172,8 @@ export default function Timer({ callback }) {
       }, 1000);
     }
 
-    sessionStorage.setItem("timerValue", seconds.toString());
-    sessionStorage.setItem("timerIsActive", isActive.toString());
+    localStorage.setItem("timerValue", seconds.toString());
+    localStorage.setItem("timerIsActive", isActive.toString());
 
     return () => {
       if (interval) {
@@ -124,7 +185,7 @@ export default function Timer({ callback }) {
   const startCountdown = () => {
     setIsActive(!isActive);
     const status = !isActive;
-    sessionStorage.setItem("timerIsActive", status.toString());
+    localStorage.setItem("timerIsActive", status.toString());
   };
 
   const changeTime = (time: number, name: string) => {
@@ -135,14 +196,14 @@ export default function Timer({ callback }) {
     setSelectedName(name);
     callback(name);
     const theSeconds = time * 60;
-    sessionStorage.setItem("timerValue", theSeconds.toString());
-    setSeconds(parseInt(sessionStorage.getItem("timerValue") || "0", 10));
-    sessionStorage.setItem("timerName", name);
+    localStorage.setItem("timerValue", theSeconds.toString());
+    setSeconds(parseInt(localStorage.getItem("timerValue") || "0", 10));
+    localStorage.setItem("timerName", name);
     setIsActive(false);
   };
 
   useEffect(() => {
-    sessionStorage.setItem("timerValue", seconds.toString());
+    localStorage.setItem("timerValue", seconds.toString());
   }, [seconds]);
 
   useEffect(() => {
@@ -150,6 +211,7 @@ export default function Timer({ callback }) {
     dispatch(time(seconds));
     if (selectedName !== null) {
       dispatch(timer(selectedName));
+      // localStorage.setItem("timerName", selectedName);
     }
   }, [selectedName, dispatch, seconds]);
 
@@ -166,41 +228,41 @@ export default function Timer({ callback }) {
   }, [notifAudio]);
 
   const reset = () => {
-    sessionStorage.setItem("reset", "true");
-    const name = sessionStorage.getItem("timerName");
+    localStorage.setItem("reset", "true");
+    const name = localStorage.getItem("timerName");
     dispatch(timeActive(false));
     if (name === "short-break") {
       setSelectedTime(5);
       setSelectedName("short-break");
       callback("short-break");
       const theSeconds = 5 * 60;
-      sessionStorage.setItem("timerValue", theSeconds.toString());
-      setSeconds(parseInt(sessionStorage.getItem("timerValue") || "0", 10));
-      sessionStorage.setItem("timerName", "short-break");
+      localStorage.setItem("timerValue", theSeconds.toString());
+      setSeconds(parseInt(localStorage.getItem("timerValue") || "0", 10));
+      localStorage.setItem("timerName", "short-break");
       setIsActive(false);
     } else if (name === "long-break") {
       setSelectedTime(15);
       setSelectedName("long-break");
       callback("long-break");
       const theSeconds = 15 * 60;
-      sessionStorage.setItem("timerValue", theSeconds.toString());
-      setSeconds(parseInt(sessionStorage.getItem("timerValue") || "0", 10));
-      sessionStorage.setItem("timerName", "long-break");
+      localStorage.setItem("timerValue", theSeconds.toString());
+      setSeconds(parseInt(localStorage.getItem("timerValue") || "0", 10));
+      localStorage.setItem("timerName", "long-break");
       setIsActive(false);
     } else {
       setSelectedTime(25);
       setSelectedName("pomodoro");
       callback("pomodoro");
       const theSeconds = 25 * 60;
-      sessionStorage.setItem("timerValue", theSeconds.toString());
-      setSeconds(parseInt(sessionStorage.getItem("timerValue") || "0", 10));
-      sessionStorage.setItem("timerName", "pomodoro");
+      localStorage.setItem("timerValue", theSeconds.toString());
+      setSeconds(parseInt(localStorage.getItem("timerValue") || "0", 10));
+      localStorage.setItem("timerName", "pomodoro");
       setIsActive(false);
     }
   };
 
   useEffect(() => {
-    sessionStorage.setItem("count", cycleCount.toString());
+    localStorage.setItem("count", cycleCount.toString());
   }, [cycleCount]);
 
   return (

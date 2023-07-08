@@ -10,9 +10,13 @@ import Instruction from "../components/generateAiComponent/Instruction";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Title from "../components/generateAiComponent/Title";
-import Cookies from "js-cookie";
 
 export default function ContainerParaphrase() {
+  let theLoadings: any;
+  if (typeof window !== "undefined") {
+    theLoadings = localStorage.getItem("loading");
+  }
+  const theLoading = theLoadings;
   const [input, setInput] = useState<string>("");
   const [questions, setQuestions] = useState<{ chat: any }[]>([]);
   const [sentenceLength, setSentenceLength] = useState("");
@@ -25,9 +29,7 @@ export default function ContainerParaphrase() {
   const [isDrop, setIsDrop] = useState(false);
   const [selected, setSelected] = useState("");
   const [isSelected, setIsSelected] = useState(false);
-  const [isLoadingPage, setIsLoadingPage] = useState(
-    sessionStorage.getItem("loading")
-  );
+  const [isLoadingPage, setIsLoadingPage] = useState(theLoading);
 
   const session = useSession();
   const router = useRouter();
@@ -130,16 +132,16 @@ export default function ContainerParaphrase() {
   useEffect(() => {
     if (
       isLoadingPage === "true" &&
-      sessionStorage.getItem("redirectPage") === "paraphrase"
+      localStorage.getItem("redirectPage") === "paraphrase"
     ) {
-      sessionStorage.setItem("loading", "false");
+      localStorage.setItem("loading", "false");
       setIsLoadingPage("false");
     }
   }, [isLoading, isLoadingPage]);
 
   useEffect(() => {
     setTimeout(function () {
-      sessionStorage.setItem("redirectPage", "");
+      localStorage.setItem("redirectPage", "");
     }, 1000);
   }, []);
 

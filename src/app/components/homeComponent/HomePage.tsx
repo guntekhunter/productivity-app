@@ -80,7 +80,7 @@ export default function HomePage() {
     }
   }, [path]);
 
-  console.log("ini status loadingnya", isLoading);
+  console.log("ini status loadingnya", session);
 
   return (
     <>

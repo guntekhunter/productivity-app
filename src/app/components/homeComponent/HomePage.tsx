@@ -84,7 +84,7 @@ export default function HomePage() {
 
   return (
     <>
-      {isLoading === "false" ? (
+      {!session ? (
         <div>
           <section className="w-full justify-center flex">
             <div className="md:w-[70%] py-[3rem] w-[90%]">

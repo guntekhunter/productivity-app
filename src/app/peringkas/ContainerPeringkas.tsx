@@ -36,7 +36,7 @@ export default function ContainerPeringkas() {
     } else {
       try {
         setIsLoading(true);
-        const res = await fetch("/api/resume", {
+        const res = await fetch("/api/paraphrase", {
           method: "POST",
           body: JSON.stringify({
             model: "gpt-3.5-turbo",

@@ -12,7 +12,6 @@ import axios from "axios";
 export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
-  // const [userExist, setUserExist] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const { data: session } = useSession();
 

@@ -25,8 +25,8 @@ export default function GlobalPomodoro() {
   const theSecond = theSeconds;
   const theCount = theCounts;
   const theName = theNames;
-  const [seconds, setSeconds] = useState(theSecond);
-  const [selectedName, setSelectedName] = useState(theName || "");
+  const [seconds, setSeconds] = useState(theSecond || 25 * 60);
+  const [selectedName, setSelectedName] = useState(theName || "pomodoro");
 
   useEffect(() => {
     if (globalTimeActive) {

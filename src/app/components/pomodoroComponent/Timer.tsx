@@ -28,12 +28,12 @@ export default function Timer({ callback }) {
   const theTime = theTimes;
   const theCount = theCounts;
   const typeTimer = typeTimers;
-  const [seconds, setSeconds] = useState(theTime);
-  const [isActive, setIsActive] = useState(globalTimeActive);
-  const [cycleCount, setCycleCount] = useState(theCount);
+  const [seconds, setSeconds] = useState(theTime || 25 * 60);
+  const [isActive, setIsActive] = useState(globalTimeActive || false);
+  const [cycleCount, setCycleCount] = useState(theCount || 0);
   const [selectedTime, setSelectedTime] = useState(25);
   const [notifAudio, setNotifAudio] = useState(false);
-  const [selectedName, setSelectedName] = useState(typeTimer || "");
+  const [selectedName, setSelectedName] = useState(typeTimer || "pomodoro");
 
   const dispatch = useDispatch();
 

@@ -4,7 +4,6 @@ import { formatTime } from "./TimerFunction";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/GlobalRedux/store";
 import { useSession } from "next-auth/react";
-import addNotification from "react-push-notification";
 import { usePathname } from "next/navigation";
 import { timeActive } from "@/app/GlobalRedux/features/timerActive/timeActiveSlice";
 

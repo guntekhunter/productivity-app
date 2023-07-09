@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   env: {
-    NEXTAUTH_SECRET: "https://productivity-app-six.vercel.app/",
+    NEXTAUTH_SECRET: "https://productivity-app-ebon.vercel.app/",
   },
 };
 

@@ -1,6 +1,4 @@
 "use client";
-import { AdvancedImage } from "@cloudinary/react";
-import { CloudinaryConfig } from "@cloudinary/url-gen";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useSession, signIn } from "next-auth/react";

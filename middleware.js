@@ -7,9 +7,7 @@ export default function middleware(req) {
   let url = req.url;
 
   if (!verify && url.includes("/chart")) {
-    return NextResponse.redirect(
-      "https://productivity-8d37mcwjr-guntekhunter.vercel.app/"
-    );
+    return NextResponse.redirect("https://productivity-app-six.vercel.app/");
   }
   if (!verify && url.includes("/")) {
     Cookies.remove("loggedin");

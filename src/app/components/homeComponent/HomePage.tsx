@@ -101,7 +101,7 @@ export default function HomePage() {
                 <div>
                   <Image
                     alt="turtles"
-                    src="/fitures/1.jpghttps://res.cloudinary.com/unm/image/upload/v1688907047/1_idb1hd.jpg"
+                    src="/fitures/1.jpg"
                     width={500}
                     height={200}
                     className="md:h-[14rem] md:w-[24rem]"
@@ -130,7 +130,7 @@ export default function HomePage() {
                 <div>
                   <Image
                     alt="turtles"
-                    src="https://res.cloudinary.com/unm/image/upload/v1688906974/2_ytis6z.jpg"
+                    src="/fitures/1.jpg"
                     width={500}
                     height={200}
                     className="md:h-[14rem] md:w-[24rem]"
@@ -145,7 +145,7 @@ export default function HomePage() {
                 <div>
                   <Image
                     alt="turtles"
-                    src="https://res.cloudinary.com/unm/image/upload/v1688906973/3_a1p68x.jpg"
+                    src="/fitures/2.jpg"
                     width={500}
                     height={200}
                     className="md:h-[14rem] md:w-[24rem] shadow-md"
@@ -172,7 +172,7 @@ export default function HomePage() {
                 <div>
                   <Image
                     alt="turtles"
-                    src="https://res.cloudinary.com/unm/image/upload/v1688906973/5_rkemby.jpg"
+                    src="/fitures/2.jpg"
                     width={500}
                     height={200}
                     className="md:h-[14rem] md:w-[24rem] shadow-md"
@@ -187,7 +187,7 @@ export default function HomePage() {
                 <div>
                   <Image
                     alt="turtles"
-                    src="https://res.cloudinary.com/unm/image/upload/v1688906973/4_zvqjaj.jpg"
+                    src="/fitures/3.jpg"
                     width={500}
                     height={200}
                     className="md:h-[14rem] md:w-[24rem] shadow-md"

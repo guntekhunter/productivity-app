@@ -1,10 +1,16 @@
 const DATA_SOURCE_URL = "https://api.openai.com/v1/chat/completions";
 
 export const config = {
-  runtime: "edge",
+  runtime: "edge", // for Edge API Routes only
+  unstable_allowDynamic: [
+    // allows a single file
+    "/lib/utilities.js",
+    // use a glob to allow anything in the function-bind 3rd party module
+    "/node_modules/function-bind/**",
+  ],
 };
 
-const handler = async (req: Request, res: Response) => {
+export const POST = async (req: Request, res: Response) => {
   const reqBody = await req.json();
   try {
     const res = await fetch(DATA_SOURCE_URL, {
@@ -20,5 +26,3 @@ const handler = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
-
-export default handler;

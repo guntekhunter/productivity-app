@@ -1,5 +1,9 @@
 const DATA_SOURCE_URL = "https://api.openai.com/v1/chat/completions";
 
+export const config = {
+  runtime: "edge",
+};
+
 export const POST = async (req: Request, res: Response) => {
   const reqBody = await req.json();
   try {

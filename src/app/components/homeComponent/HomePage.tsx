@@ -101,7 +101,7 @@ export default function HomePage() {
                 <div>
                   <Image
                     alt="turtles"
-                    src="/fitures/1.jpg"
+                    src="https://res.cloudinary.com/unm/image/upload/v1688907047/1_idb1hd.jpg"
                     width={500}
                     height={200}
                     className="md:h-[14rem] md:w-[24rem]"
@@ -130,7 +130,7 @@ export default function HomePage() {
                 <div>
                   <Image
                     alt="turtles"
-                    src="/fitures/1.jpg"
+                    src="https://res.cloudinary.com/unm/image/upload/v1688907047/1_idb1hd.jpg"
                     width={500}
                     height={200}
                     className="md:h-[14rem] md:w-[24rem]"
@@ -145,7 +145,7 @@ export default function HomePage() {
                 <div>
                   <Image
                     alt="turtles"
-                    src="/fitures/2.jpg"
+                    src="https://res.cloudinary.com/unm/image/upload/v1688906974/2_ytis6z.jpg"
                     width={500}
                     height={200}
                     className="md:h-[14rem] md:w-[24rem] shadow-md"
@@ -172,7 +172,7 @@ export default function HomePage() {
                 <div>
                   <Image
                     alt="turtles"
-                    src="/fitures/2.jpg"
+                    src="https://res.cloudinary.com/unm/image/upload/v1688906974/2_ytis6z.jpg"
                     width={500}
                     height={200}
                     className="md:h-[14rem] md:w-[24rem] shadow-md"
@@ -187,7 +187,7 @@ export default function HomePage() {
                 <div>
                   <Image
                     alt="turtles"
-                    src="/fitures/3.jpg"
+                    src="https://res.cloudinary.com/unm/image/upload/v1688906973/3_a1p68x.jpg"
                     width={500}
                     height={200}
                     className="md:h-[14rem] md:w-[24rem] shadow-md"
@@ -219,7 +219,7 @@ export default function HomePage() {
                 <div>
                   <Image
                     alt="turtles"
-                    src="/fitures/4.jpg"
+                    src="https://res.cloudinary.com/unm/image/upload/v1688906973/4_zvqjaj.jpg"
                     width={500}
                     height={200}
                     className="md:h-[14rem] md:w-[24rem] shadow-md"
@@ -247,7 +247,7 @@ export default function HomePage() {
                 <div>
                   <Image
                     alt="turtles"
-                    src="/fitures/4.jpg"
+                    src="https://res.cloudinary.com/unm/image/upload/v1688906973/4_zvqjaj.jpg"
                     width={500}
                     height={200}
                     className="md:h-[14rem] md:w-[24rem] shadow-md"
@@ -262,7 +262,7 @@ export default function HomePage() {
                 <div>
                   <Image
                     alt="turtles"
-                    src="/fitures/5.jpg"
+                    src="https://res.cloudinary.com/unm/image/upload/v1688906973/5_rkemby.jpg"
                     width={500}
                     height={200}
                     className="md:h-[14rem] md:w-[24rem] shadow-md"

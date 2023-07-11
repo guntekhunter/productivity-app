@@ -4,7 +4,7 @@ export const config = {
   runtime: "edge",
 };
 
-const handler = async (req: Request, res: Response) => {
+export const POST = async (req: Request, res: Response) => {
   const reqBody = await req.json();
   try {
     const res = await fetch(DATA_SOURCE_URL, {
@@ -20,5 +20,3 @@ const handler = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
-
-export default handler;

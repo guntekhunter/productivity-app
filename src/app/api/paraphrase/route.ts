@@ -4,7 +4,7 @@ export const config = {
   runtime: "edge",
 };
 
-export const POST = async (req: Request, res: Response) => {
+export default async function handler(req: Request, res: Response) {
   const reqBody = await req.json();
   try {
     const res = await fetch(DATA_SOURCE_URL, {
@@ -19,4 +19,4 @@ export const POST = async (req: Request, res: Response) => {
   } catch (error) {
     console.log(error);
   }
-};
+}

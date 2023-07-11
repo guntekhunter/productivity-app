@@ -1,6 +1,13 @@
 const DATA_SOURCE_URL = "https://api.openai.com/v1/chat/completions";
+
+export const dynamic = "auto";
+export const dynamicParams = true;
+export const revalidate = false;
+export const fetchCache = "auto";
 export const runtime = "edge";
-export default async function handler(req: Request, res: Response) {
+export const preferredRegion = "auto";
+
+export const POST = async (req: Request, res: Response) => {
   const reqBody = await req.json();
   try {
     const res = await fetch(DATA_SOURCE_URL, {
@@ -15,4 +22,4 @@ export default async function handler(req: Request, res: Response) {
   } catch (error) {
     console.log(error);
   }
-}
+};

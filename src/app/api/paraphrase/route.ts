@@ -7,6 +7,10 @@ export const fetchCache = "auto";
 export const runtime = "nodejs";
 export const preferredRegion = "auto";
 
+export const config = {
+  runtime: "edge",
+};
+
 export const POST = async (req: Request, res: Response) => {
   const reqBody = await req.json();
   try {

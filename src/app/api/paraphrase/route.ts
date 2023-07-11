@@ -1,7 +1,14 @@
 const DATA_SOURCE_URL = "https://api.openai.com/v1/chat/completions";
 
 export const config = {
-  runtime: "experimental-edge",
+  api: {
+    bodyParser: {
+      sizeLimit: "1mb",
+    },
+  },
+  experimental: {
+    runtime: "experimental-edge",
+  },
 };
 
 export default async function handler(req: Request, res: Response) {

@@ -1,14 +1,13 @@
 const DATA_SOURCE_URL = "https://api.openai.com/v1/chat/completions";
+export const dynamic = "auto";
+export const dynamicParams = true;
+export const revalidate = false;
+export const fetchCache = "auto";
+export const runtime = "nodejs";
+export const preferredRegion = "auto";
 
 export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: "1mb",
-    },
-  },
-  experimental: {
-    runtime: "experimental-edge",
-  },
+  runtime: "experimental-edge",
 };
 
 export default async function handler(req: Request, res: Response) {

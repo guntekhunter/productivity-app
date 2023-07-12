@@ -197,7 +197,6 @@ export default function KonsultanComponent() {
                     }}
                     type="text"
                     className="w-full h-[2rem] px-[.5rem]"
-                    autoFocus
                   />
                 </div>
                 <button

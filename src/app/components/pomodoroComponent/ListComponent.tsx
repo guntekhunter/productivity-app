@@ -112,7 +112,6 @@ export default function ListComponent({name,color,callback,index,deleted,id,
         </p>
       )}
       <div className="flex space-x-3">
-        <p>{id}</p>
         <button onClick={deleting}>
           <Image
             alt="turtles"

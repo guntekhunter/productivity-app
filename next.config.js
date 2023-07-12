@@ -12,7 +12,7 @@ const nextConfig = {
     ],
   },
   env: {
-    NEXTAUTH_SECRET: "https://productivity-app-five.vercel.app/",
+    NEXTAUTH_SECRET: "http://localhost:3000/",
   },
 };
 

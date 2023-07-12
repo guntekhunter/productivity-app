@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { useForm, ValidationError } from "@formspree/react";
 import { useDispatch } from "react-redux";
+import Image from "next/image";
 import { navbarActive } from "../GlobalRedux/features/navbar/navbarActiveSlice";
 
 export default function Footer() {
@@ -39,9 +40,15 @@ export default function Footer() {
   return (
     <section className="w-full bg-black text-white flex justify-around relative">
       <div className="md:w-[70%] w-[90%] pt-[5rem] pb-[1rem] md:space-y-[5rem]">
-        <div className="md:flex justify-between px-[1rem]">
+        <div className="md:flex justify-between">
           <div className="flex space-x-[4rem]">
-            <p className="text-[1.8rem]">Teman</p>
+            <Image
+              src="/logo.png"
+              alt=""
+              width={500}
+              height={500}
+              className="md:w-[10rem] w-[5rem]"
+            />
             <div className="pt-[1rem]">
               {session ? (
                 <div className="space-y-[1rem]">

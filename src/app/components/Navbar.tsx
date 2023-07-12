@@ -38,8 +38,16 @@ export default function Navbar() {
     return (
       <div className="fixed w-full flex justify-around relative z-20">
         <div className="md:w-[70%] w-[90%] flex justify-between border-b-2 h-full md:py-[1.3rem] py-[.5rem] sticky top-0">
-          <div className="font-bold">Teman</div>
-          <div className="md:flex hidden sm:hidden">
+          <div className="font-bold">
+            <Image
+              src="/logo.png"
+              alt=""
+              width={500}
+              height={500}
+              className="md:w-[6rem] w-[5rem]"
+            />
+          </div>
+          <div className="md:flex hidden sm:hidden flex align-center items-center justify-center">
             <ul className="flex space-x-[3rem] text-[.8rem]">
               <Link
                 href="/pomodoro"
@@ -170,8 +178,16 @@ export default function Navbar() {
     return (
       <div className="w-full flex justify-around">
         <div className="md:w-[70%] w-[90%] flex justify-between border-b-2 h-full py-[1.3rem] sticky top-0">
-          <div className="font-bold">Teman</div>
-          <div>
+          <div className="font-bold">
+            <Image
+              src="/logo.png"
+              alt=""
+              width={500}
+              height={500}
+              className="md:w-[6rem] w-[5rem]"
+            />
+          </div>
+          <div className="flex align-center items-center justify-center">
             <ul className="space-x-[3rem] text-[.8rem] md:flex hidden sm:hidden">
               <Link
                 href="/"

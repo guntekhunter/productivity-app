@@ -19,7 +19,7 @@ export default function Timer({ callback }) {
   let theCounts: any;
   let typeTimers: any;
   if (typeof window !== "undefined") {
-    theTimes = parseInt(localStorage.getItem("timerValue") || "0", 10);
+    theTimes = parseInt(localStorage.getItem("timerValue") || "0", 1500);
     theCounts = parseInt(localStorage.getItem("count") || "0", 10);
     typeTimers = localStorage.getItem("timerName");
   } else {

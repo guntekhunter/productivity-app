@@ -42,13 +42,15 @@ export default function Footer() {
       <div className="md:w-[70%] w-[90%] pt-[5rem] pb-[1rem] md:space-y-[5rem]">
         <div className="md:flex justify-between">
           <div className="flex space-x-[4rem]">
-            <Image
-              src="/logo.png"
-              alt=""
-              width={500}
-              height={500}
-              className="md:w-[10rem] w-[5rem]"
-            />
+            <div>
+              <Image
+                src="/logo-black.png"
+                alt=""
+                width={500}
+                height={500}
+                className="md:w-[6rem] w-[5rem] filter invert"
+              />
+            </div>
             <div className="pt-[1rem]">
               {session ? (
                 <div className="space-y-[1rem]">

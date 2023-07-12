@@ -40,7 +40,7 @@ export default function Navbar() {
         <div className="md:w-[70%] w-[90%] flex justify-between border-b-2 h-full md:py-[1.3rem] py-[.5rem] sticky top-0">
           <div className="font-bold">
             <Image
-              src="/logo.png"
+              src="/logo-black.png"
               alt=""
               width={500}
               height={500}
@@ -180,7 +180,7 @@ export default function Navbar() {
         <div className="md:w-[70%] w-[90%] flex justify-between border-b-2 h-full py-[1.3rem] sticky top-0">
           <div className="font-bold">
             <Image
-              src="/logo.png"
+              src="/logo-black.png"
               alt=""
               width={500}
               height={500}

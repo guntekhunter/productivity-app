@@ -51,7 +51,7 @@ export default function Footer() {
                 className="md:w-[6rem] w-[5rem] filter invert"
               />
             </div>
-            <div className="pt-[1rem]">
+            <div>
               {session ? (
                 <div className="space-y-[1rem]">
                   <div>

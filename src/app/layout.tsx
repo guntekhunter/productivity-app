@@ -12,7 +12,7 @@ import { useSession } from "next-auth/react";
 const sans = Open_Sans({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Teman",
+  title: "Sebuah Teman.site",
   description: "Membantu Menyelesaikan Tugasmu",
 };
 

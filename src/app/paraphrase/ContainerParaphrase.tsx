@@ -66,35 +66,36 @@ export default function ContainerParaphrase() {
             stream: true,
           }),
         });
-        const reader = res.body?.getReader();
-        const decoder = new TextDecoder("utf-8");
-        let completeSummary = "";
+        if (!res.ok) {
+          throw new Error(res.statusText);
+        }
 
-        while (true) {
-          if (reader) {
-            const chunk = await reader.read();
-            const { done, value } = chunk;
-            if (done) {
-              break;
+        const data = res.body;
+        if (!data) {
+          return;
+        }
+
+        const onParse = (event: ParsedEvent | ReconnectInterval) => {
+          if (event.type === "event") {
+            const data = event.data;
+            try {
+              const text = JSON.parse(data).text ?? "";
+              setSummary((prev) => prev + text);
+            } catch (e) {
+              console.error(e);
             }
-            const decodedChunk = decoder.decode(value);
-            const lines = decodedChunk.split("\n");
-            const parsedLines = lines
-              .map((line) => line.replace(/^data: /, "").trim())
-              .filter((line) => line !== "" && line !== "[DONE]")
-              .map((line) => JSON.parse(line));
-
-            for (const parsedLine of parsedLines) {
-              const { choices } = parsedLine;
-              const { delta } = choices[0];
-              const { content } = delta;
-
-              if (content) {
-                completeSummary += content;
-              }
-            }
-            setSummary(completeSummary);
           }
+        };
+
+        const reader = data.getReader();
+        const decoder = new TextDecoder();
+        const parser = createParser(onParse);
+        let done = false;
+        while (!done) {
+          const { value, done: doneReading } = await reader.read();
+          done = doneReading;
+          const chunkValue = decoder.decode(value);
+          parser.feed(chunkValue);
         }
         setIsLoading(false);
       } catch (error) {

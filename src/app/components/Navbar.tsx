@@ -34,27 +34,6 @@ export default function Navbar() {
 
   console.log(isActive);
 
-  // useEffect(() => {
-  //   const addUser = async () => {
-  //     try {
-  //       if (!userExist) {
-  //         const data = await axios.post("/api/user", {
-  //           name: session?.user?.name,
-  //           email: session?.user?.email,
-  //           image: session?.user?.image,
-  //         });
-  //         if (data.data.response === "user exist") {
-  //           setUserExist(true);
-  //           return;
-  //         }
-  //       }
-  //     } catch (error) {
-  //       console.error("Error adding user:", error);
-  //     }
-  //   };
-  //   addUser();
-  // }, [session, userExist]);
-
   if (session) {
     return (
       <div className="fixed w-full flex justify-around relative z-20">

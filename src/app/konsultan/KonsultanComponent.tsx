@@ -6,7 +6,11 @@ import Title from "../components/generateAiComponent/Title";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import ConsultationDescription from "../components/generateAiComponent/ConsultationDescription";
-import { ParsedEvent, ReconnectInterval, createParser } from "eventsource-parser";
+import {
+  ParsedEvent,
+  ReconnectInterval,
+  createParser,
+} from "eventsource-parser";
 
 export default function KonsultanComponent() {
   let theLoadings: any;
@@ -85,43 +89,6 @@ export default function KonsultanComponent() {
         setAnswer([...answer, { chat: completeSummary, type: "answer" }]);
       }
       setIsLoading(false);
-      // const reader = res.body?.getReader();
-      // const decoder = new TextDecoder("utf-8");
-      // let completeSummary = "";
-
-      // while (true) {
-      //   if (reader) {
-      //     const chunk = await reader.read();
-      //     const { done, value } = chunk;
-      //     if (done) {
-      //       break;
-      //     }
-      //     const decodedChunk = decoder.decode(value);
-      //     const lines = decodedChunk.split("\n");
-      //     const parsedLines = lines
-      //       .map((line) => line.replace(/^data: /, "").trim())
-      //       .filter((line) => line !== "" && line !== "[DONE]")
-      //       .map((line) => JSON.parse(line));
-
-      //     for (const parsedLine of parsedLines) {
-      //       const { choices } = parsedLine;
-      //       const { delta } = choices[0];
-      //       const { content } = delta;
-
-      //       if (content) {
-      //         completeSummary += content;
-      //       }
-      //     }
-      //     setIndividualAnswer(completeSummary);
-      //     setIsLoading(true);
-      //     loading = true;
-      //     if (completeSummary) {
-      //       setAnswer([...answer, { chat: completeSummary, type: "answer" }]);
-      //     }
-      //   }
-      // }
-      // loading = false;
-      // setIsLoading(false);
     } catch (error) {
       console.log(error);
     }

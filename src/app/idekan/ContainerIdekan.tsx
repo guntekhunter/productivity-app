@@ -34,6 +34,7 @@ export default function ContainerIdekan() {
   const startResume = async () => {
     setQuestions([...questions, { chat: input }]);
     setIsLoading(false);
+    setSummary("");
     if (!input) {
       setInputRequired(true);
     } else {

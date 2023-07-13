@@ -43,6 +43,7 @@ export default function ContainerParaphrase() {
     if (selected === "Creatif") {
       temperatures = 1;
     }
+    setSummary("");
     if (!input) {
       setInputRequired(true);
     } else {

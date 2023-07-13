@@ -182,7 +182,7 @@ export default function ContainerParaphrase() {
                 }}
               />
               <p className={`${inputRequired ? "" : "hidden"}`}>
-                Jangan Lupa Masukan Teks Teman-teman!
+                Jangan Lupa Masukan Teksmu!
               </p>
               <button
                 className="absolute z-1 right-5 top-5"
@@ -235,8 +235,8 @@ export default function ContainerParaphrase() {
                   </p>
                 </button>
                 <div
-                  className={`transfrom duration-100 ease-in z-10 ${
-                    isDrop ? "" : "opacity-0"
+                  className={`transfrom duration-100 ease-in ${
+                    isDrop ? "z-10" : "hidden opacity-0"
                   } absolute bg-white border-[1.5px] rounded-md w-full right-0 h-[5rem] overflow-y-scroll border-t-[1px] scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black focus:ring-0 focus:outline-none`}
                 >
                   <div className="">

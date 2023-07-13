@@ -30,6 +30,7 @@ export default function ContainerPeringkas() {
 
   const startResume = async () => {
     setQuestions([...questions, { chat: input }]);
+    setSummary("");
     setIsLoading(false);
     if (!input) {
       setInputRequired(true);
@@ -47,10 +48,10 @@ export default function ContainerPeringkas() {
               },
               {
                 role: "user",
-                content: `${input} buat kalimat tersebut menjadi ${sentenceLength} kalimat in indonesian languange`,
+                content: `${input} ringkas kalimat tersebut memiliki panjang kalimat ${sentenceLength} kalimat, buat dalam bahasa indonesia`,
               },
             ],
-            temperature: 0,
+            temperature: 1,
             stream: true,
           }),
         });

@@ -173,7 +173,7 @@ export default function Footer() {
               <Link
                 href="https://openai.com/"
                 target="_blank"
-                className="hover:border-b-[1px]"
+                className="hover:border-b-[1px] font-bold"
               >
                 OpenAi
               </Link>
@@ -185,7 +185,7 @@ export default function Footer() {
               <Link
                 href="https://portfolio-neon-three-38.vercel.app/"
                 target="_blank"
-                className="hover:border-b-[1px] transition-all ease-in duration-200"
+                className="hover:border-b-[1px] transition-all ease-in duration-200 font-bold"
               >
                 Guntek
               </Link>

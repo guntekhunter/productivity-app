@@ -89,9 +89,9 @@ export default function HomePage() {
           <section className="w-full justify-center flex">
             <div className="md:w-[70%] py-[3rem] w-[90%]">
               <div className="flex justify-center text-center md:text-[2.5rem]">
-                Selamat datang di Teman.Com. Kami Berkomitmen Untuk Membantu
-                Teman-Teman Mengatasi Setiap Tugas, Hambatan, Atau Proyek Yang
-                Menantang
+                Selamat datang di Sebuah Teman.site. Kami Berkomitmen Untuk
+                Membantu Teman-Teman Mengatasi Setiap Tugas, Hambatan, Atau
+                Proyek Yang Menantang
               </div>
             </div>
           </section>
@@ -113,9 +113,11 @@ export default function HomePage() {
                   Tingkatkan Fokus Dengan Teknik Pomodoro
                 </div>
                 <div className="flex md:text-[1rem] items-center">
-                  Teknik belajar yang membangi waktu fokus selama 25 menit,
-                  istirahat singkat 5 menit dan istirahat panjang 15 menit,
-                  terbukti membantu fokus dan pemahaman saat belajar
+                  <p>
+                    Teknik belajar yang membangi waktu fokus selama 25 menit,
+                    istirahat singkat 5 menit dan istirahat panjang 15 menit,
+                    terbukti membantu fokus dan pemahaman saat belajar.{" "}
+                  </p>
                 </div>
                 <div className="flex md:py-[2rem] py-[.7rem] justify-center md:justify-start">
                   <button
@@ -154,7 +156,7 @@ export default function HomePage() {
               </div>
               <div className="md:w-[50%] py-[3rem] md:space-y-0 space-y-[1rem]">
                 <div className="flex md:text-[2.5rem] items-center text-[1.5rem]">
-                  Ringkas Kalimat Dengan Mudah
+                  Kalimatmu Kepanjangnya?
                 </div>
                 <div className="flex md:text-[1rem] items-center">
                   Meringkas kalimat panjang dengan cepat dan sesuai kebutuhanmu.
@@ -196,13 +198,13 @@ export default function HomePage() {
               </div>
               <div className="md:w-[50%] py-[3rem] md:space-y-0 space-y-[1rem]">
                 <div className="flex md:text-[2.5rem] text-[1.5rem] items-center">
-                  Paraphrase Kalimat Untuk Menghindari Plagiarisme
+                  Paraphrase Kalimatmu Untuk Menghindari Plagiarisme
                 </div>
                 <div className="flex md:text-[1rem] items-center">
                   Mengubah kalimat agar tidak terjadi plagiarisme dengan
                   mengatur tingkat perbedaan kata yang dapat disesuaikan.
                 </div>
-                <div className="flex py-[2rem] py-[.7rem] justify-center md:justify-start">
+                <div className="flex md:py-[2rem] py-[.7rem] justify-center md:justify-start">
                   <button
                     className="bg-black text-white py-[.2rem] px-[2rem] rounded-md"
                     onClick={() => tryFitures("paraphrase")}
@@ -234,7 +236,7 @@ export default function HomePage() {
                   Menyediakan saran berdasarkan kategori, tujuan ide, dan
                   tingkat kesulitan dalam mengimplementasikan ide teman-teman.
                 </div>
-                <div className="flex py-[2rem] md:py-[2rem] py-[.7rem] justify-center md:justify-start">
+                <div className="flex py-[.7rem] md:py-[2rem] py-[.7rem] justify-center md:justify-start bg-re-200">
                   <button
                     className="bg-black text-white py-[.2rem] px-[2rem] rounded-md"
                     onClick={() => tryFitures("idekan")}
@@ -293,8 +295,8 @@ export default function HomePage() {
           <section className="w-full justify-center flex">
             <div className="md:w-[70%] py-[3rem] w-[90%]">
               <div className="flex justify-center text-center md:text-[2.5rem]">
-                Sekian Perkenalan Kami, Jika Teman-teman Butuhkan Bantuan Dengan
-                Tugas Dan Masalah Teman-teman Silahkan Login Ke Teman.com
+                Tugas Dan Masalah Teman-teman terasa berat?, membutuhnya
+                Bantukan?, silahkan login dibawah
               </div>
               <div className="flex justify-center  py-[2rem]">
                 <button

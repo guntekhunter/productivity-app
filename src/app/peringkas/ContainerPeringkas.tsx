@@ -44,11 +44,11 @@ export default function ContainerPeringkas() {
             messages: [
               {
                 role: "system",
-                content: `You are a language model that can make a summary base on given text`,
+                content: `You are a language model that can make a summary based on given text`,
               },
               {
                 role: "user",
-                content: `${input} make summary of that text to ${sentenceLength} sentences, buat dalam bahasa indonesia`,
+                content: `${input} generate a summary with ${sentenceLength} sentences, buat dalam bahasa indonesia`,
               },
             ],
             temperature: 1,

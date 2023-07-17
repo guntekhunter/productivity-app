@@ -96,7 +96,7 @@ export default function HomePage() {
             </div>
           </section>
           <section className="w-full justify-center flex bg-black text-white space-x-[2rem] py-[3rem]">
-            <div className="w-[80%] md:flex">
+            <div className="w-[70%] md:flex">
               <div className="flex flex items-center justify-center md:w-[50%] md:hidden flex">
                 <div>
                   <Image
@@ -104,12 +104,12 @@ export default function HomePage() {
                     src="https://res.cloudinary.com/unm/image/upload/v1688907047/1_idb1hd.jpg"
                     width={500}
                     height={200}
-                    className="md:h-[14rem] md:w-[24rem]"
+                    className="md:h-full md:w-full"
                   ></Image>
                 </div>
               </div>
               <div className="md:w-[50%] py-[3rem] md:space-y-0 space-y-[1rem]">
-                <div className="flex md:text-[2.5rem] text-[1.5rem] items-center">
+                <div className="flex md:text-[2.5rem] text-[1.5rem] items-center leading-10">
                   Tingkatkan Fokus Dengan Teknik Pomodoro
                 </div>
                 <div className="flex md:text-[1rem] items-center">
@@ -119,7 +119,7 @@ export default function HomePage() {
                     terbukti membantu fokus dan pemahaman saat belajar.{" "}
                   </p>
                 </div>
-                <div className="flex md:py-[2rem] py-[.7rem] justify-center md:justify-start">
+                <div className="flex md:py-[.5rem] py-[.7rem] justify-center md:justify-start">
                   <button
                     className="bg-white text-black py-[.2rem] px-[2rem] rounded-md"
                     onClick={() => tryFitures("pomodoro")}
@@ -135,14 +135,14 @@ export default function HomePage() {
                     src="https://res.cloudinary.com/unm/image/upload/v1688907047/1_idb1hd.jpg"
                     width={500}
                     height={200}
-                    className="md:h-[14rem] md:w-[24rem]"
+                    className="md:h-full md:w-full"
                   ></Image>
                 </div>
               </div>
             </div>
           </section>
-          <section className="w-full justify-center flex space-x-[2rem] py-[3rem]">
-            <div className="w-[80%] md:flex">
+          <section className="w-full justify-center flex space-x-[2rem] md:py-[6rem] py-[3rem]">
+            <div className="w-[70%] md:flex">
               <div className="flex flex items-center justify-center md:w-[50%] md:hidden">
                 <div>
                   <Image
@@ -150,18 +150,18 @@ export default function HomePage() {
                     src="https://res.cloudinary.com/unm/image/upload/v1688906974/2_ytis6z.jpg"
                     width={500}
                     height={200}
-                    className="md:h-[14rem] md:w-[24rem] shadow-md"
+                    className="md:h-full md:w-full shadow-md"
                   ></Image>
                 </div>
               </div>
-              <div className="md:w-[50%] py-[3rem] md:space-y-0 space-y-[1rem]">
-                <div className="flex md:text-[2.5rem] items-center text-[1.5rem]">
+              <div className="md:w-[50%] py-[3rem] md:space-y-1 space-y-[1rem]">
+                <div className="flex md:text-[2.5rem] items-center text-[1.5rem] leading-10">
                   Kalimatmu Kepanjangnya?
                 </div>
                 <div className="flex md:text-[1rem] items-center">
                   Meringkas kalimat panjang dengan cepat dan sesuai kebutuhanmu.
                 </div>
-                <div className="flex md:py-[2rem] py-[.7rem] justify-center md:justify-start">
+                <div className="flex md:py-[.5rem] py-[.7rem] justify-center md:justify-start">
                   <button
                     className="bg-black text-white py-[.2rem] px-[2rem] rounded-md"
                     onClick={() => tryFitures("peringkas")}
@@ -177,34 +177,34 @@ export default function HomePage() {
                     src="https://res.cloudinary.com/unm/image/upload/v1688906974/2_ytis6z.jpg"
                     width={500}
                     height={200}
-                    className="md:h-[14rem] md:w-[24rem] shadow-md"
+                    className="md:h-full md:w-full shadow-md"
                   ></Image>
                 </div>
               </div>
             </div>
           </section>
-          <section className="w-full justify-center flex space-x-[2rem] pb-[3rem]">
-            <div className="w-[80%] md:flex">
-              <div className="flex flex items-center justify-center md:w-[50%]">
-                <div>
+          <section className="w-full justify-center flex space-x-[2rem] pb-[3rem] md:pb-[6rem]">
+            <div className="w-[70%] md:flex">
+              <div className="flex flex items-center justify-center md:w-[50%] pr-[2.5rem]">
+                <div className="">
                   <Image
                     alt="turtles"
                     src="https://res.cloudinary.com/unm/image/upload/v1688906973/3_a1p68x.jpg"
                     width={500}
                     height={200}
-                    className="md:h-[14rem] md:w-[24rem] shadow-md"
+                    className="md:h-full md:w-full shadow-md"
                   ></Image>
                 </div>
               </div>
-              <div className="md:w-[50%] py-[3rem] md:space-y-0 space-y-[1rem]">
-                <div className="flex md:text-[2.5rem] text-[1.5rem] items-center">
+              <div className="md:w-[50%] py-[3rem] md:space-y-[.3rem] space-y-[1rem]">
+                <div className="flex md:text-[2.5rem] text-[1.5rem] items-center leading-10">
                   Paraphrase Kalimatmu Untuk Menghindari Plagiarisme
                 </div>
                 <div className="flex md:text-[1rem] items-center">
                   Mengubah kalimat agar tidak terjadi plagiarisme dengan
                   mengatur tingkat perbedaan kata yang dapat disesuaikan.
                 </div>
-                <div className="flex md:py-[2rem] py-[.7rem] justify-center md:justify-start">
+                <div className="flex md:py-[.5rem] py-[.7rem] justify-center md:justify-start">
                   <button
                     className="bg-black text-white py-[.2rem] px-[2rem] rounded-md"
                     onClick={() => tryFitures("paraphrase")}
@@ -215,8 +215,8 @@ export default function HomePage() {
               </div>
             </div>
           </section>
-          <section className="w-full justify-center flex space-x-[2rem] pb-[3rem]">
-            <div className="w-[80%] md:flex">
+          <section className="w-full justify-center flex space-x-[2rem] pb-[3rem] md:pb-[6rem]">
+            <div className="w-[70%] md:flex">
               <div className="flex flex items-center justify-center md:w-[50%] md:hidden">
                 <div>
                   <Image
@@ -229,14 +229,14 @@ export default function HomePage() {
                 </div>
               </div>
               <div className="md:w-[50%] py-[3rem] md:space-y-0 space-y-[1rem]">
-                <div className="flex md:text-[2.5rem] text-[1.5rem] items-center">
+                <div className="flex md:text-[2.5rem] text-[1.5rem] items-center leading-10">
                   Mencari Ide Menjadi Lebih Mudah
                 </div>
                 <div className="flex md:text-[1rem] items-center">
                   Menyediakan saran berdasarkan kategori, tujuan ide, dan
                   tingkat kesulitan dalam mengimplementasikan ide teman-teman.
                 </div>
-                <div className="flex py-[.7rem] md:py-[2rem] py-[.7rem] justify-center md:justify-start bg-re-200">
+                <div className="flex py-[.7rem] md:py-[.5rem] py-[.7rem] justify-center md:justify-start bg-re-200">
                   <button
                     className="bg-black text-white py-[.2rem] px-[2rem] rounded-md"
                     onClick={() => tryFitures("idekan")}
@@ -259,20 +259,20 @@ export default function HomePage() {
             </div>
           </section>
           <section className="w-full justify-center flex space-x-[2rem] pb-[3rem]">
-            <div className="w-[80%] md:flex">
-              <div className="flex flex items-center justify-center md:w-[50%]">
+            <div className="w-[70%] md:flex">
+              <div className="flex flex items-center justify-center md:w-[50%] mr-[2.5rem]">
                 <div>
                   <Image
                     alt="turtles"
                     src="https://res.cloudinary.com/unm/image/upload/v1688906973/5_rkemby.jpg"
                     width={500}
                     height={200}
-                    className="md:h-[14rem] md:w-[24rem] shadow-md"
+                    className="md:h-full md:w-full shadow-md"
                   ></Image>
                 </div>
               </div>
               <div className="md:w-[50%] py-[3rem] md:space-y-0 space-y-[1rem]">
-                <div className="flex md:text-[2.5rem] text-[1.5rem] items-center">
+                <div className="flex md:text-[2.5rem] text-[1.5rem] items-center leading-10">
                   Memberikan solusi dari masalah anda dengan AI
                 </div>
                 <div className="flex md:text-[1rem] items-center">
@@ -281,7 +281,7 @@ export default function HomePage() {
                   sesuai dan membantumu mengatasi tantangan yang sedang kamu
                   hadapi.
                 </div>
-                <div className="flex md:py-[2rem] py-[.7rem] justify-center md:justify-start">
+                <div className="flex md:py-[.5rem] py-[.7rem] justify-center md:justify-start">
                   <button
                     className="bg-black text-white py-[.2rem] px-[2rem] rounded-md"
                     onClick={() => tryFitures("konsultan")}

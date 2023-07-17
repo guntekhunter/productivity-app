@@ -300,7 +300,7 @@ export default function HomePage() {
               </div>
               <div className="flex justify-center  py-[2rem]">
                 <button
-                  className="bg-black text-white px-[2rem] py-[.5rem] rounded-md"
+                  className="bg-black text-white py-[.2rem] px-[2rem] rounded-md"
                   onClick={() => tryFitures("pomodoro")}
                 >
                   Login

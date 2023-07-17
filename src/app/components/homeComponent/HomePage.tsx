@@ -142,7 +142,7 @@ export default function HomePage() {
             </div>
           </section>
           <section className="w-full justify-center flex space-x-[2rem] md:py-[6rem] py-[3rem]">
-            <div className="w-[70%] md:flex">
+            <div className="w-[80%] md:flex md:px-[4rem] md:py-[3rem] p-[2rem] md:p-0 shadow-md md:shadow-none">
               <div className="flex flex items-center justify-center md:w-[50%] md:hidden">
                 <div>
                   <Image
@@ -161,7 +161,7 @@ export default function HomePage() {
                 <div className="flex md:text-[1rem] items-center">
                   Meringkas kalimat panjang dengan cepat dan sesuai kebutuhanmu.
                 </div>
-                <div className="flex md:py-[.5rem] py-[.7rem] justify-center md:justify-start">
+                <div className="flex md:py-[.5rem] justify-center md:justify-start">
                   <button
                     className="bg-black text-white py-[.2rem] px-[2rem] rounded-md"
                     onClick={() => tryFitures("peringkas")}
@@ -184,8 +184,8 @@ export default function HomePage() {
             </div>
           </section>
           <section className="w-full justify-center flex space-x-[2rem] pb-[3rem] md:pb-[6rem]">
-            <div className="w-[70%] md:flex">
-              <div className="flex flex items-center justify-center md:w-[50%] pr-[2.5rem]">
+            <div className="w-[80%] md:flex  md:px-[4rem] md:py-[3rem] p-[2rem] md:p-0 shadow-md md:shadow-none">
+              <div className="flex flex items-center justify-center md:w-[50%] md:pr-[2.5rem]">
                 <div className="">
                   <Image
                     alt="turtles"
@@ -216,7 +216,7 @@ export default function HomePage() {
             </div>
           </section>
           <section className="w-full justify-center flex space-x-[2rem] pb-[3rem] md:pb-[6rem]">
-            <div className="w-[70%] md:flex">
+            <div className="w-[80%] md:flex md:px-[4rem] md:py-[3rem] p-[2rem] md:p-0 shadow-md md:shadow-none">
               <div className="flex flex items-center justify-center md:w-[50%] md:hidden">
                 <div>
                   <Image
@@ -224,7 +224,7 @@ export default function HomePage() {
                     src="https://res.cloudinary.com/unm/image/upload/v1688906973/4_zvqjaj.jpg"
                     width={500}
                     height={200}
-                    className="md:h-[14rem] md:w-[24rem] shadow-md"
+                    className="md:h-full md:w-full shadow-md"
                   ></Image>
                 </div>
               </div>
@@ -245,22 +245,22 @@ export default function HomePage() {
                   </button>
                 </div>
               </div>
-              <div className="flex flex items-center justify-center md:w-[50%] md:flex hidden">
+              <div className="flex flex items-center justify-center md:w-[50%] md:flex hidden md:ml-[2rem]">
                 <div>
                   <Image
                     alt="turtles"
                     src="https://res.cloudinary.com/unm/image/upload/v1688906973/4_zvqjaj.jpg"
                     width={500}
                     height={200}
-                    className="md:h-[14rem] md:w-[24rem] shadow-md"
+                    className="md:h-full md:w-full shadow-md"
                   ></Image>
                 </div>
               </div>
             </div>
           </section>
           <section className="w-full justify-center flex space-x-[2rem] pb-[3rem]">
-            <div className="w-[70%] md:flex">
-              <div className="flex flex items-center justify-center md:w-[50%] mr-[2.5rem]">
+            <div className="w-[80%] md:flex  md:px-[4rem] md:py-[3rem] p-[2rem] md:p-0 shadow-md md:shadow-none">
+              <div className="flex flex items-center justify-center md:w-[50%] md:mr-[2.5rem]">
                 <div>
                   <Image
                     alt="turtles"

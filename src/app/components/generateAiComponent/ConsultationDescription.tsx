@@ -9,9 +9,12 @@ export default function ConsultationDescription() {
         </h1>
         <p className="font-bold text-[1.4rem]">Apa Itu Konsultan?</p>
         <p>
-          Konsultan adalah sebuah sebuah chatbot yang menggunakan teknologi AI
-          untuk membantu anda dalam melewati masalah mental atau burnout yang
-          sedang anda hadapi, atau bahkan membantu anda menyelesaikan tugas
+          Konsultan adalah sebuah sebuah chatbot yang menggunakan
+          teknologikecerdasan buatan untuk membantu anda dalam melewati masalah
+          yang sedang anda hadapi, atau bahkan membantu anda menyelesaikan tugas
+          dan menjawab semua pertanyaan teman teman sekalinya, silahkan klik
+          tombol copy untuk menyalin teks jawaban dan paste dimanapun
+          teman-teman mahu
         </p>
 
         <p className="font-bold text-[1.4rem]">
@@ -21,12 +24,7 @@ export default function ConsultationDescription() {
           <p>
             Perlu diperhatikan jika halaman ini menggunakan AI atau kecerdasan
             buatan yang hanya dapat membantu anda memberikan saran dan masukan
-            mengenai kesehatan mental, pengembangan diri dan memberikan saran
-            yang membantu menyelesaikan tugas, jika anda mengalami masalah
-            mental yang berat lebih disarankan untuk melakukan konsultasi
-            langsung dengan psikolog atau psikiater untuk penenganan lebih
-            lanjut. Tapi kami berharap halaman ini dapat membantu meringankan
-            beban anda
+            yang bisa saja salah
           </p>
         </div>
       </div>

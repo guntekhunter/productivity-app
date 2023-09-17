@@ -20,6 +20,9 @@ export default function KonsultanComponent() {
   const theLoading = theLoadings;
   const [input, setInput] = useState("");
   const [individualAnswer, setIndividualAnswer] = useState("");
+  const [hoverCopy, setHoverCopy] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
+  const [summary, setSummary] = useState("");
   const [answer, setAnswer] = useState<{ chat: any; type: string }[]>([]);
   const [question, setQuestion] = useState<{ chat: any; type: string }[]>([]);
   const [arrayChat, setArrayChat] = useState<{ chat: any; type: string }[]>([]);
@@ -41,7 +44,7 @@ export default function KonsultanComponent() {
           messages: [
             {
               role: "system",
-              content: `${consultAi} Previous Conversation:\n ${conversation} make all response in indonesian, and user name is ${session.data?.user?.name}`,
+              content: `Previous Conversation:\n ${conversation} make all response in indonesian, and user name is ${session.data?.user?.name}`,
             },
             {
               role: "user",
@@ -114,6 +117,18 @@ export default function KonsultanComponent() {
   const session = useSession();
   const router = useRouter();
 
+  const handleCopy = (e: any, item: any) => {
+    e.preventDefault();
+    navigator.clipboard
+      .writeText(item)
+      .then(() => {
+        setIsCopied(true);
+      })
+      .catch((error) => {
+        console.error("Error copying text:", error);
+      });
+  };
+
   useEffect(() => {
     if (session.status === "unauthenticated") {
       router.push("/");
@@ -168,13 +183,38 @@ export default function KonsultanComponent() {
                         }`}
                       >
                         <p
-                          className={`rounded-md ${
+                          className={`rounded-md relative ${
                             item.type === "question"
                               ? "flex items-end justify-end shadow-md bg-black text-white px-[1rem] py-[.5rem]"
-                              : "flex items-start justify-start shadow-md bg-white px-[2rem] py-[1rem]"
+                              : "flex items-start justify-start shadow-md bg-white pr-[3rem] py-[1rem] pl-[1rem]"
                           }`}
                         >
                           {item.chat}
+                          <button
+                            onClick={(e) => handleCopy(e, item.chat)}
+                            className={`absolute z-1 right-5 bottom-[1rem] ${
+                              item.type === "question" ? "hidden" : ""
+                            }`}
+                          >
+                            <Image
+                              alt="turtles"
+                              src="/copy.png"
+                              width={500}
+                              height={500}
+                              className="w-[1.5rem]"
+                              onMouseEnter={() => setHoverCopy(true)}
+                              onMouseLeave={() => setHoverCopy(false)}
+                            ></Image>
+                            <div
+                              className={`rounded-md absolute h-[2rem] top-0 mt-[100%] left-0 transition duration-200 ${
+                                hoverCopy ? "opacity-1" : "opacity-0"
+                              }`}
+                            >
+                              <div className="bg-gray-200 bottom-[-.9rem] mr-[1rem] px-2 rounded-md">
+                                copy
+                              </div>
+                            </div>
+                          </button>
                         </p>
                       </div>
                     </div>

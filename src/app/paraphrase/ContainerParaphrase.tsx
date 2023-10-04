@@ -185,7 +185,7 @@ export default function ContainerParaphrase() {
                 Jangan Lupa Masukan Teksmu!
               </p>
               <button
-                className="absolute z-1 right-5 top-[1rem]"
+                className="absolute z-1 right-5 top-[2.5rem]"
                 onClick={handleClear}
               >
                 <div className="relative pl-2">

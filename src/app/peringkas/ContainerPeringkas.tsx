@@ -167,7 +167,7 @@ export default function ContainerPeringkas() {
                 Jangan Lupa Masukan Teks Teman-teman!
               </p>
               <button
-                className="absolute z-1 right-5 top-5"
+                className="absolute z-1 right-5 top-[2.5rem]"
                 onClick={handleClear}
               >
                 <div className="relative pl-2">

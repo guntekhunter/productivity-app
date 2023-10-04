@@ -82,10 +82,10 @@ export default function ListComponent({name,color,callback,index,deleted,id,
     <div
       className={`transition duration-200 ease-in-out ${
         color === "pomodoro"
-          ? "bg-red-200"
+          ? "bg-red-200 dark:bg-[#BB5757]"
           : color === "short-break"
-          ? "bg-green-200"
-          : "bg-blue-200"
+          ? "bg-green-200 dark:bg-[#3E905C]"
+          : "bg-blue-200 dark:bg-[#6F8297]"
       } md:px-[3rem] px-[2rem] py-[1.5rem] rounded-md relative flex justify-between h-auto inline-block`}
     >
       <div className="absolute bg-black w-2 left-0 h-full top-0"></div>

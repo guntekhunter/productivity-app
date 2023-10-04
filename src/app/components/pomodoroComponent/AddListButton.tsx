@@ -47,7 +47,7 @@ export default function AddListButton({ callback }) {
                   saveList();
                 }
               }}
-              className="w-full appearance-none focus:ring-0 focus:outline-none focus:border-none"
+              className="w-full appearance-none focus:ring-0 focus:outline-none focus:border-none dark:bg-black"
             />
             <div className="my-2 flex md:justify-end justify-center w-full pt-[1rem] space-x-[2rem] dark:border-white">
               <button

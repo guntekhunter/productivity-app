@@ -238,7 +238,7 @@ export default function ContainerIdekan() {
                       hoverClear ? "opacity-1" : "opacity-0"
                     }`}
                   >
-                    <div className="bg-gray-200 bottom-[-.9rem] mr-[1rem] px-2 rounded-md">
+                    <div className="bg-gray-200 dark:bg-[#0F0F0F] bottom-[-.9rem] mr-[1rem] px-2 rounded-md">
                       bersihkan
                     </div>
                   </div>
@@ -305,7 +305,7 @@ export default function ContainerIdekan() {
                       hoverCopy ? "opacity-1" : "opacity-0"
                     }`}
                   >
-                    <div className="bg-gray-200 bottom-[-.9rem] mr-[1rem] px-2 rounded-md">
+                    <div className="bg-gray-200 dark:bg-[#0F0F0F] bottom-[-.9rem] mr-[1rem] px-2 rounded-md">
                       copy
                     </div>
                   </div>

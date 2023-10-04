@@ -200,7 +200,7 @@ export default function ContainerIdekan() {
             <div className="relative">
               <textarea
                 placeholder="Contoh: Sebuah Produk"
-                className="w-full border-[1.5px] dark:bg-[#0F0F0F] border-gray-200 dark:border-gray-500 rounded-md appearance-none h-[5rem] overflow-y-scroll border-t-[1px] px-5 scrollbar-thin scrollbar-track-[#F5F8FA] dark:scrollbar-track-[#0F0F0F] scrollbar-thumb-black resize-none focus:ring-0 focus:outline-none py-[1rem] text-gray-600 "
+                className="w-full dark:text-white border-[1.5px] dark:bg-[#0F0F0F] border-gray-200 dark:border-gray-500 rounded-md appearance-none h-[5rem] overflow-y-scroll border-t-[1px] px-5 scrollbar-thin scrollbar-track-[#F5F8FA] dark:scrollbar-track-[#0F0F0F] scrollbar-thumb-black resize-none focus:ring-0 focus:outline-none py-[1rem] text-gray-600 "
                 name=""
                 id=""
                 value={input}
@@ -259,7 +259,7 @@ export default function ContainerIdekan() {
               />
               <button
                 onClick={startResume}
-                className="w-full bg-black dark:bg-[#204635] text-white font-bold rounded-md  hover:bg-gray-900 dark:hover:bg-[#FF691A] flex items-center justify-center space-x-[1rem]"
+                className="w-full bg-black dark:bg-[#204635] text-white font-bold rounded-md  hover:bg-gray-900 dark:hover:bg-[#163426] flex items-center justify-center space-x-[1rem]"
               >
                 <div
                   className={`flex items-center justify-center  ${
@@ -282,7 +282,7 @@ export default function ContainerIdekan() {
             <div className="relative z-0">
               <div
                 id=""
-                className="text-gray-600 w-full border-[1.5px] border-gray-200 dark:border-gray-500 rounded-md appearance-none h-[15rem] overflow-y-scroll border-t-[1px] px-5 scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black resize-none focus:ring-0 focus:outline-none py-[1rem] mt-[1.4rem] whitespace-pre-wrap dark:scrollbar-track-[#0F0F0F]"
+                className="text-gray-600 dark:text-white w-full border-[1.5px] border-gray-200 dark:border-gray-500 rounded-md appearance-none h-[15rem] overflow-y-scroll border-t-[1px] px-5 scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black resize-none focus:ring-0 focus:outline-none py-[1rem] mt-[1.4rem] whitespace-pre-wrap dark:scrollbar-track-[#0F0F0F]"
               >
                 {summary}
               </div>
@@ -296,7 +296,7 @@ export default function ContainerIdekan() {
                     src="/copy.png"
                     width={500}
                     height={500}
-                    className="w-[1.5rem]"
+                    className="w-[1.5rem] dark:convert"
                     onMouseEnter={() => setHoverCopy(true)}
                     onMouseLeave={() => setHoverCopy(false)}
                   ></Image>

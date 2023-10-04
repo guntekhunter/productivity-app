@@ -165,7 +165,7 @@ export default function ContainerParaphrase() {
             <div className="relative">
               <textarea
                 placeholder="Contoh: Teknologi dapat diartikan sebagai penerapan ilmu pengetahuan, penemuan, dan keterampilan yang digunakan untuk merancang, membuat, dan memanfaatkan alat, mesin, perangkat lunak, sistem, dan proses untuk memecahkan masalah dan memenuhi kebutuhan pendidikan....."
-                className="text-gray-600 w-full border-[1.5px] border-gray-200 dark:border-gray-500 rounded-md appearance-none h-[15rem] overflow-y-scroll border-t-[1px] px-5 scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black resize-none focus:ring-0 focus:outline-none py-[1rem] mt-[1.4rem] whitespace-pre-wrap dark:scrollbar-track-[#0F0F0F] dark:text-white dark:bg-black"
+                className="text-gray-600 w-full border-[1.5px] px-5 border-gray-200 dark:border-gray-500 rounded-md appearance-none h-[15rem] overflow-y-scroll border-t-[1px] px-5 scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black resize-none focus:ring-0 focus:outline-none py-[1rem] mt-[1.4rem] whitespace-pre-wrap dark:scrollbar-track-[#0F0F0F] dark:text-white dark:bg-black"
                 name=""
                 id=""
                 value={input}
@@ -264,7 +264,7 @@ export default function ContainerParaphrase() {
               <div className="w-full">
                 <button
                   onClick={startResume}
-                  className="w-full bg-black dark:bg-[#204635] text-white font-bold rounded-md hover:bg-gray-900 flex items-center justify-center space-x-[1rem] h-[4rem] md:h-full"
+                  className="w-full bg-black dark:bg-[#204635] dark:hover:bg-[#163426] text-white font-bold rounded-md hover:bg-gray-900 flex items-center justify-center space-x-[1rem] h-[4rem] md:h-full"
                 >
                   <div
                     className={`flex items-center justify-center  ${

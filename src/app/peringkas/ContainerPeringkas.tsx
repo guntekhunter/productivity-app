@@ -147,7 +147,7 @@ export default function ContainerPeringkas() {
             <div className="relative">
               <textarea
                 placeholder="Contoh: Teknologi dapat diartikan sebagai penerapan ilmu pengetahuan, penemuan, dan keterampilan yang digunakan untuk merancang, membuat, dan memanfaatkan alat, mesin, perangkat lunak, sistem, dan proses untuk memecahkan masalah dan memenuhi kebutuhan pendidikan....."
-                className="dark:bg-black text-gray-600 w-full border-[1.5px] border-gray-200 dark:border-gray-500 rounded-md appearance-none h-[15rem] overflow-y-scroll border-t-[1px] px-5 scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black resize-none focus:ring-0 focus:outline-none py-[1rem] mt-[1.4rem] whitespace-pre-wrap dark:scrollbar-track-[#0F0F0F] dark:text-white"
+                className="dark:bg-black px-5 text-gray-600 w-full border-[1.5px] border-gray-200 dark:border-gray-500 rounded-md appearance-none h-[15rem] overflow-y-scroll border-t-[1px] px-5 scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black resize-none focus:ring-0 focus:outline-none py-[1rem] mt-[1.4rem] whitespace-pre-wrap dark:scrollbar-track-[#0F0F0F] dark:text-white"
                 name=""
                 id=""
                 value={input}
@@ -217,7 +217,7 @@ export default function ContainerPeringkas() {
               </div>
               <button
                 onClick={startResume}
-                className="w-full bg-black dark:bg-[#204635] text-white font-bold rounded-md  hover:bg-gray-900 flex items-center justify-center space-x-[1rem]"
+                className="w-full bg-black dark:bg-[#204635] dark:hover:bg-[#163426] text-white font-bold rounded-md  hover:bg-gray-900 flex items-center justify-center space-x-[1rem]"
               >
                 <div
                   className={`flex items-center justify-center  ${
@@ -254,7 +254,7 @@ export default function ContainerPeringkas() {
                     src="/copy.png"
                     width={500}
                     height={0}
-                    className="w-[1.5rem]"
+                    className="w-[1.5rem] dark:convert"
                     onMouseEnter={(e) => setHoverCopy(true)}
                     onMouseLeave={(e) => setHoverCopy(false)}
                   ></Image>

@@ -201,7 +201,7 @@ export default function KonsultanComponent() {
                               src="/copy.png"
                               width={500}
                               height={500}
-                              className="w-[1.5rem]"
+                              className="w-[1.5rem] dark:convert"
                               onMouseEnter={() => setHoverCopy(true)}
                               onMouseLeave={() => setHoverCopy(false)}
                             ></Image>
@@ -210,7 +210,7 @@ export default function KonsultanComponent() {
                                 hoverCopy ? "opacity-1" : "opacity-0"
                               }`}
                             >
-                              <div className="bg-gray-200 bottom-[-.9rem] mr-[1rem] px-2 rounded-md">
+                              <div className="bg-gray-200 bottom-[-.9rem] mr-[1rem] px-2 rounded-md ">
                                 copy
                               </div>
                             </div>
@@ -240,7 +240,7 @@ export default function KonsultanComponent() {
                   />
                 </div>
                 <button
-                  className="bg-black dark:bg-[#204635] text-white rounded-md hover:bg-gray-900 w-[5rem] h-[2rem] flex justify-center items-center"
+                  className="bg-black dark:bg-[#204635] dark:hover:bg-[#163426] text-white rounded-md hover:bg-gray-900 w-[5rem] h-[2rem] flex justify-center items-center"
                   onClick={sendMessage}
                 >
                   {isLoading ? (

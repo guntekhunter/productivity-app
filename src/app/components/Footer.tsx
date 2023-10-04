@@ -187,7 +187,7 @@ export default function Footer() {
                 target="_blank"
                 className="hover:border-b-[1px] transition-all ease-in duration-200 font-bold"
               >
-                Guntek
+                Agung
               </Link>
             </p>
           </div>

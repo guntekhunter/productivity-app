@@ -88,7 +88,7 @@ export default function ListComponent({name,color,callback,index,deleted,id,
           : "bg-blue-200 dark:bg-[#6F8297]"
       } md:px-[3rem] px-[2rem] py-[1.5rem] rounded-md relative flex justify-between h-auto inline-block`}
     >
-      <div className="absolute bg-black w-2 left-0 h-full top-0"></div>
+      <div className="absolute bg-black dark:bg-[#0F0F0F] w-2 left-0 h-full top-0"></div>
       {isEdit ? (
         <input
           type="text"

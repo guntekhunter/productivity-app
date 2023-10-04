@@ -254,7 +254,7 @@ export default function ContainerPeringkas() {
                     src="/copy.png"
                     width={500}
                     height={0}
-                    className="w-[1.5rem] dark:convert"
+                    className="w-[1.5rem] dark:invert"
                     onMouseEnter={(e) => setHoverCopy(true)}
                     onMouseLeave={(e) => setHoverCopy(false)}
                   ></Image>

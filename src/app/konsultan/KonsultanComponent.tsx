@@ -201,7 +201,7 @@ export default function KonsultanComponent() {
                               src="/copy.png"
                               width={500}
                               height={500}
-                              className="w-[1.5rem] dark:convert"
+                              className="w-[1.5rem] dark:invert"
                               onMouseEnter={() => setHoverCopy(true)}
                               onMouseLeave={() => setHoverCopy(false)}
                             ></Image>

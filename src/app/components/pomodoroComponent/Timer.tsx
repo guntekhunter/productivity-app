@@ -225,10 +225,10 @@ export default function Timer({ callback }) {
         <div
           className={`transition duration-200 ease-in-out ${
             selectedName === "pomodoro"
-              ? "bg-red-200"
+              ? "bg-red-200 dark:bg-[#BB5757]"
               : selectedName === "short-break"
-              ? "bg-green-200"
-              : "bg-blue-200"
+              ? "bg-green-200 dark:bg-[#3E905C]"
+              : "bg-blue-200 dark:bg-[#6F8297]"
           } md:w-[60%] w-[90%] p-[2rem] rounded-md`}
         >
           <div className="flex justify-around pt-[1.5rem] ">

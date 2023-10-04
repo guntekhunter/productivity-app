@@ -32,8 +32,8 @@ export default function AddListButton({ callback }) {
   return (
     <div>
       {isActive ? (
-        <div className="md:px-[2.5rem] px-[1.5rem] py-[1.5rem] rounded-md relative flex border-[.2rem] border-black w-full">
-          <div className="space-y-2 w-full">
+        <div className="md:px-[2.5rem] px-[1.5rem] py-[1.5rem] rounded-md relative flex border-[.2rem] border-black dark:border-white w-full">
+          <div className="space-y-2 w-full dark:border-white">
             <p className="text-[1.5rem] font-bold">Tambah List</p>
             <input
               type="text"
@@ -49,7 +49,7 @@ export default function AddListButton({ callback }) {
               }}
               className="w-full appearance-none focus:ring-0 focus:outline-none focus:border-none"
             />
-            <div className="my-2 flex md:justify-end justify-center w-full pt-[1rem] space-x-[2rem]">
+            <div className="my-2 flex md:justify-end justify-center w-full pt-[1rem] space-x-[2rem] dark:border-white">
               <button
                 onClick={addList}
                 className="bg-gray-200 text-black hover:bg-gray-300 px-[3rem] py-[.5rem] rounded-md font-light"
@@ -58,7 +58,7 @@ export default function AddListButton({ callback }) {
               </button>
               <button
                 onClick={saveList}
-                className="bg-black text-white px-[3rem] hover:bg-gray-900 py-[.5rem] rounded-md font-light"
+                className="bg-black dark:bg-[#204635] text-white px-[3rem] hover:bg-gray-900 py-[.5rem] rounded-md font-light"
               >
                 Tambah
               </button>
@@ -68,7 +68,7 @@ export default function AddListButton({ callback }) {
       ) : (
         <button
           onClick={addList}
-          className="px-[3rem] py-[1.5rem] rounded-md relative flex justify-around border-[.2rem] border-black border-dashed w-full"
+          className="px-[3rem] py-[1.5rem] rounded-md relative flex justify-around border-[.2rem] border-black border-dashed w-full dark:border-white"
         >
           <div className="flex space-x-2 font-bold">
             <Image
@@ -76,7 +76,7 @@ export default function AddListButton({ callback }) {
               alt=""
               width={500}
               height={0}
-              className="w-[1.5rem]"
+              className="w-[1.5rem] dark:invert"
             ></Image>
             <p>Tambah List</p>
           </div>

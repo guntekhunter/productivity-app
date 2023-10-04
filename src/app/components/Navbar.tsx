@@ -7,6 +7,8 @@ import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import { PrismaClient } from "@prisma/client";
 import axios from "axios";
+import { useTheme } from "next-themes";
+import Switcher from "../Switcher";
 
 // @ts-ignore
 export default function Navbar() {
@@ -14,6 +16,7 @@ export default function Navbar() {
   const router = useRouter();
   const [isActive, setIsActive] = useState(false);
   const { data: session } = useSession();
+  const { theme, setTheme } = useTheme();
 
   const login = async () => {
     Cookies.set("loggedin", "true");
@@ -34,19 +37,22 @@ export default function Navbar() {
 
   console.log(isActive);
 
+  console.log(theme);
+
   if (session) {
     return (
-      <div className="fixed w-full flex justify-around relative z-20">
-        <div className="md:w-[70%] w-[90%] flex justify-between border-b-2 h-full md:py-[1.3rem] py-[.5rem] sticky top-0">
+      <div className="fixed w-full flex justify-around relative z-20 dark:bg-black">
+        <div className="md:w-[70%] w-[90%] flex justify-between border-b-2 dark:border-b-gray-500 h-full md:py-[1.3rem] py-[.5rem] sticky top-0">
           <div className="font-bold">
             <Image
               src="/logo-black.png"
               alt=""
               width={500}
               height={500}
-              className="md:w-[6rem] w-[5rem]"
+              className="md:w-[6rem] w-[5rem] dark:invert"
             />
           </div>
+
           <div className="md:flex hidden sm:hidden flex align-center items-center justify-center">
             <ul className="flex space-x-[3rem] text-[.8rem]">
               <Link
@@ -105,7 +111,7 @@ export default function Navbar() {
               alt=""
               width={500}
               height={500}
-              className="w-[1rem] h-[1rem]"
+              className="w-[1rem] h-[1rem] dark:invert"
             />
           </div>
         </div>
@@ -187,6 +193,7 @@ export default function Navbar() {
               className="md:w-[6rem] w-[5rem]"
             />
           </div>
+
           <div className="flex align-center items-center justify-center">
             <ul className="space-x-[3rem] text-[.8rem] md:flex hidden sm:hidden">
               <Link

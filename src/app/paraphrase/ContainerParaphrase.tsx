@@ -150,7 +150,7 @@ export default function ContainerParaphrase() {
   return (
     <>
       {isLoadingPage === "false" ? (
-        <div className="w-full flex justify-around text-[.8rem] mb-[2rem]">
+        <div className="w-full flex justify-around text-[.8rem] pb-[2rem] dark:bg-black">
           <div className="md:w-[70%] w-[90%] inline">
             <Title
               title="Hindari Plagiarisme Dengan Paraphrase"
@@ -165,7 +165,7 @@ export default function ContainerParaphrase() {
             <div className="relative">
               <textarea
                 placeholder="Contoh: Teknologi dapat diartikan sebagai penerapan ilmu pengetahuan, penemuan, dan keterampilan yang digunakan untuk merancang, membuat, dan memanfaatkan alat, mesin, perangkat lunak, sistem, dan proses untuk memecahkan masalah dan memenuhi kebutuhan pendidikan....."
-                className="w-full border-[1.5px] border-gray-200 rounded-md appearance-none h-[15rem] overflow-y-scroll border-t-[1px] px-5 scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black resize-none focus:ring-0 focus:outline-none py-[1rem] text-gray-600 "
+                className="text-gray-600 w-full border-[1.5px] border-gray-200 dark:border-gray-500 rounded-md appearance-none h-[15rem] overflow-y-scroll border-t-[1px] px-5 scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black resize-none focus:ring-0 focus:outline-none py-[1rem] mt-[1.4rem] whitespace-pre-wrap dark:scrollbar-track-[#0F0F0F] dark:text-white dark:bg-black"
                 name=""
                 id=""
                 value={input}
@@ -194,7 +194,7 @@ export default function ContainerParaphrase() {
                     src="/clean.png"
                     width={500}
                     height={0}
-                    className="w-[1.5rem]"
+                    className="w-[1.5rem] dark:invert"
                     onMouseEnter={(e) => setHoverClear(true)}
                     onMouseLeave={(e) => setHoverClear(false)}
                   ></Image>
@@ -215,18 +215,18 @@ export default function ContainerParaphrase() {
               instructions="Masukkan Mode Paraphrase Anda"
               suggestions=""
             />
-            <div className="md:flex md:space-x-5 space-y-[.6rem] md:space-y-0">
+            <div className="md:flex md:space-x-5 space-y-[.6rem] md:space-y-0 ">
               <div className="w-full relative space-y-[.4rem]">
                 <button
                   onClick={hanldeDropDown}
-                  className="w-full border-[1.5px] rounded-md flex px-[1rem] py-[1rem] space-x-[.7rem]"
+                  className="w-full border-[1.5px] dark:border-gray-500 rounded-md flex px-[1rem] py-[1rem] space-x-[.7rem]"
                 >
                   <Image
                     alt="turtles"
                     src="/down.png"
                     width={500}
                     height={0}
-                    className={`w-[1.5rem] transform duration-100 ${
+                    className={`w-[1.5rem] transform duration-100 dark:invert ${
                       isDrop ? "rotate-180" : ""
                     }`}
                   ></Image>
@@ -237,7 +237,7 @@ export default function ContainerParaphrase() {
                 <div
                   className={`transfrom duration-100 ease-in ${
                     isDrop ? "z-10" : "hidden opacity-0"
-                  } absolute bg-white border-[1.5px] rounded-md w-full right-0 h-[5rem] overflow-y-scroll border-t-[1px] scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black focus:ring-0 focus:outline-none`}
+                  } absolute bg-white dark:bg-[#0F0F0F] border-[1.5px] dark:border-gray-500 rounded-md w-full right-0 overflow-y-scroll border-t-[1px] scrollbar-thin scrollbar-track-[#F5F8FA] dark:scrollbar-track-[#0F0F0F] scrollbar-thumb-black dark:scrollbar-thumb-light focus:ring-0 focus:outline-none`}
                 >
                   <div className="">
                     {arrayMode.map((item, key) => (
@@ -249,7 +249,9 @@ export default function ContainerParaphrase() {
                           setIsDrop(false);
                         }}
                         className={`${
-                          key === arrayMode.length - 1 ? "" : "border-b-[1.5px]"
+                          key === arrayMode.length - 1
+                            ? ""
+                            : "border-b-[1.5px] dark:border-b-gray-500"
                         } py-[.5rem] px-[1rem] cursor-pointer trasnform duration-200 hover:bg-black hover:text-white w-full`}
                       >
                         {item}
@@ -262,7 +264,7 @@ export default function ContainerParaphrase() {
               <div className="w-full">
                 <button
                   onClick={startResume}
-                  className="w-full bg-black text-white font-bold rounded-md hover:bg-gray-900 flex items-center justify-center space-x-[1rem] h-[4rem] md:h-full"
+                  className="w-full bg-black dark:bg-[#204635] text-white font-bold rounded-md hover:bg-gray-900 flex items-center justify-center space-x-[1rem] h-[4rem] md:h-full"
                 >
                   <div
                     className={`flex items-center justify-center  ${
@@ -275,7 +277,7 @@ export default function ContainerParaphrase() {
                         src="/spinner-of-dots.png"
                         width={500}
                         height={200}
-                        className="w-full h-full object-cover invert animate-spin"
+                        className="w-full h-full object-cover invert animate-spin dark:invert"
                       ></Image>
                     </div>
                   </div>
@@ -286,7 +288,7 @@ export default function ContainerParaphrase() {
             <div className="relative z-0">
               <div
                 id=""
-                className="text-gray-600 w-full border-[1.5px] border-gray-200 rounded-md appearance-none h-[15rem] overflow-y-scroll border-t-[1px] px-5 scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black resize-none focus:ring-0 focus:outline-none py-[1rem] mt-[1.4rem] whitespace-pre-wrap"
+                className="text-gray-600 w-full border-[1.5px] border-gray-200 dark:border-gray-500 rounded-md appearance-none h-[15rem] overflow-y-scroll border-t-[1px] px-5 scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black resize-none focus:ring-0 focus:outline-none py-[1rem] mt-[1.4rem] whitespace-pre-wrap dark:scrollbar-track-[#0F0F0F] dark:text-white"
               >
                 {summary}
               </div>
@@ -300,7 +302,7 @@ export default function ContainerParaphrase() {
                     src="/copy.png"
                     width={500}
                     height={0}
-                    className="w-[1.5rem]"
+                    className="w-[1.5rem] dark:invert"
                     onMouseEnter={(e) => setHoverCopy(true)}
                     onMouseLeave={(e) => setHoverCopy(false)}
                   ></Image>

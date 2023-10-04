@@ -154,7 +154,7 @@ export default function KonsultanComponent() {
   return (
     <>
       {isLoadingPage === "false" ? (
-        <div className="w-full flex justify-around ">
+        <div className="w-full flex justify-around dark:bg-black">
           <div className="md:w-[70%] w-full py-2">
             <div className="px-[1rem]">
               <Title
@@ -164,7 +164,7 @@ export default function KonsultanComponent() {
               />
             </div>
             <div className="w-full border-[1.5px] md:h-[30rem] h-[35rem] rounded-md flex flex-col">
-              <div className="flex-1 flex flex-col-reverse px-[2rem] pt-[1.5rem] space-y-[2rem] overflow-y-scroll scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black py-[1rem]">
+              <div className="flex-1 flex flex-col-reverse px-[2rem] pt-[1.5rem] space-y-[2rem] overflow-y-scroll scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black py-[1rem] dark:scrollbar-track-[#0F0F0F] dark:border-[#0F0F0F]">
                 {arrayChat.map((item, key) => (
                   <div
                     key={key}
@@ -185,8 +185,8 @@ export default function KonsultanComponent() {
                         <p
                           className={`rounded-md relative ${
                             item.type === "question"
-                              ? "flex items-end justify-end shadow-md bg-black text-white px-[1rem] py-[.5rem]"
-                              : "flex items-start justify-start shadow-md bg-white pr-[3rem] py-[1rem] pl-[1rem]"
+                              ? "flex items-end justify-end shadow-md bg-black dark:bg-white dark:text-black text-white px-[1rem] py-[.5rem]"
+                              : "flex items-start justify-start shadow-md bg-white pr-[3rem] py-[1rem] pl-[1rem] dark:bg-[#0F0F0F] dark:text-white"
                           }`}
                         >
                           {item.chat}
@@ -221,7 +221,7 @@ export default function KonsultanComponent() {
                   </div>
                 ))}
               </div>
-              <div className="h-[5rem] flex flex-rows items-center px-[2rem] py-4 space-x-2 bg-gray-100">
+              <div className="h-[5rem] flex flex-rows items-center px-[2rem] py-4 space-x-2 bg-gray-100 dark:bg-[#0F0F0F]">
                 <div className="flex-1">
                   <input
                     value={input}
@@ -240,7 +240,7 @@ export default function KonsultanComponent() {
                   />
                 </div>
                 <button
-                  className="bg-black text-white rounded-md hover:bg-gray-900 w-[5rem] h-[2rem] flex justify-center items-center"
+                  className="bg-black dark:bg-[#204635] text-white rounded-md hover:bg-gray-900 w-[5rem] h-[2rem] flex justify-center items-center"
                   onClick={sendMessage}
                 >
                   {isLoading ? (

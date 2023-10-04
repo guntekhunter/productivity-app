@@ -38,7 +38,7 @@ export default function Footer() {
   };
 
   return (
-    <section className="w-full bg-black text-white flex justify-around relative">
+    <section className="w-full bg-black text-white flex justify-around relative dark:bg-[#0F0F0F]">
       <div className="md:w-[70%] w-[90%] pt-[5rem] pb-[1rem] md:space-y-[5rem]">
         <div className="md:flex justify-between">
           <div className="flex space-x-[4rem]">

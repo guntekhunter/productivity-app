@@ -8,6 +8,8 @@ import "./globals.css";
 import { Open_Sans } from "next/font/google";
 import { PrismaClient } from "@prisma/client";
 import { useSession } from "next-auth/react";
+import DarkTheme from "./DarkTheme";
+import Switcher from "./Switcher";
 
 const sans = Open_Sans({ subsets: ["latin"] });
 
@@ -31,7 +33,12 @@ export default function RootLayout({
             <Navbar />
             <ModalMessage />
             <GlobalPomodoro />
-            {children}
+            <DarkTheme>
+              <div>
+                <Switcher />
+              </div>
+              {children}
+            </DarkTheme>
             <Footer />
           </Providers>
         </ProvidersWrapper>

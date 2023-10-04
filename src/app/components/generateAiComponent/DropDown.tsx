@@ -39,14 +39,14 @@ export default function DropDown({arrayDrop,callbackDrop,isStatus,placeHolder,
     <div className="w-full relative space-y-[.4rem]">
       <button
         onClick={hanldeDropDown}
-        className="w-full border-[1.5px] rounded-md flex px-[1rem] py-[1rem] space-x-[.7rem]"
+        className="w-full border-[1.5px] rounded-md flex px-[1rem] py-[1rem] space-x-[.7rem] dark:border-gray-500"
       >
         <Image
           alt="turtles"
           src="/down.png"
           width={500}
           height={0}
-          className={`w-[1.5rem] transform duration-100 ${
+          className={`w-[1.5rem] transform duration-100 dark:invert ${
             isDrop ? "rotate-180" : ""
           }`}
         ></Image>
@@ -57,14 +57,14 @@ export default function DropDown({arrayDrop,callbackDrop,isStatus,placeHolder,
       <div
         className={`transfrom duration-100 ease-in z-10 ${
           isDrop ? "" : "opacity-0 hidden"
-        } absolute bg-white border-[1.5px] rounded-md w-full right-0 ${isStatus === "difficulty" ? "h-[7rem]":"h-[9rem]"} overflow-y-scroll border-t-[1px] scrollbar-thin scrollbar-track-[#F5F8FA] scrollbar-thumb-black focus:ring-0 focus:outline-none`}
+        } absolute bg-white dark:bg-[#0F0F0F] border-[1.5px] dark:border-gray-500 rounded-md w-full right-0 ${isStatus === "difficulty" ? "h-[7rem]":"h-[9rem]"} overflow-y-scroll border-t-[1px] scrollbar-thin scrollbar-track-[#F5F8FA] dark:scrollbar-track-[#0F0F0F] scrollbar-thumb-black dark:scrollbar-thumb-light focus:ring-0 focus:outline-none`}
       >
         <div className="">
           {
             isStatus !== "difficulty" && (
               <input
                 autoFocus
-                className="w-full outline-none py-[.5rem] px-[1rem] border-b-[1.5px]"
+                className="w-full outline-none py-[.5rem] px-[1rem] border-b-[1.5px] dark:border-b-gray-500"
                 value={input}
                 onChange={handleInputChange}
                 onKeyDown={handleKeyDown}
@@ -81,7 +81,7 @@ export default function DropDown({arrayDrop,callbackDrop,isStatus,placeHolder,
                 setIsDrop(false);
               }}
               className={`${
-                key === arrayDrop.length - 1 ? "" : "border-b-[1.5px]"
+                key === arrayDrop.length - 1 ? "" : "border-b-[1.5px] dark:border-b-gray-500"
               } py-[.5rem] px-[1rem] cursor-pointer trasnform duration-200 hover:bg-black hover:text-white w-full`}
             >
               {item}

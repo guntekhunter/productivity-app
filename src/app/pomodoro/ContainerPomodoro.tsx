@@ -58,13 +58,13 @@ export default function ContainerPomodoro() {
   return (
     <div>
       {theLoading === "false" ? (
-        <div>
+        <div className="dark:bg-black">
           <Timer callback={callbackButton} />
           <List color={timerType} />
           <Description />
         </div>
       ) : (
-        <div className="h-[100vh] justify-around flex items-center">
+        <div className="h-[100vh] justify-around flex items-center ">
           Loading...
         </div>
       )}

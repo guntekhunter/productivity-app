@@ -190,7 +190,7 @@ export default function Navbar() {
               alt=""
               width={500}
               height={500}
-              className="md:w-[6rem] w-[5rem]"
+              className="md:w-[6rem] w-[5rem] dark:invert"
             />
           </div>
 

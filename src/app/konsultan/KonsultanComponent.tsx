@@ -240,7 +240,7 @@ export default function KonsultanComponent() {
                   />
                 </div>
                 <button
-                  className="bg-black dark:bg-[#204635] dark:hover:bg-[#163426] text-white rounded-md hover:bg-gray-900 w-[5rem] h-[2rem] flex justify-center items-center"
+                  className="bg-black dark:bg-[#D48429] dark:text-black dark:hover:bg-[#B66C18]  text-white rounded-md hover:bg-gray-900 w-[5rem] h-[2rem] flex justify-center items-center"
                   onClick={sendMessage}
                 >
                   {isLoading ? (

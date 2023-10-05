@@ -58,7 +58,7 @@ export default function AddListButton({ callback }) {
               </button>
               <button
                 onClick={saveList}
-                className="bg-black dark:bg-[#204635] text-white px-[3rem] hover:bg-gray-900 py-[.5rem] rounded-md font-light"
+                className="bg-black dark:bg-[#D48429] dark:text-black dark:hover:bg-[#B66C18] text-white dark:text-black px-[3rem] hover:bg-gray-900 py-[.5rem] rounded-md font-light"
               >
                 Tambah
               </button>

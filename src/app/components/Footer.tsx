@@ -44,11 +44,18 @@ export default function Footer() {
           <div className="flex space-x-[4rem]">
             <div>
               <Image
+                src="/logo.png"
+                alt=""
+                width={500}
+                height={500}
+                className="md:w-[6rem] w-[5rem] hidden dark:block"
+              />
+              <Image
                 src="/logo-black.png"
                 alt=""
                 width={500}
                 height={500}
-                className="md:w-[6rem] w-[5rem] filter invert"
+                className="md:w-[6rem] w-[5rem] block dark:hidden invert"
               />
             </div>
             <div>

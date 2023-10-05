@@ -35,21 +35,24 @@ export default function Navbar() {
     setIsActive(!isActive);
   };
 
-  console.log(isActive);
-
-  console.log(theme);
-
   if (session) {
     return (
       <div className="fixed w-full flex justify-around relative z-20 dark:bg-black">
         <div className="md:w-[70%] w-[90%] flex justify-between border-b-2 dark:border-b-gray-500 h-full md:py-[1.3rem] py-[.5rem] sticky top-0">
           <div className="font-bold">
             <Image
+              src="/logo.png"
+              alt=""
+              width={500}
+              height={500}
+              className="md:w-[6rem] w-[5rem] hidden dark:block"
+            />
+            <Image
               src="/logo-black.png"
               alt=""
               width={500}
               height={500}
-              className="md:w-[6rem] w-[5rem] dark:invert"
+              className="md:w-[6rem] w-[5rem] block dark:hidden"
             />
           </div>
 
@@ -186,11 +189,18 @@ export default function Navbar() {
         <div className="md:w-[70%] w-[90%] flex justify-between border-b-2 h-full py-[1.3rem] sticky top-0">
           <div className="font-bold">
             <Image
+              src="/logo.png"
+              alt=""
+              width={500}
+              height={500}
+              className="md:w-[6rem] w-[5rem] hidden dark:block"
+            />
+            <Image
               src="/logo-black.png"
               alt=""
               width={500}
               height={500}
-              className="md:w-[6rem] w-[5rem] dark:invert"
+              className="md:w-[6rem] w-[5rem] block dark:hidden"
             />
           </div>
 

@@ -264,7 +264,7 @@ export default function ContainerParaphrase() {
               <div className="w-full">
                 <button
                   onClick={startResume}
-                  className="w-full bg-black dark:bg-[#204635] dark:hover:bg-[#163426] text-white font-bold rounded-md hover:bg-gray-900 flex items-center justify-center space-x-[1rem] h-[4rem] md:h-full"
+                  className="w-full bg-black dark:bg-[#D48429] dark:text-black dark:hover:bg-[#B66C18]  text-white font-bold rounded-md hover:bg-gray-900 flex items-center justify-center space-x-[1rem] h-[4rem] md:h-full"
                 >
                   <div
                     className={`flex items-center justify-center  ${

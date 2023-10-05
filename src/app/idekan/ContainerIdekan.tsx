@@ -259,7 +259,7 @@ export default function ContainerIdekan() {
               />
               <button
                 onClick={startResume}
-                className="w-full bg-black dark:bg-[#204635] text-white font-bold rounded-md  hover:bg-gray-900 dark:hover:bg-[#163426] flex items-center justify-center space-x-[1rem]"
+                className="w-full bg-black dark:bg-[#D48429] dark:text-black dark:hover:bg-[#B66C18] text-white font-bold rounded-md  hover:bg-gray-900 flex items-center justify-center space-x-[1rem]"
               >
                 <div
                   className={`flex items-center justify-center  ${

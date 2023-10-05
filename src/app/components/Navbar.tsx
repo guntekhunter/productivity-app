@@ -7,7 +7,6 @@ import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import { PrismaClient } from "@prisma/client";
 import axios from "axios";
-import { useTheme } from "next-themes";
 import Switcher from "../Switcher";
 
 // @ts-ignore
@@ -16,7 +15,6 @@ export default function Navbar() {
   const router = useRouter();
   const [isActive, setIsActive] = useState(false);
   const { data: session } = useSession();
-  const { theme, setTheme } = useTheme();
 
   const login = async () => {
     Cookies.set("loggedin", "true");

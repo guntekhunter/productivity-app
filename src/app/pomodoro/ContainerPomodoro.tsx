@@ -65,7 +65,7 @@ export default function ContainerPomodoro() {
         </div>
       ) : (
         <div className="h-[100vh] justify-around flex items-center ">
-          Loading...
+          Loadingnyami...
         </div>
       )}
     </div>

@@ -10,14 +10,15 @@ import { PrismaClient } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import DarkTheme from "./DarkTheme";
 import Switcher from "./Switcher";
+import Script from "next/script";
 
 const sans = Open_Sans({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Sebuah Teman",
-  description: "Sebuah Teman adalah Teknologi AI untuk menyelesaikan tugasmu, chat GPT versi low budge, untuk mahasiswa dan guru",
+  description:
+    "Sebuah Teman adalah Teknologi AI untuk menyelesaikan tugasmu, chat GPT versi low budge, untuk mahasiswa dan guru",
 };
-
 
 // add user data
 
@@ -28,7 +29,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head><meta name="google-adsense-account" content="ca-pub-6428415696823215"/></head>
+      <Script
+        async
+        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID}`}
+        crossOrigin="anonymous"
+      />
       <body className={sans.className}>
         <ProvidersWrapper>
           <Providers>

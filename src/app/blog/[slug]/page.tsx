@@ -24,14 +24,14 @@ export default function page(props: any) {
   const slug = props.params.slug;
   const post = getPostContent(slug);
   return (
-    <div className="w-full flex justify-around text-[.8rem] pb-[2rem] dark:bg-black">
+    <div className="w-full flex justify-around pb-[2rem] dark:bg-black">
       <div className="md:w-[70%] w-[90%] inline dark:bg-black">
         <div className="w-full align-center justify-center flex py-[2rem]">
           <h1 className="text-[3rem] font-bold text-center space-y-2 leading-[3.4rem]">
             {post.data.title}
           </h1>
         </div>
-        <article className="prose porse-li:text-[1rem] dark:text-[1rem] dark:prose-invert prose lg:prose-xl">
+        <article className="prose prose-li:text-[1rem] dark:text-[1rem] dark:prose-invert prose lg:prose-xl max-w-5xl mx-auto">
           <p className="color-gray-200 text-gray-500">{post.data.date}</p>
           <Markdown>{post.content}</Markdown>
         </article>

@@ -96,6 +96,14 @@ export default function Navbar() {
               >
                 Konsultan
               </Link>
+              <Link
+                href="/blog"
+                className={`hover:font-bold ${
+                  pathname === "/blog" ? "font-bold" : ""
+                }`}
+              >
+                Blog
+              </Link>
               <Link href="">
                 <button onClick={logout} className="">
                   LogOut
@@ -168,6 +176,16 @@ export default function Navbar() {
           </div>
           <div>
             <Link
+              href="/blog"
+              className={`hover:font-bold ${
+                pathname === "/blog" ? "font-bold" : ""
+              }`}
+            >
+              Blog
+            </Link>
+          </div>
+          <div>
+            <Link
               onClick={activateNav}
               href="/konsultan"
               className={`hover:font-bold ${
@@ -212,6 +230,14 @@ export default function Navbar() {
               >
                 Home
               </Link>
+              <Link
+                href="/blog"
+                className={`hover:font-bold ${
+                  pathname === "/blog" ? "font-bold" : ""
+                }`}
+              >
+                Blog
+              </Link>
               <button
                 onClick={login}
                 className="bg-black text-white py-[.1rem] px-[1rem] rounded-md hover:bg-gray-900 duration-200"
@@ -248,6 +274,16 @@ export default function Navbar() {
                 }`}
               >
                 Home
+              </Link>
+            </div>
+            <div>
+              <Link
+                href="/blog"
+                className={`hover:font-bold ${
+                  pathname === "/blog" ? "font-bold" : ""
+                }`}
+              >
+                Blog
               </Link>
             </div>
             <button

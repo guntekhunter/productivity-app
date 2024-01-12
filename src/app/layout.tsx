@@ -14,10 +14,11 @@ import Script from "next/script";
 
 const sans = Open_Sans({ subsets: ["latin"] });
 
+
 export const metadata = {
   title: "Sebuah Teman",
   description:
-    "Sebuah Teman adalah Teknologi AI untuk menyelesaikan tugasmu, chat GPT versi low budge, untuk mahasiswa dan guru",
+  "Sebuah Teman adalah Teknologi AI untuk menyelesaikan tugasmu, chat GPT versi low budge, untuk mahasiswa dan guru",
 };
 
 // add user data
@@ -29,6 +30,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <meta name="google-site-verification" content="fkPZcxOI_UM2wPjwpFlko8fufw7RmJXp0BbhTeR9JG8" />
       <Script
         async
         src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID}`}

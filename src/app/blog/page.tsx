@@ -8,7 +8,7 @@ export default function page(currentPage: any) {
   const postMetadata = getPostMetadata();
 
   const page = currentPage.searchParams["page"] ?? "1";
-  const per_page = currentPage.searchParams["per_page"] ?? "4";
+  const per_page = currentPage.searchParams["per_page"] ?? "6";
 
   const start = (Number(page) - 1) * Number(per_page);
   const end = start + Number(per_page);
@@ -22,7 +22,7 @@ export default function page(currentPage: any) {
       <div className="w-full flex justify-around pb-[2rem] dark:bg-black">
         <div className="md:w-[70%] w-[90%] inline dark:bg-black">
           <Title title="Blog" more="Selamat Membaca teman-teman" />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {postPreviews}
           </div>
           <PaginationControl />

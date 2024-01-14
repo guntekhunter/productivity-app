@@ -10,7 +10,7 @@ export default function PaginationControl() {
   const searchParams = useSearchParams();
   const page = searchParams?.get("page") ?? "1";
 
-  const per_page = searchParams?.get("per_page") ?? "4";
+  const per_page = searchParams?.get("per_page") ?? "6";
 
   console.log(searchParams?.get("page") ?? "1");
   console.log(page);
@@ -37,9 +37,9 @@ export default function PaginationControl() {
   console.log(page);
   return (
     <div className="flex justify-center py-[2rem]">
-      <div className="bg-red-200 flex space-x-[2rem]">
+      <div className="flex space-x-[2rem]">
         <button
-          className="bg-black text-white px-[1.5rem] py-[.3rem] rounded-md"
+          className="bg-black dark:invert text-white px-[1.5rem] py-[.3rem] rounded-md"
           onClick={() => {
             pagination("prev");
           }}
@@ -52,7 +52,7 @@ export default function PaginationControl() {
           {page} / {Math.ceil(10 / Number(per_page) - 1)}
         </div>
         <button
-          className="bg-black text-white px-[1.5rem] py-[.3rem] rounded-md"
+          className="bg-black text-white px-[1.5rem] py-[.3rem] rounded-md dark:invert"
           onClick={() => {
             pagination("next");
           }}

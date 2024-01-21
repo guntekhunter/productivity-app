@@ -1,7 +1,7 @@
 import React from "react";
 import Title from "../components/generateAiComponent/Title";
-import getPostMetadata from "../../../components/getPostMetaData";
-import PostPreview from "../../../components/PostPreview";
+import getPostMetadata from "../components/blog/getPostMetaData";
+import PostPreview from "../components/blog/PostPreview";
 import PaginationControl from "./PaginationControl";
 
 export default function page(currentPage: any) {

@@ -2,13 +2,13 @@ import React from "react";
 import fs from "fs";
 import Markdown from "markdown-to-jsx";
 import matter from "gray-matter";
-import getPostMetadata from "../../../../components/getPostMetaData";
+import getPostMetadata from "../../components/blog/getPostMetaData";
 import Title from "@/app/components/generateAiComponent/Title";
-import PostPreview from "../../../../components/PostPreview";
+import PostPreview from "../../components/blog/PostPreview";
 import Link from "next/link";
 
 const getPostContent = (slug: string) => {
-  const folder = "posts/";
+  const folder = "src/app/posts/";
   const file = `${folder}${slug}.md`;
   const content = fs.readFileSync(file, "utf8");
   const matterResult = matter(content);

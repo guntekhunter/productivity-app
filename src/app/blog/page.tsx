@@ -1,5 +1,11 @@
 import React from "react";
+import BlogPage from "./BlogPage";
 
 export default function page() {
-  return <div>Ommaleka</div>;
+  return (
+    <div>
+      okmalkeka
+      <BlogPage />
+    </div>
+  );
 }

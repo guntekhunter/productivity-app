@@ -15,27 +15,27 @@ const getPostContent = (slug: string) => {
   return matterResult;
 };
 
-// export const generateStaticParams = async () => {
-//   const posts = getPostMetadata();
-//   return posts.map((post) => ({
-//     slug: post.slug,
-//   }));
-// };
+export const generateStaticParams = async () => {
+  const posts = getPostMetadata();
+  return posts.map((post) => ({
+    slug: post?.slug,
+  }));
+};
 
 export default function page(props: any) {
   const postMetadata = getPostMetadata();
   const postPreviews = postMetadata
     .slice(0, 3)
-    .map((post, index) => <PostPreview key={post.slug} {...post} />);
+    .map((post, index) => <PostPreview key={post?.slug} {...post} />);
 
-  const slug = props.params.slug;
+  const slug = props?.params.slug;
   const post = getPostContent(slug);
   return (
     <div className="w-full flex justify-around pb-[2rem] dark:bg-black">
       <div className="md:w-[70%] w-[90%] inline dark:bg-black">
         <div className="w-full align-center justify-center flex py-[2rem]">
           <h1 className="text-[3rem] font-bold text-center space-y-2 leading-[3.4rem]">
-            {post.data.title}
+            {post?.data.title}
           </h1>
         </div>
         <article className="prose prose-li:text-[1rem] prose-p:text-[1rem] dark:text-[1rem] dark:prose-invert prose lg:prose-xl max-w-5xl mx-auto">

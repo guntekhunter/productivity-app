@@ -7,15 +7,15 @@ import PaginationControl from "./PaginationControl";
 export default function page(currentPage: any) {
   const postMetadata = getPostMetadata();
 
-  const page = currentPage.searchParams["page"] ?? "1";
-  const per_page = currentPage.searchParams["per_page"] ?? "6";
+  const page = currentPage?.searchParams["page"] ?? "1";
+  const per_page = currentPage?.searchParams["per_page"] ?? "6";
 
   const start = (Number(page) - 1) * Number(per_page);
   const end = start + Number(per_page);
 
   const entries = postMetadata.slice(start, end);
   const postPreviews = entries.map((post) => (
-    <PostPreview key={post.slug} {...post} />
+    <PostPreview key={post?.slug} {...post} />
   ));
   return (
     <div>
@@ -25,7 +25,7 @@ export default function page(currentPage: any) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {postPreviews}
           </div>
-          <PaginationControl />
+          {/* <PaginationControl /> */}
         </div>
       </div>
     </div>
